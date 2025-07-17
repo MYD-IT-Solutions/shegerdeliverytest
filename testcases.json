@@ -1,0 +1,1613 @@
+{
+    "web_application": {
+        "common_pages": {
+            "landing_page": [
+                {
+                    "id": "WEB-LND-01",
+                    "feature": "Page Load",
+                    "scenario": "Verify page load and location detection (Permission Allowed)",
+                    "steps": "1. Open a new browser tab (clear cache/permissions if needed).\n2. Navigate to https://shegerdeliveries.com.\n3. When the browser prompts for location access, click \"Allow\".",
+                    "expected_result": "The page loads completely. The \"Enter Delivery Address\" field is automatically populated with the user's current location in Addis Ababa. The \"Popular Restaurants\" section updates to show restaurants available in that detected location."
+                },
+                {
+                    "id": "WEB-LND-02",
+                    "feature": "Header",
+                    "scenario": "Verify header logo link",
+                    "steps": "1. On the landing page, click the Sheger Deliveries logo in the top-left corner.",
+                    "expected_result": "The page should reload, confirming the link points to the homepage."
+                },
+                {
+                    "id": "WEB-LND-03",
+                    "feature": "Header",
+                    "scenario": "Verify \"Login\" button navigation",
+                    "steps": "1. On the landing page, click the \"Login\" button in the header.",
+                    "expected_result": "The user is redirected to the sign-in page (/signin)."
+                },
+                {
+                    "id": "WEB-LND-04",
+                    "feature": "Main Search",
+                    "scenario": "Verify search with detected address and default service",
+                    "steps": "1. Allow location detection as per WEB-LND-01.\n2. Click the \"Search\" button.",
+                    "expected_result": "The user is redirected to a search results or store listing page for the detected location and \"Food Delivery\" service."
+                },
+                {
+                    "id": "WEB-LND-05",
+                    "feature": "Main Search",
+                    "scenario": "Verify changing service type",
+                    "steps": "1. Click the \"Food Delivery\" dropdown.\n2. Select \"Grocery Delivery\" from the list.\n3. Click \"Search\".",
+                    "expected_result": "The dropdown text and icon update to \"Grocery Delivery\". The user is redirected to a search results page for grocery stores at the specified location."
+                },
+                {
+                    "id": "WEB-LND-06",
+                    "feature": "Main Search",
+                    "scenario": "Verify searching with a new, valid address",
+                    "steps": "1. Type a valid address in Addis Ababa into the \"Enter Delivery Address\" field (e.g., \"Bole Medhanealem\").\n2. Select a valid option from the Google Maps autocomplete suggestions.\n3. Click \"Search\".",
+                    "expected_result": "The user is redirected to a search results page for the newly entered address."
+                },
+                {
+                    "id": "WEB-LND-07",
+                    "feature": "Main Search",
+                    "scenario": "Verify search fails with no address",
+                    "steps": "1. Clear the \"Enter Delivery Address\" field.\n2. Click the \"Search\" button.",
+                    "expected_result": "An error message \"use current location\" should appear, and the user remains on the landing page."
+                },
+                {
+                    "id": "WEB-LND-08",
+                    "feature": "Popular Restaurants",
+                    "scenario": "Verify clicking a restaurant link",
+                    "steps": "1. Scroll to the \"Popular Restaurants in Your Location\" section.\n2. Click on the first available restaurant image or name (e.g., \"Burger Shop\").",
+                    "expected_result": "The user is redirected to the details page for that specific restaurant."
+                },
+                {
+                    "id": "WEB-LND-09",
+                    "feature": "App Download",
+                    "scenario": "Verify User App Store and Play Store links",
+                    "steps": "1. Scroll to the \"DOWNLOAD Shegerdeliveries TODAY\" section.\n2. Under \"User iOS App & Android App\", click the \"App Store\" button.\n3. Go back and click the \"Play Store\" button.",
+                    "expected_result": "The links should navigate to the correct \"Sheger Deliveries\" app pages on their respective stores."
+                },
+                {
+                    "id": "WEB-LND-10",
+                    "feature": "App Download",
+                    "scenario": "Verify Driver/Provider App Store and Play Store links",
+                    "steps": "1. Scroll to the \"DOWNLOAD Shegerdeliveries TODAY\" section.\n2. Under \"Provider / Driver iOS App & Android App\", click the \"App Store\" and \"Play Store\" buttons.",
+                    "expected_result": "The links should navigate to the correct \"Sheger Riders\" app pages on their respective stores."
+                },
+                {
+                    "id": "WEB-LND-11",
+                    "feature": "App Download",
+                    "scenario": "Verify Store/Restaurant App Store and Play Store links",
+                    "steps": "1. Scroll to the \"DOWNLOAD Shegerdeliveries TODAY\" section.\n2. Under \"Store / Restaurant iOS App & Android App\", click the \"App Store\" and \"Play Store\" buttons.",
+                    "expected_result": "The links should navigate to the correct store management app pages on their respective stores."
+                },
+                {
+                    "id": "WEB-LND-12",
+                    "feature": "Footer",
+                    "scenario": "Verify footer navigation links",
+                    "steps": "1. Scroll to the footer.\n2. Click on \"Term & Conditions\".\n3. Go back and click on \"Privacy Policy\".\n4. Go back and click on \"Help\".\n5. Go back and clik on “Contact Us”",
+                    "expected_result": "Each link should open the corresponding correct static page."
+                },
+                {
+                    "id": "WEB-LND-13",
+                    "feature": "Footer",
+                    "scenario": "Verify language and currency selectors",
+                    "steps": "1. Scroll to the footer.\n2. Click the language dropdown and select \"Española\".\n3. Click the currency dropdown and select \"USD\".",
+                    "expected_result": "2. The page text should attempt to translate to Spanish.3. Prices on the site (if visible) should update to show the USD symbol."
+                },
+                {
+                    "id": "WEB-LND-14",
+                    "feature": "Responsiveness",
+                    "scenario": "Verify mobile/tablet view",
+                    "steps": "1. Resize the browser window to be narrow (like a mobile phone).",
+                    "expected_result": "The layout should adapt. The navigation should collapse into a \"hamburger\" menu icon. Content should stack vertically without horizontal scrollbars."
+                },
+                {
+                    "id": "WEB-LND-15",
+                    "feature": "Page Load",
+                    "scenario": "Verify behavior when location permission is denied",
+                    "steps": "1. Open a new browser tab (clear cache/permissions if needed).\n2. Navigate to https://shegerdeliveries.com.\n3. When the browser prompts for location access, click \"Block\" or \"Deny\".",
+                    "expected_result": "The application handles the lack of location gracefully. The \"Enter Delivery Address\" field remains blank, prompting the user to enter an address manually. The page does not crash or hang."
+                }
+            ],
+            "login_registration": [
+                {
+                    "id": "WEB-LOGIN-01",
+                    "feature": "Login Page",
+                    "scenario": "Verify UI and default state of the Login page",
+                    "steps": "1. Navigate to the Login page (/signin).",
+                    "expected_result": "The page loads correctly. The \"User\" tab is active by default. The form prompts for a Mobile Number. Social login options (Google, Apple, Facebook) are visible."
+                },
+                {
+                    "id": "WEB-LOGIN-02",
+                    "feature": "Login Page",
+                    "scenario": "Verify switching between User, Provider, and Store tabs",
+                    "steps": "1. On the Login page, click the \"Provider\" tab.\n 2. Click the \"Store\" tab.\n 3. Click back to the \"User\" tab.",
+                    "expected_result": "The content below the tabs updates correctly for each user type, showing the appropriate form fields and descriptive text."
+                },
+                {
+                    "id": "WEB-LOGIN-03",
+                    "feature": "User Login",
+                    "scenario": "Verify login with a valid mobile number and password",
+                    "steps": "1. On the \"User\" tab, enter a valid, registered mobile number.\n2. Click the \"Login\" button. \n3. On the next screen, enter the correct password. \n4. Click \"Next\".",
+                    "expected_result": "User is successfully authenticated and redirected to the main dashboard."
+                },
+                {
+                    "id": "WEB-LOGIN-04",
+                    "feature": "User Login",
+                    "scenario": "Verify login fails with an unregistered mobile number",
+                    "steps": "1. On the \"User\" tab, enter a mobile number that is not registered.\n2. Click the \"Login\" button.",
+                    "expected_result": "An error message is displayed indicating the user is not found or needs to sign up."
+                },
+                {
+                    "id": "WEB-LOGIN-05",
+                    "feature": "User Login",
+                    "scenario": "Verify login fails with an incorrect password",
+                    "steps": "1. Enter a valid, registered mobile number and click \"Login\". \n2. On the password screen, enter an incorrect password. \n3. Click \"Next\".",
+                    "expected_result": "An error message \"Invalid credentials\" or \"Incorrect password\" is displayed. The user remains on the password entry screen."
+                },
+                {
+                    "id": "WEB-LOGIN-06",
+                    "feature": "Forgot Password",
+                    "scenario": "Verify \"Forgot Password\" link navigates correctly",
+                    "steps": "1. On the password entry screen, click the \"Forgot Password?\" link.",
+                    "expected_result": "The user is taken to a view to reset their password, likely by entering their mobile number to receive a verification code."
+                },
+                {
+                    "id": "WEB-LOGIN-07",
+                    "feature": "Navigation",
+                    "scenario": "Verify \"Sign Up\" link navigates to the signup gateway",
+                    "steps": "1. On the Login page, click the \"Don't have an account? Sign Up\" link at the bottom.",
+                    "expected_result": "The user is redirected to the /signup page, which presents options for \"User\" and \"Store\" signup."
+                },
+                {
+                    "id": "WEB-REG-01",
+                    "feature": "Signup Gateway",
+                    "scenario": "Verify navigation to the User Signup page",
+                    "steps": "1. Navigate to the /signup page. 2. Click the \"User sign up\" button.",
+                    "expected_result": "The user is redirected to the User Registration form at /signup_user."
+                },
+                {
+                    "id": "WEB-REG-02",
+                    "feature": "User Registration",
+                    "scenario": "Verify successful registration with valid data and OTP",
+                    "steps": "1. On the /signup_user page, fill all fields (First Name, Last Name, Email, Mobile, Password, City) with valid, unique information. \n2. Click the \"SUBMIT\" button. \n3. An OTP pop-up appears. Enter the correct OTP sent to the mobile number. \n4. Click \"SUBMIT\" on the pop-up.",
+                    "expected_result": "The user account is created successfully. The user is redirected to the Login page or the main dashboard."
+                },
+                {
+                    "id": "WEB-REG-03",
+                    "feature": "User Registration",
+                    "scenario": "Verify registration fails with an existing email",
+                    "steps": "1. On the /signup_user page, fill in all fields with valid information, but use an email address that is already registered. \n2. Click \"SUBMIT\".",
+                    "expected_result": "An inline error message, \"Email has already been taken\", appears under the email field. The form is not submitted."
+                },
+                {
+                    "id": "WEB-REG-04",
+                    "feature": "User Registration",
+                    "scenario": "Verify registration fails with an existing mobile number",
+                    "steps": "1. On the /signup_user page, fill all fields with valid information, but use a mobile number that is already registered. \n2. Click \"SUBMIT\".",
+                    "expected_result": "An inline error message \"Mobile number has already been taken\" appears. The form is not submitted."
+                },
+                {
+                    "id": "WEB-REG-05",
+                    "feature": "User Registration",
+                    "scenario": "Verify validation for empty required fields",
+                    "steps": "1. On the /signup_user page, leave one of the required fields (e.g., First Name) blank. \n2. Click \"SUBMIT\".",
+                    "expected_result": "An inline error message like \"The First Name field is required\" appears under the corresponding field. The form is not submitted."
+                },
+                {
+                    "id": "WEB-REG-06",
+                    "feature": "User Registration",
+                    "scenario": "Verify OTP validation with an incorrect code",
+                    "steps": "1. Complete the registration form with valid data to trigger the OTP popup. \n2. In the OTP popup, enter an incorrect 4-digit code. \n3. Click \"SUBMIT\" on the popup.",
+                    "expected_result": "An error message \"Invalid credentials\" or \"Invalid OTP\" is displayed within the popup. The popup remains open."
+                }
+            ]
+        },
+        "customer_portal": {
+            "user_profile": [
+                {
+                    "id": "WEB-PRF-01",
+                    "feature": "Profile Page",
+                    "scenario": "Verify that user data is displayed correctly",
+                    "steps": "1. Log in as a user. \n2. Navigate to the Profile page (/userprofile).",
+                    "expected_result": "The page loads correctly. All fields (First Name, Last Name, Location, Email, Mobile Number) show the correct user data and are disabled (read-only)."
+                },
+                {
+                    "id": "WEB-PRF-02",
+                    "feature": "Profile Page",
+                    "scenario": "Verify that the side navigation works correctly",
+                    "steps": "1. On any profile section page, click on a different link in the left-side navigation (e.g., \"My Orders\", \"Wallet\", \"Promotions\").",
+                    "expected_result": "The user is correctly navigated to the corresponding page, and the correct link in the navigation is highlighted."
+                },
+                {
+                    "id": "WEB-PRF-03",
+                    "feature": "Profile Picture",
+                    "scenario": "Verify uploading a valid profile picture",
+                    "steps": "1. Navigate to the Profile Picture page (/profile_picture). \n2. Click \"Upload Picture\" and select a valid image file (JPG, PNG) from your computer. \n3. Click \"SUBMIT\".",
+                    "expected_result": "A success message is shown. The new profile picture is displayed on the page and in the header."
+                },
+                {
+                    "id": "WEB-PRF-04",
+                    "feature": "Profile Picture",
+                    "scenario": "Verify attempting to upload an invalid file type",
+                    "steps": "1. Navigate to the Profile Picture page. \n2. Click \"Upload Picture\" and select an invalid file (e.g., a .txt or .pdf file).",
+                    "expected_result": "The file selection should be rejected by the browser, or an error message should be displayed after attempting to submit."
+                },
+                {
+                    "id": "WEB-PRF-05",
+                    "feature": "My Orders",
+                    "scenario": "Verify order history is displayed",
+                    "steps": "1. Navigate to the My Orders page (/usermyjobs).",
+                    "expected_result": "The page loads and displays a table of past and current orders. All columns (Orders Id, Date, Payment Method, etc.) are populated correctly."
+                },
+                {
+                    "id": "WEB-PRF-06",
+                    "feature": "Wallet",
+                    "scenario": "Verify wallet balance and add money functionality",
+                    "steps": "1. Navigate to the Wallet page (/wallet). \n2. Enter a valid amount (e.g., \"100\") into the \"Add Wallet Amount\" field. \n3. Click \"Add Amount\".",
+                    "expected_result": "The current wallet balance is displayed correctly. Clicking \"Add Amount\" should redirect to a payment gateway page."
+                },
+                {
+                    "id": "WEB-PRF-07",
+                    "feature": "Wallet",
+                    "scenario": "Verify validation for invalid wallet amount",
+                    "steps": "1. Navigate to the Wallet page. \n2. Enter an invalid amount (e.g., \"abc\" or \"-100\") into the \"Add Wallet Amount\" field. \n3. Click \"Add Amount\".",
+                    "expected_result": "An error message should be displayed, and the form should not submit."
+                },
+                {
+                    "id": "WEB-PRF-08",
+                    "feature": "Promotions",
+                    "scenario": "Verify applying a valid promo code",
+                    "steps": "1. Navigate to the Promotions page (/promotion). \n2. Enter a valid, active promo code in the input field. \n3. Click \"Apply\".",
+                    "expected_result": "A success message is displayed, and the promo code might appear in a list of active promotions."
+                },
+                {
+                    "id": "WEB-PRF-09",
+                    "feature": "Promotions",
+                    "scenario": "Verify applying an invalid promo code",
+                    "steps": "1. Navigate to the Promotions page. \n2. Enter an invalid or expired promo code. \n3. Click \"Apply\".",
+                    "expected_result": "An error message \"Invalid promo code\" or similar is displayed."
+                },
+                {
+                    "id": "WEB-PRF-10",
+                    "feature": "Account Actions",
+                    "scenario": "Verify \"Log Out\" functionality",
+                    "steps": "1. From any profile page, click the \"Log Out\" button.",
+                    "expected_result": "The user is logged out of their account and redirected to the homepage or login page."
+                },
+                {
+                    "id": "WEB-PRF-11",
+                    "feature": "Account Actions",
+                    "scenario": "Verify \"Delete Account\" confirmation flow",
+                    "steps": "1. From any profile page, click the \"Delete Account\" button. \n2. In the first modal, click \"Yes\".\n3. In the second modal, enter the correct OTP. 4. Click \"OK\".",
+                    "expected_result": "The first modal appears. Clicking \"Yes\" opens the second (OTP) modal. After correct OTP entry, the account is deleted, and the user is logged out and redirected."
+                },
+                {
+                    "id": "WEB-PRF-12",
+                    "feature": "Account Actions",
+                    "scenario": "Verify the cancellation of the \"Delete Account\" action",
+                    "steps": "1. From any profile page, click the \"Delete Account\" button. \n2. In the first modal, click \"No\".",
+                    "expected_result": "The modal closes, and the user remains on the current page, logged in."
+                }
+            ],
+            "store_listing": [
+                {
+                    "id": "WEB-SL-01",
+                    "feature": "Page UI",
+                    "scenario": "Verify initial page elements",
+                    "steps": "1. After searching from the landing page, arrive at the store listing page.",
+                    "expected_result": "The header is visible with search bar, profile, and orders links. Delivery/Pickup Tabs is visible, and \"Delivery\" is selected by default. A horizontal carousel of \"Top Categories\" is displayed. A list of \"Nearby\" stores is displayed below."
+                },
+                {
+                    "id": "WEB-SL-02",
+                    "feature": "Header Search",
+                    "scenario": "Verify searching for a store name",
+                    "steps": "1. In the header search bar, type the name of a known store (e.g., \"Burger Shop\"). \n2. Press Enter or wait for the search to execute.",
+                    "expected_result": "The \"Nearby\" store list filters to show only stores matching the search term."
+                },
+                {
+                    "id": "WEB-SL-03",
+                    "feature": "Header Search",
+                    "scenario": "Verify searching for a food item",
+                    "steps": "1. In the header search bar, type a food item (e.g., \"Pizza\").",
+                    "expected_result": "The \"Nearby\" store list filters to show stores that sell the searched item."
+                },
+                {
+                    "id": "WEB-SL-04",
+                    "feature": "Header Search",
+                    "scenario": "Verify search with no results",
+                    "steps": "1. In the header search bar, type a random string that will not match any store or item (e.g., \"xyzabc\").",
+                    "expected_result": "The \"Nearby\" store list becomes empty, and a \"Result not Found\" message is displayed."
+                },
+                {
+                    "id": "WEB-SL-05",
+                    "feature": "Delivery/Pickup Tab",
+                    "scenario": "Verify switching to \"Pickup\"",
+                    "steps": "1. Click the \"Pickup\" Tab",
+                    "expected_result": "The \"Pickup\" button becomes active. The list of \"Nearby\" stores updates to show only stores that offer pickup service."
+                },
+                {
+                    "id": "WEB-SL-06",
+                    "feature": "Category Filter",
+                    "scenario": "Verify filtering by a top category",
+                    "steps": "1. In the \"Top Categories\" carousel, click on a category (e.g., \"Pizza\").",
+                    "expected_result": "The list of \"Nearby\" stores filters to show only stores belonging to that category. The selected category may become highlighted."
+                },
+                {
+                    "id": "WEB-SL-07",
+                    "feature": "Store Card",
+                    "scenario": "Verify store information is correct",
+                    "steps": "1. Observe the first store card in the \"Nearby\" list.",
+                    "expected_result": "The card correctly displays the store's banner image, name, and user rating (e.g., \"3.0\")."
+                },
+                {
+                    "id": "WEB-SL-08",
+                    "feature": "Store Card",
+                    "scenario": "Verify navigation to store details",
+                    "steps": "1. Click anywhere on the first store card in the \"Nearby\" list.",
+                    "expected_result": "The user is redirected to the detailed page for that specific store (e.g., /newdetails/10025)."
+                },
+                {
+                    "id": "WEB-SL-09",
+                    "feature": "Header Navigation",
+                    "scenario": "Verify the \"Orders\" link",
+                    "steps": "1. In the header, click the \"Orders\" link.",
+                    "expected_result": "The user is redirected to the My Orders page (/deliveryall/orders)."
+                }
+            ],
+            "store_detail": [
+                {
+                    "id": "WEB-DTL-01",
+                    "feature": "Page UI",
+                    "scenario": "Verify initial page elements and store information",
+                    "steps": "1. From the store listing page, click on a store to navigate to its detail page.",
+                    "expected_result": "The page loads with the store's banner image, name, and address. The \"Delivery/Pickup\" toggle is visible. The menu categories are listed on the left, and menu items are displayed in the main area."
+                },
+                {
+                    "id": "WEB-DTL-02",
+                    "feature": "Store Info",
+                    "scenario": "Verify expanding and collapsing the \"Info\" section",
+                    "steps": "1. Click the \"Info\" link with the down arrow. \n2. Click the \"Info\" link again.",
+                    "expected_result": "1. The section expands to show the store's \"Open Hours\" and a map. The arrow points up. \n2. The section collapses. The arrow points down."
+                },
+                {
+                    "id": "WEB-DTL-03",
+                    "feature": "Schedule Order",
+                    "scenario": "Verify opening and interacting with the \"Schedule Order\" modal",
+                    "steps": "1. Click the \"ASAP\" or time link next to the location. \n2. In the modal, click the \"Schedule Order\" tab. \n3. Select a future date and time. \n4. Click \"Set Time\".",
+                    "expected_result": "The modal opens correctly. The user can switch tabs and select a date/time. After clicking \"Set Time\", the modal closes, and the delivery time in the header updates."
+                },
+                {
+                    "id": "WEB-DTL-04",
+                    "feature": "Menu Navigation",
+                    "scenario": "Verify filtering menu items by category",
+                    "steps": "1. On the left-side navigation, click on a menu category other than the default one.",
+                    "expected_result": "The main content area updates to show only the menu items from the selected category. The selected category is highlighted."
+                },
+                {
+                    "id": "WEB-DTL-05",
+                    "feature": "Menu Search",
+                    "scenario": "Verify searching for a specific menu item",
+                    "steps": "1. In the \"Search\" bar within the menu section, type the name of a known item (e.g., \"Mighty Zinger Burger\").",
+                    "expected_result": "The list of menu items filters in real-time to show only items matching the search query."
+                },
+                {
+                    "id": "WEB-DTL-06",
+                    "feature": "Add to Cart",
+                    "scenario": "Verify adding an item to the cart",
+                    "steps": "1. Find a menu item and click the \"Add\" button or the item itself. \n2. In the pop-up modal, confirm the item details and click the \"ADD\" button.",
+                    "expected_result": "The modal closes. The \"Your Orders\" bar appears at the bottom of the page, showing a count of 1 and the correct subtotal. The main header \"Cart\" icon also updates its count to 1."
+                },
+                {
+                    "id": "WEB-DTL-07",
+                    "feature": "Add to Cart",
+                    "scenario": "Verify quantity modification in the item popup",
+                    "steps": "1. Click to add an item to open the popup modal. \n2. Click the \"+\" button to increase the quantity to 3. \n3. Click the \"-\" button to decrease the quantity to 2. \n4. Click the \"ADD\" button.",
+                    "expected_result": "The quantity number updates correctly with each click. The final price in the \"ADD\" button updates to reflect the price for 2 items. The cart at the bottom shows a quantity of 2."
+                },
+                {
+                    "id": "WEB-DTL-08",
+                    "feature": "Add to Cart",
+                    "scenario": "Verify adding special instructions",
+                    "steps": "1. Open the \"Add to Cart\" modal for an item. \n2. In the \"Special Instructions\" text area, type \"Extra spicy, please.\" \n3. Add the item to the cart.\n 4. Expand the \"Your Orders\" bar at the bottom.",
+                    "expected_result": "The special instructions should be visible under the item in the cart details."
+                },
+                {
+                    "id": "WEB-DTL-09",
+                    "feature": "Cart Management",
+                    "scenario": "Verify increasing/decreasing quantity from the cart bar",
+                    "steps": "1. Add an item to the cart. \n2. Expand the \"Your Orders\" bar. 3. Click the \"+\" button next to the item.\n 4. Click the \"-\" button next to the item.",
+                    "expected_result": "The item quantity and the subtotal update correctly with each click."
+                },
+                {
+                    "id": "WEB-DTL-10",
+                    "feature": "Cart Management",
+                    "scenario": "Verify removing an item from the cart",
+                    "steps": "1. Add two different items to the cart. \n2. Expand the \"Your Orders\" bar.. \n3. Click the \"Remove\" link for one of the items.",
+                    "expected_result": "The selected item is removed from the cart. The subtotal is recalculated correctly."
+                },
+                {
+                    "id": "WEB-DTL-11",
+                    "feature": "Cart Management",
+                    "scenario": "Verify \"Clear Cart\" functionality",
+                    "steps": "1. Add multiple items to the cart. \n2. Expand the \"Your Orders\" bar. \n3. Click the \"Clear Cart\" button.",
+                    "expected_result": "All items are removed from the cart, and the \"Your Orders\" bar disappears."
+                },
+                {
+                    "id": "WEB-DTL-12",
+                    "feature": "Checkout",
+                    "scenario": "Verify navigation to checkout",
+                    "steps": "1. Add at least one item to the cart. \n2. Click the \"Checkout\" button in the \"Your Orders\" bar.",
+                    "expected_result": "The user is redirected to the checkout page (/deliveryall/checkout)."
+                }
+            ],
+            "checkout": [
+                {
+                    "id": "WEB-CHK-01",
+                    "feature": "Page UI",
+                    "scenario": "Verify page loads with correct order details",
+                    "steps": "1. Add items to the cart from a store page. \n2. Click \"Checkout\". \n3. Arrive on the /deliveryall/checkout page.",
+                    "expected_result": "The page loads correctly. The left side shows sections for Delivery Time, Delivery Type, Location, Payment, and Promotions. \nThe right side shows a summary of \"Your order from [Store Name]\" with the correct items, quantities, and a detailed price breakdown (Subtotal, Tax, Fees, Total)."
+                },
+                {
+                    "id": "WEB-CHK-02",
+                    "feature": "Order Summary",
+                    "scenario": "Modify item quantity from checkout",
+                    "steps": "1. In the right-side order summary, locate an item. \n2. Click the \"+\" button to increase its quantity. \n3. Click the \"-\" button to decrease its quantity.",
+                    "expected_result": "The quantity for the item updates instantly. The Subtotal and Total in the price breakdown are recalculated and updated correctly."
+                },
+                {
+                    "id": "WEB-CHK-03",
+                    "feature": "Order Summary",
+                    "scenario": "Remove an item from checkout",
+                    "steps": "1. In the right-side order summary, click the \"Remove\" link for an item.",
+                    "expected_result": "The item is removed from the order summary list. The Subtotal and Total are recalculated. If it's the last item, the user should be redirected or the page should show an empty cart state."
+                },
+                {
+                    "id": "WEB-CHK-04",
+                    "feature": "Delivery Details",
+                    "scenario": "Change delivery address",
+                    "steps": "1. In the \"Confirm Location\" section, click into the address input field. \n2. Type a new, valid address and select it from the autocomplete suggestions.",
+                    "expected_result": "The map updates to show the new location pin. The Delivery Fee in the price breakdown should be recalculated."
+                },
+                {
+                    "id": "WEB-CHK-05",
+                    "feature": "Delivery Details",
+                    "scenario": "Add a delivery note",
+                    "steps": "1. In the \"Confirm Location\" section, type a note in the \"Add Delivery Note\" field (e.g., \"Call upon arrival\").",
+                    "expected_result": "The text is accepted in the input field. This note should be saved with the order upon placement."
+                },
+                {
+                    "id": "WEB-CHK-06",
+                    "feature": "Delivery Details",
+                    "scenario": "Switch to Takeaway",
+                    "steps": "1. In the \"Delivery Type\" section, select the \"TakeAway\" radio button.",
+                    "expected_result": "The \"Delivery Fee\" line item in the price breakdown should be removed or set to zero. The \"Total\" amount is updated accordingly."
+                },
+                {
+                    "id": "WEB-CHK-07",
+                    "feature": "Schedule Order",
+                    "scenario": "Schedule an order for a later time",
+                    "steps": "1. Click the \"Schedule\" button. \n2. In the modal, select a future date and an available time slot. \n3. Click \"Set Time\".",
+                    "expected_result": "The modal closes. The \"Delivery time\" section updates to show the selected date and time instead of \"As soon as possible\"."
+                },
+                {
+                    "id": "WEB-CHK-08",
+                    "feature": "Promotions",
+                    "scenario": "Apply a valid promo code",
+                    "steps": "1. Click the \"Add promo code\" link. \n2. Enter a valid promo code into the input field.\n 3. Click \"Apply\".",
+                    "expected_result": "A success message appears. A \"Promo Amount\" line with a negative value appears in the price breakdown, and the \"Total\" is reduced. The \"Add promo code\" link is replaced with a \"Remove Promo\" button."
+                },
+                {
+                    "id": "WEB-CHK-09",
+                    "feature": "Promotions",
+                    "scenario": "Apply an invalid promo code",
+                    "steps": "1. Click the \"Add promo code\" link. \n2. Enter an invalid or expired code. \n3. Click \"Apply\".",
+                    "expected_result": "An error message is displayed below the input field, indicating the code is invalid. The price breakdown does not change."
+                },
+                {
+                    "id": "WEB-CHK-10",
+                    "feature": "Provider Tips",
+                    "scenario": "Add a tip for the provider",
+                    "steps": "1. Click the \"Add Provider Tips\" link. \n2. Enter a numeric value (e.g., \"50\") into the tips input field. \n3. Click \"Apply\".",
+                    "expected_result": "A \"Tips\" line item is added to the price breakdown, and the \"Total\" amount increases. The link changes to show the added tip, and a \"Remove Tips\" button appears."
+                },
+                {
+                    "id": "WEB-CHK-11",
+                    "feature": "Payment",
+                    "scenario": "Switch payment method",
+                    "steps": "1. In the \"Payment\" section, click the dropdown. 2. Select \"Online Payment\".",
+                    "expected_result": "The payment method UI updates, potentially showing fields for card details or other online payment options."
+                },
+                {
+                    "id": "WEB-CHK-12",
+                    "feature": "Payment",
+                    "scenario": "Use the wallet balance",
+                    "steps": "1. Ensure the user has a wallet balance. \n2. In the \"Payment\" section, check the \"Wallet\" checkbox.",
+                    "expected_result": "A \"Wallet Amount\" line with a negative value appears in the price breakdown, reducing the final \"Total\". If the wallet balance covers the entire order, the total should be 0.00."
+                },
+                {
+                    "id": "WEB-CHK-13",
+                    "feature": "Place Order",
+                    "scenario": "Place a \"Cash on Delivery\" order",
+                    "steps": "1. Ensure \"Pay Cash on Delivery\" is selected. \n2. Confirm all details are correct. \n3. Click the \"Place Order\" button.",
+                    "expected_result": "The order is successfully placed. The user is redirected to an order confirmation or tracking page."
+                }
+            ],
+            "order_tracking": [
+                {
+                    "id": "WEB-TRK-01",
+                    "feature": "Page UI",
+                    "scenario": "Verify all static elements are displayed correctly",
+                    "steps": "1. After placing an order, navigate to the track order page for that order.",
+                    "expected_result": "The page loads correctly. The header, breadcrumbs, and footer are visible. The map area is displayed on the left. The order details panel is on the right, showing the correct store image, name, rating, Order ID, Delivery Type, and total price."
+                },
+                {
+                    "id": "WEB-TRK-02",
+                    "feature": "Order Status",
+                    "scenario": "Verify the progress bar shows the correct initial status",
+                    "steps": "1. Navigate to the track order page immediately after placing an order.",
+                    "expected_result": "The \"Track Order\" progress bar is displayed. The first step, \"Order confirmed\", is marked as active (green icon), and the time of confirmation is shown. The subsequent steps are inactive (gray icons)."
+                },
+                {
+                    "id": "WEB-TRK-03",
+                    "feature": "Order Status",
+                    "scenario": "Verify the progress bar updates as the order progresses",
+                    "steps": "1. Observe the track order page as the backend status is updated by an admin/store. (This will require coordination with a test admin). \n2. Admin updates status to \"In Progress\". \n3. Admin updates status to \"Courier on the way\". \n4. Admin updates status to \"Completed\".",
+                    "expected_result": "2. The \"Order is in Progress\" step becomes active, and a timestamp appears. \n3. The \"Courier is on the way\" step becomes active, and a timestamp appears. \n4. The \"Order is Completed\" step becomes active, and a timestamp appears.\n5. After order is completed check the time if it matches the current time."
+                },
+                {
+                    "id": "WEB-TRK-04",
+                    "feature": "Order Details",
+                    "scenario": "Verify store link navigates correctly",
+                    "steps": "1. In the order details panel, click on the store name (\"Burger Shop\").",
+                    "expected_result": "The user is redirected to the store's detail page (/deliveryall/newdetails/10025)."
+                },
+                {
+                    "id": "WEB-TRK-05",
+                    "feature": "Cancellation",
+                    "scenario": "Verify by opening the cancellation modal",
+                    "steps": "1. On an order that is still cancellable (e.g., status is \"Order confirmed\"), find and click the \"Cancel Order\" button.",
+                    "expected_result": "The \"Cancel Reason\" modal appears, showing a dropdown for the reason and a text area for comments."
+                },
+                {
+                    "id": "WEB-TRK-06",
+                    "feature": "Cancellation",
+                    "scenario": "Verify submitting a cancellation request",
+                    "steps": "1. Open the \"Cancel Order\" modal. \n2. Select a reason from the dropdown (e.g., \"Accidentally ordered\"). \n3. Enter a comment in the text area. \n4. Click \"Submit\".",
+                    "expected_result": "The order is cancelled. The page should update to show the \"Cancelled\" status, and the progress bar should be replaced with a cancellation message."
+                },
+                {
+                    "id": "WEB-TRK-07",
+                    "feature": "Cancellation",
+                    "scenario": "Verify closing the cancellation modal",
+                    "steps": "1. Open the \"Cancel Order\" modal. \n2. Click the \"x\" (close) button.",
+                    "expected_result": "The modal closes, and the user remains on the order tracking page with no change in order status."
+                }
+            ]
+        },
+        "store_portal": {
+            "dashboard": [
+                {
+                    "id": "WEB-STR-DASH-01",
+                    "feature": "Page UI",
+                    "scenario": "Verify all dashboard elements are displayed correctly",
+                    "steps": "1. Log in as a store user.",
+                    "expected_result": "The dashboard loads. The header displays the store name, availability toggle, and user menu. The left sidebar shows navigation links (Dashboard, Payouts, Menu, etc.). The main content area displays widgets for Sales, Service Quality, and Customer Satisfaction."
+                },
+                {
+                    "id": "WEB-STR-DASH-02",
+                    "feature": "Header",
+                    "scenario": "Verify user dropdown menu",
+                    "steps": "1. In the header, click the user name/image in the top-right corner.",
+                    "expected_result": "A dropdown menu appears with \"Profile\" and \"Sign out\" links. The user's image, name, and \"Member since\" date are correct."
+                },
+                {
+                    "id": "WEB-STR-DASH-03",
+                    "feature": "Header",
+                    "scenario": "Verify \"Profile\" and \"Sign out\" links",
+                    "steps": "1. Open the user dropdown menu. \n2. Click \"Profile\". \n3. Go back to the dashboard.\n 4. Open the user dropdown menu and click \"Sign out\".",
+                    "expected_result": "2. The user is redirected to the store's profile editing page. \n4. The user is logged out and redirected to the login page."
+                },
+                {
+                    "id": "WEB-STR-DASH-04",
+                    "feature": "Header",
+                    "scenario": "Verify store availability toggle",
+                    "steps": "1. Observe the \"Available/Unavailable\" toggle in the header. \n2. Click the toggle to change the status.",
+                    "expected_result": "The toggle should visually change state. A background API call is made to update the store's availability status. The initial state (e.g., \"Available\") should reflect the store's current setting."
+                },
+                {
+                    "id": "WEB-STR-DASH-05",
+                    "feature": "Sidebar Navigation",
+                    "scenario": "Verify that all links navigate to the correct pages",
+                    "steps": "1. Click on \"Payout Details\". \n2. Click on \"Menu\". \n3. Click on \"Offers\".\n4. Click on \"Preparation Time\". \n5. Click on \"Orders\".",
+                    "expected_result": "Each link should navigate to the correct corresponding page within the store portal (e.g., /store/payout_preference, /store/menu, etc.). The active link in the sidebar should be highlighted correctly."
+                },
+                {
+                    "id": "WEB-STR-DASH-06",
+                    "feature": "Sidebar Navigation",
+                    "scenario": "Verify the \"Support\" dropdown",
+                    "steps": "1. Click the \"Support\" link in the sidebar.",
+                    "expected_result": "A dropdown/collapsible section opens, revealing links for \"WhatsApp\" and \"Skype\". Clicking these links should attempt to open the respective applications."
+                },
+                {
+                    "id": "WEB-STR-DASH-07",
+                    "feature": "Dashboard Widgets",
+                    "scenario": "Verify that the sales data is displayed",
+                    "steps": "1. Observe the \"Sales\" section.",
+                    "expected_result": "The widgets for \"Net Payout (7 days)\", \"Owe Amount\", and \"Net Payout (30 days)\" display monetary values. The graphs for the last 7 and 30 days are rendered."
+                },
+                {
+                    "id": "WEB-STR-DASH-08",
+                    "feature": "Dashboard Widgets",
+                    "scenario": "Verify service quality metrics",
+                    "steps": "1. Observe the \"Service Quality\" section.",
+                    "expected_result": "The \"Accept Orders\" and \"Cancel Orders\" widgets display correct percentages and progress bars."
+                },
+                {
+                    "id": "WEB-STR-DASH-09",
+                    "feature": "Dashboard Widgets",
+                    "scenario": "Verify customer satisfaction metrics",
+                    "steps": "1. Observe the \"Customer Satisfaction\" section.",
+                    "expected_result": "The \"Satisfaction rating\" widget displays the correct percentage and progress bar. The table below lists items and their negative feedback ratings."
+                },
+                {
+                    "id": "WEB-STR-DASH-10",
+                    "feature": "Account Actions",
+                    "scenario": "Verify \"Delete Account\" flow",
+                    "steps": "1. Click the \"Delete Account\" link in the sidebar. \n2. In the first modal, click \"Yes\". \n3. In the second modal, enter the correct OTP. \n4. Click \"OK\".",
+                    "expected_result": "The first confirmation modal appears. Clicking \"Yes\" triggers the second OTP modal. After correct OTP entry, the account is deleted, and the user is logged out."
+                }
+            ],
+            "payouts": [
+                {
+                    "id": "WEB-STR-PAY-01",
+                    "feature": "Page UI",
+                    "scenario": "Verify all elements on the Payouts page are displayed correctly",
+                    "steps": "1. Log in as a store user. \n2. From the sidebar, navigate to \"Payout Details\".",
+                    "expected_result": "The page loads correctly. The \"Payouts\" summary box shows \"Net earnings\", \"Orders\", and \"Next payment\". The \"Payout history\" table is displayed with correct column headers. The \"Payout Methods\" section is displayed with an \"Add\" button."
+                },
+                {
+                    "id": "WEB-STR-PAY-02",
+                    "feature": "Payout History",
+                    "scenario": "Verify navigation to the weekly payout details",
+                    "steps": "1. In the \"Payout history\" table, click on a date range link in the \"Week of\" column (e.g., \"05 May - 11 May\").",
+                    "expected_result": "The user is redirected to a detailed payout page for that specific week, showing a list of individual orders included in that payout."
+                },
+                {
+                    "id": "WEB-STR-PAY-03",
+                    "feature": "Payout History",
+                    "scenario": "Verify exporting a weekly statement",
+                    "steps": "1. In the \"Payout history\" table, click the save/download icon in the \"Weekly Statement\" column for any given week.",
+                    "expected_result": "A file download is initiated. The downloaded file should be a CSV or XLS file containing the payout data for that week."
+                },
+                {
+                    "id": "WEB-STR-PAY-04",
+                    "feature": "Add Payout Method",
+                    "scenario": "Verify the \"Add Payout Method\" modal flow",
+                    "steps": "1. In the \"Payout Methods\" section, click the \"Add\" button. 2. In the \"Add Payout Method\" modal, select \"Bank Transfer\". 3. Click \"Next\".",
+                    "expected_result": "The first modal (\"choose_payout\") appears. After selecting a method and clicking \"Next\", the first modal closes and the corresponding detailed form modal (e.g., \"BankTransfer_modal\") appears."
+                },
+                {
+                    "id": "WEB-STR-PAY-05",
+                    "feature": "Add Payout Method",
+                    "scenario": "Verify form validation for adding a Bank Transfer account",
+                    "steps": "1. Open the \"BankTransfer_modal\".\n 2. Leave a required field (e.g., \"Account Number\") blank. \n3. Click \"Submit\".",
+                    "expected_result": "An inline error message, \"This field is required,\" appears below the empty field. The form is not submitted."
+                },
+                {
+                    "id": "WEB-STR-PAY-06",
+                    "feature": "Add Payout Method",
+                    "scenario": "Verify adding a valid Bank Transfer account",
+                    "steps": "1. Open the \"BankTransfer_modal\". \n2. Fill in all required fields with valid bank details. \n3. Click \"Submit\".",
+                    "expected_result": "The form submits successfully. The modal closes, and the main page refreshes to show the newly added Bank Transfer account in the \"Payout Methods\" table with a \"Ready\" status."
+                }
+            ],
+            "menu": [
+                {
+                    "id": "WEB-STR-MENU-01",
+                    "feature": "Page UI",
+                    "scenario": "Verify all elements on the Menu page are displayed correctly",
+                    "steps": "1. Log in as a store user. \n2. From the sidebar, navigate to \"Menu\".",
+                    "expected_result": "The page loads correctly. The \"Manage Menu\" title is visible. The \"Import Menu\" section is present with options to choose a file and download a sample. The language selector is present. The three-panel layout for Menu, Categories/Items, and Item Details is displayed."
+                },
+                {
+                    "id": "WEB-STR-MENU-02",
+                    "feature": "Import/Export",
+                    "scenario": "Verify downloading the sample data file",
+                    "steps": "1. In the \"Import Menu\" section, click the \"Sample Data\" link.",
+                    "expected_result": "A file download is initiated for a sample menu file (e.g., .xls or .csv)."
+                },
+                {
+                    "id": "WEB-STR-MENU-03",
+                    "feature": "Import/Export",
+                    "scenario": "Verify importing a valid menu file",
+                    "steps": "1. Click \"Choose file\" and select a correctly formatted menu file. \n2. Click the \"Import\" button.",
+                    "expected_result": "The page reloads, and the menu structure is updated to reflect the data from the imported file. A success message is shown."
+                },
+                {
+                    "id": "WEB-STR-MENU-04",
+                    "feature": "Menu Management",
+                    "scenario": "Verify adding a new menu",
+                    "steps": "1. Click the \"Add menu\" button. \n2. In the modal, enter a \"Menu name\".\n3. Set the available days and times. \n4. Click \"SUBMIT\".",
+                    "expected_result": "The new menu appears in the leftmost menu list."
+                },
+                {
+                    "id": "WEB-STR-MENU-05",
+                    "feature": "Menu Management",
+                    "scenario": "Verify editing an existing menu",
+                    "steps": "1. Hover over a menu and click the pencil icon. \n2. In the modal, change the name and availability times. \n3. Click \"SUBMIT\".",
+                    "expected_result": "The menu's name and availability are updated successfully."
+                },
+                {
+                    "id": "WEB-STR-MENU-06",
+                    "feature": "Category Management",
+                    "scenario": "Verify adding a new category",
+                    "steps": "1. Select a menu from the list. 2. Click the \"add category\" link. 3. In the modal, enter a \"Category name\". 4. Click \"SUBMIT\".",
+                    "expected_result": "The new category appears in the list under the selected menu."
+                },
+                {
+                    "id": "WEB-STR-MENU-07",
+                    "feature": "Category Management",
+                    "scenario": "Verify editing a category name",
+                    "steps": "1. In a category list, click the pencil icon next to a category. \n2. In the modal, change the name. \n3. Click \"SUBMIT\".",
+                    "expected_result": "The category name is updated in the list."
+                },
+                {
+                    "id": "WEB-STR-MENU-08",
+                    "feature": "Item Management",
+                    "scenario": "Verify adding a new menu item",
+                    "steps": "1. Select a menu and a category. \n2. Click the \"Add Item\" button. \n3. Fill in all required fields in the right-hand panel (Item Name, Description, Price, Tax, Visibility). \n4. Click \"Submit Changes\".",
+                    "expected_result": "The new item is added to the item list under the selected category. A success message is shown."
+                },
+                {
+                    "id": "WEB-STR-MENU-09",
+                    "feature": "Item Management",
+                    "scenario": "Verify form validation for a new item",
+                    "steps": "1. Click \"Add Item\". \n2. Leave a required field like \"Item Name\" or \"Price\" blank. \n3. Click \"Submit Changes\".",
+                    "expected_result": "An error message appears, indicating the required field must be filled. The item is not created."
+                },
+                {
+                    "id": "WEB-STR-MENU-10",
+                    "feature": "Item Management",
+                    "scenario": "Verify editing an existing menu item",
+                    "steps": "1. Select an existing menu item from the list.\n 2. In the right-hand panel, change the price. \n3. Click \"Submit Changes\".",
+                    "expected_result": "The item's price is updated successfully. A success message is shown."
+                },
+                {
+                    "id": "WEB-STR-MENU-11",
+                    "feature": "Item Management",
+                    "scenario": "Verify deleting an item",
+                    "steps": "1. Select a menu and category. \n2. Click the trash icon next to a menu item. \n3. In the confirmation modal, click \"SUBMIT\".",
+                    "expected_result": "The item is removed from the list."
+                },
+                {
+                    "id": "WEB-STR-MENU-12",
+                    "feature": "Translation",
+                    "scenario": "Verify by changing the translation language",
+                    "steps": "1. Select a language from the dropdown in the top right (e.g., \"Española\"). \n2. Click \"Change\".",
+                    "expected_result": "The UI text should update to the selected language. When editing a menu/category/item, the name and description fields should now show the content for the selected language."
+                }
+            ],
+            "offers": [
+                {
+                    "id": "WEB-STR-OFFER-01",
+                    "feature": "Page UI",
+                    "scenario": "Verify all elements on the Offers page are displayed correctly",
+                    "steps": "1. Log in as a store user. \n2. From the sidebar, navigate to \"Offers\".",
+                    "expected_result": "The page loads correctly. The \"Offers\" title is visible. An \"Add Offers\" button is present. A data table lists existing offers with columns for Order ID, Offer Title, Start Date, End Date, Percentage, Status, and Action."
+                },
+                {
+                    "id": "WEB-STR-OFFER-02",
+                    "feature": "Add Offer",
+                    "scenario": "Verify opening the \"Add Offer\" modal",
+                    "steps": "1. Click the \"Add Offers\" button.",
+                    "expected_result": "The \"offer_modal\" appears, allowing the user to input a new offer's details."
+                },
+                {
+                    "id": "WEB-STR-OFFER-03",
+                    "feature": "Add Offer",
+                    "scenario": "Verify form validation for a new offer",
+                    "steps": "1. Open the \"Add Offer\" modal. \n2. Leave the \"Offer title\" field blank. \n3. Click \"SUBMIT\".",
+                    "expected_result": "An error message appears indicating that the title field is required. The form is not submitted."
+                },
+                {
+                    "id": "WEB-STR-OFFER-04",
+                    "feature": "Add Offer",
+                    "scenario": "Verify adding a valid offer",
+                    "steps": "1. Open the \"Add Offer\" modal. \n2. Fill in all required fields: Offer Title, Description, a valid Start Date, a valid End Date (after the start date), and a Percentage. \n3. Click \"SUBMIT\".",
+                    "expected_result": "The modal closes. The new offer appears as a new row in the data table on the main page. A success message is shown."
+                },
+                {
+                    "id": "WEB-STR-OFFER-05",
+                    "feature": "Edit Offer",
+                    "scenario": "Verify editing an existing offer",
+                    "steps": "1. In the offers table, click the pencil icon for an existing offer. \n2. In the modal, change the Percentage value. \n3. Click \"SUBMIT\".",
+                    "expected_result": "The modal closes. The offer's percentage value is updated in the table."
+                },
+                {
+                    "id": "WEB-STR-OFFER-06",
+                    "feature": "Offer Status",
+                    "scenario": "Verify by toggling the offer status",
+                    "steps": "1. In the offers table, locate an active offer. \n2. Click the \"on\" part of the toggle to deactivate it. \n3. Click the \"off\" part of the toggle to reactivate it.",
+                    "expected_result": "The toggle switch visually changes state. A background API call is made to update the offer's status. The offer is successfully activated/deactivated."
+                },
+                {
+                    "id": "WEB-STR-OFFER-07",
+                    "feature": "Delete Offer",
+                    "scenario": "Verify deleting an offer",
+                    "steps": "1. In the offers table, click the trash icon for an offer. \n2. In the confirmation modal (\"confirm-delete\"), click the \"Delete\" button.",
+                    "expected_result": "The confirmation modal appears. After confirming, the offer is removed from the data table."
+                }
+            ],
+            "preparation_time": [
+                {
+                    "id": "WEB-STR-PREP-01",
+                    "feature": "Page UI",
+                    "scenario": "Verify all elements on the Preparation Time page are displayed correctly",
+                    "steps": "1. Log in as a store user. \n2. From the sidebar, navigate to \"Preparation Time\".",
+                    "expected_result": "The page loads correctly. The \"Edit Preparation Time\" title is visible. A primary input field for the overall preparation time is displayed with the store's current default value. An \"Add More\" button is visible."
+                },
+                {
+                    "id": "WEB-STR-PREP-02",
+                    "feature": "Update Overall Time",
+                    "scenario": "Verify updating the default preparation time",
+                    "steps": "1. Change the value in the main preparation time input field (e.g., from \"30\" to \"45\"). \n2. Click \"Submit\".",
+                    "expected_result": "The new default preparation time is saved successfully. A success message is displayed."
+                },
+                {
+                    "id": "WEB-STR-PREP-03",
+                    "feature": "Add Specific Time Slot",
+                    "scenario": "Verify adding a new specific time slot",
+                    "steps": "1. Click the \"Add More\" button.",
+                    "expected_result": "A new row appears with a dropdown for the day, two time input fields (from/to), and a text field for the preparation time in that slot."
+                },
+                {
+                    "id": "WEB-STR-PREP-04",
+                    "feature": "Add Specific Time Slot",
+                    "scenario": "Verify the configuration and saving of a new time slot",
+                    "steps": "1. Click \"Add More\". \n2. Select a day (e.g., \"Monday\"). \n3. Set a \"from\" time (e.g., \"09:00 AM\") and a \"to\" time (e.g., \"05:00 PM\"). \n4. Enter a specific preparation time (e.g., \"60\"). \n5. Click \"Submit\".",
+                    "expected_result": "The new time-specific preparation slot is saved successfully. A success message is displayed. The new row persists after a page refresh."
+                },
+                {
+                    "id": "WEB-STR-PREP-05",
+                    "feature": "Form Validation",
+                    "scenario": "Verify validation for an incomplete time slot",
+                    "steps": "1. Click \"Add More\". \n2. Select a day, but leave the time or preparation minute fields blank. \n3. Click \"Submit\".",
+                    "expected_result": "An error message should appear, indicating that all fields for the time slot must be filled. The form should not be submitted."
+                },
+                {
+                    "id": "WEB-STR-PREP-06",
+                    "feature": "Form Validation",
+                    "scenario": "Verify validation for an invalid time range",
+                    "steps": "1. Click \"Add More\". \n2. Select a day. \n3. Set a \"from\" time that is later than the \"to\" time (e.g., From: \"05:00 PM\", To: \"09:00 AM\"). \n4. Click \"Submit\".",
+                    "expected_result": "An error message should appear, indicating that the time range is invalid. The form should not be submitted."
+                },
+                {
+                    "id": "WEB-STR-PREP-07",
+                    "feature": "Remove Specific Time Slot",
+                    "scenario": "Verify removing a specific time slot",
+                    "steps": "1. Add and save a specific time slot. \n2. On the same row, click the trash icon. \n3. Click \"Submit\".",
+                    "expected_result": "The specific time slot row is removed from the page. The change is saved successfully."
+                }
+            ],
+            "orders": [
+                {
+                    "id": "WEB-STR-ORD-01",
+                    "feature": "Page UI",
+                    "scenario": "Verify all elements on the Orders page are displayed correctly",
+                    "steps": "1. Log in as a store user. \n2. From the sidebar, navigate to \"Orders\".",
+                    "expected_result": "The page loads correctly. The \"Manage Orders\" title and breadcrumbs are visible. The filter section is displayed with a dropdown, date pickers, and a search button. Summary cards for Tax, Earnings, Owe Amount, and Orders are present. The data table with all orders is displayed."
+                },
+                {
+                    "id": "WEB-STR-ORD-02",
+                    "feature": "Filtering",
+                    "scenario": "Verify filtering orders by \"Today\"",
+                    "steps": "1. In the \"Filter By\" dropdown, select \"Today\". \n2. Click \"Search\".",
+                    "expected_result": "The data table updates to show only orders created on the current date. The summary cards (Tax, Earnings, etc.) also update to reflect the filtered data."
+                },
+                {
+                    "id": "WEB-STR-ORD-03",
+                    "feature": "Filtering",
+                    "scenario": "Verify filtering orders by a custom date range",
+                    "steps": "1. In the \"Filter By\" dropdown, select \"Custom\". \n2. Use the date pickers to select a \"From Date\" and a \"To Date\". \n3. Click \"Search\".",
+                    "expected_result": "The data table updates to show only orders created within the selected date range. The summary cards update accordingly."
+                },
+                {
+                    "id": "WEB-STR-ORD-04",
+                    "feature": "Filtering",
+                    "scenario": "Verify resetting the filter to \"Overall.\"",
+                    "steps": "1. Apply a filter (e.g., \"Today\"). \n2. In the \"Filter By\" dropdown, select \"Overall\". \n3. Click \"Search\".",
+                    "expected_result": "The data table resets to show all orders, and the summary cards reflect the total data."
+                },
+                {
+                    "id": "WEB-STR-ORD-05",
+                    "feature": "Data Table",
+                    "scenario": "Verify the \"View\" action button",
+                    "steps": "1. In the data table, locate any order row. \n2. Click the \"view\" icon (pencil icon) in the \"Action\" column.",
+                    "expected_result": "The user is redirected to the detailed view page for that specific order (e.g., /store/view_order/10025)."
+                },
+                {
+                    "id": "WEB-STR-ORD-06",
+                    "feature": "Data Table",
+                    "scenario": "Verify searching within the table",
+                    "steps": "1. In the search box above the table, type a specific User Name (e.g., \"Zaman Mm\").",
+                    "expected_result": "The table filters in real-time to show only the orders associated with that user."
+                },
+                {
+                    "id": "WEB-STR-ORD-07",
+                    "feature": "Data Table",
+                    "scenario": "Verify sorting the table by Order ID",
+                    "steps": "1. Click the header for the \"Order id\" column. \n2. Click the header again.",
+                    "expected_result": "1. The table sorts the orders by ID in ascending order. \n2. The table sorts the orders by ID in descending order."
+                },
+                {
+                    "id": "WEB-STR-ORD-08",
+                    "feature": "Data Table",
+                    "scenario": "Verify exporting data",
+                    "steps": "1. Click the \"csv\" button. \n2. Click the \"Excel\" button.",
+                    "expected_result": "A .csv file containing the table data is downloaded. A .xls or .xlsx file containing the table data is downloaded."
+                }
+            ]
+        },
+        "provider_portal": {
+            "profile": [
+                {
+                    "id": "WEB-PPRF-01",
+                    "feature": "Page UI",
+                    "scenario": "Verify all elements on the profile page are displayed correctly",
+                    "steps": "1. Log in as a provider. \n2. Navigate to the profile page (/providerprofile).",
+                    "expected_result": "The page loads correctly. A left-side navigation card displays the provider's image, name, and links for \"Profile\", \"My Orders\", \"Log Out\", and \"Delete Account\". The main content area shows the provider's details."
+                },
+                {
+                    "id": "WEB-PPRF-02",
+                    "feature": "Profile Card",
+                    "scenario": "Verify provider name and image are correct",
+                    "steps": "1. Observe the left-side navigation card.",
+                    "expected_result": "The provider's full name (\"DriverFirst DriverLast\") and profile picture are displayed correctly at the top of the card."
+                },
+                {
+                    "id": "WEB-PPRF-03",
+                    "feature": "Navigation",
+                    "scenario": "Verify navigation links work correctly",
+                    "steps": "1. On the profile page, click the \"My Orders\" link in the left-side navigation. \n2. Navigate back and click the \"Profile\" link.",
+                    "expected_result": "1. The user is redirected to the /providermyjobs page \n2. The user is redirected back to the /providerprofile page, and the \"Profile\" link is highlighted."
+                },
+                {
+                    "id": "WEB-PPRF-04",
+                    "feature": "Profile Details",
+                    "scenario": "Verify user data is displayed and read-only",
+                    "steps": "1. Observe the main content area.",
+                    "expected_result": "All fields (Email, Phone Number, Location, City, State, Postal Code) display the correct information for the logged-in provider and are disabled (read-only)."
+                },
+                {
+                    "id": "WEB-PPRF-05",
+                    "feature": "Account Actions",
+                    "scenario": "Verify \"Log Out\" functionality",
+                    "steps": "1. In the left-side navigation card, click the \"Log Out\" link.",
+                    "expected_result": "The user is logged out of their account and redirected to the homepage or login page."
+                },
+                {
+                    "id": "WEB-PPRF-06",
+                    "feature": "Account Actions",
+                    "scenario": "Verify \"Delete Account\" confirmation flow",
+                    "steps": "1. In the left-side navigation card, click the \"Delete Account\" link. \n2. In the first confirmation modal, click \"Yes\". \n3. In the second modal, enter the correct OTP. \n4. Click \"Ok\".",
+                    "expected_result": "The first modal (\"myModal\") appears. Clicking \"Yes\" triggers the second OTP modal (\"myModals\"). After correct OTP entry, the account is deleted, and the user is logged out."
+                }
+            ],
+            "orders": [
+                {
+                    "id": "WEB-PORD-01",
+                    "feature": "Page UI",
+                    "scenario": "Verify all elements on the \"My Orders\" page are displayed correctly",
+                    "steps": "1. Log in as a provider. \n2. From the sidebar, navigate to \"My Orders\".",
+                    "expected_result": "The page loads correctly. The left-side navigation card is present. The \"Total Earnings\" amount is displayed. The summary cards for \"Completed Orders\", \"Acceptance Rate\", and \"Cancelled Orders\" are visible with their respective values. The order history table is displayed."
+                },
+                {
+                    "id": "WEB-PORD-02",
+                    "feature": "Data Display",
+                    "scenario": "Verify that the summary card data is accurate",
+                    "steps": "1. Observe the values in the three summary cards.",
+                    "expected_result": "The numbers for \"Completed Orders\", \"Acceptance Rate\", and \"Cancelled Orders\" should accurately reflect the provider's history."
+                },
+                {
+                    "id": "WEB-PORD-03",
+                    "feature": "Order Table",
+                    "scenario": "Verify that the order history table populates with data",
+                    "steps": "1. Observe the table at the bottom of the page.",
+                    "expected_result": "The table correctly lists the provider's past orders with columns for \"Orders Id\", \"Total Earnings\", and \"status\"."
+                },
+                {
+                    "id": "WEB-PORD-04",
+                    "feature": "Order Table",
+                    "scenario": "Verify navigation to the order detail page",
+                    "steps": "1. In the order history table, click on any \"Orders Id\" link (e.g., \"10056\").",
+                    "expected_result": "The user is redirected to the detailed view page for that specific order (e.g., /provider_order_jobs/provider/10056)."
+                },
+                {
+                    "id": "WEB-PORD-05",
+                    "feature": "Pagination",
+                    "scenario": "Verify table pagination functionality",
+                    "steps": "1. If there are more orders than can fit on one page, navigate to the pagination controls at the bottom of the table. \n2. Click the \"Next\" button or a page number.",
+                    "expected_result": "The table updates to show the next set of orders. The pagination controls update to reflect the current page."
+                }
+            ]
+        }
+    },
+    "mobile_application": {
+        "customer_application": {
+            "login_registration": [
+                {
+                    "id": "MOB-CUST-LGN-01",
+                    "feature": "UI",
+                    "scenario": "Verify all elements on the \"Welcome Back\" screen",
+                    "steps": "1. Launch the Customer application.",
+                    "expected_result": "The screen loads correctly. The Sheger logo is at the top. The text \"Welcome Back\" and \"Login to continue\" is displayed. Buttons for \"Continue with Phone Number,\" \"Register,\" \"Google,\" \"Facebook,\" and \"Apple Login\" are all visible and enabled. The language and currency selectors are at the bottom."
+                },
+                {
+                    "id": "MOB-CUST-LGN-02",
+                    "feature": "Login",
+                    "scenario": "Verify \"Continue with Phone Number\" flow",
+                    "steps": "1. Tap the \"Continue with Phone Number\" button.",
+                    "expected_result": "The user is navigated to a new screen prompting for their phone number to begin the login process."
+                },
+                {
+                    "id": "MOB-CUST-LGN-03",
+                    "feature": "Registration",
+                    "scenario": "Verify \"Register\" button navigation",
+                    "steps": "1. Tap the \"Register\" button.",
+                    "expected_result": "The user is navigated to the main registration screen, where they can create a new account."
+                },
+                {
+                    "id": "MOB-CUST-LGN-04",
+                    "feature": "Social Login",
+                    "scenario": "Verify the \"Google\" login button",
+                    "steps": "1. Tap the \"Google\" button.",
+                    "expected_result": "The standard Google account selection/login flow is initiated within the app."
+                },
+                {
+                    "id": "MOB-CUST-LGN-05",
+                    "feature": "Social Login",
+                    "scenario": "Verify the \"Facebook\" login button",
+                    "steps": "1. Tap the \"Facebook\" button.",
+                    "expected_result": "The standard Facebook login/authentication flow is initiated within the app."
+                },
+                {
+                    "id": "MOB-CUST-LGN-06",
+                    "feature": "Social Login",
+                    "scenario": "Verify the \"Apple Login\" button",
+                    "steps": "1. Tap the \"Apple Login\" button.",
+                    "expected_result": "The standard Apple ID login/authentication flow is initiated within the app."
+                },
+                {
+                    "id": "MOB-CUST-LGN-07",
+                    "feature": "Localization",
+                    "scenario": "Verify Language selector",
+                    "steps": "1. Tap the \"English\" dropdown at the bottom left.",
+                    "expected_result": "A list of available languages appears, allowing the user to change the app's language."
+                },
+                {
+                    "id": "MOB-CUST-LGN-08",
+                    "feature": "Localization",
+                    "scenario": "Verify Currency selector",
+                    "steps": "1. Tap the \"ETB\" dropdown at the bottom-right.",
+                    "expected_result": "A list of available currencies appears, allowing the user to change the currency displayed in the app."
+                }
+            ],
+            "service_selection": [
+                {
+                    "id": "MOB-CUST-HOME-01",
+                    "feature": "UI",
+                    "scenario": "Verify all elements on the Home screen",
+                    "steps": "1. Log in to the application.",
+                    "expected_result": "The screen loads correctly. The header displays a hamburger menu icon, the delivery status (\"ASAP\"), and the current delivery address. Three main service categories are visible: \"Food Delivery,\" \"Grocery Delivery,\" and \"Pharmacy Delivery.\" A WhatsApp support icon is visible in the bottom-right corner."
+                },
+                {
+                    "id": "MOB-CUST-HOME-02",
+                    "feature": "Header",
+                    "scenario": "Verify by tapping the delivery address/status bar",
+                    "steps": "1. Tap the bar at the top that shows \"ASAP -> [Address]\".",
+                    "expected_result": "A screen should appear allowing the user to change their delivery address or schedule an order for a later time.\nAlso allow to choose delivery type “meet at vehicle” or “Deliver to door”\nAlso, an option to add a delivery note\nFinally, the option to chase the order time ASAP or schedule the order "
+                },
+                {
+                    "id": "MOB-CUST-HOME-03",
+                    "feature": "Navigation",
+                    "scenario": "Verify tapping the \"Food Delivery\" button",
+                    "steps": "1. Tap the \"Food Delivery\" button.",
+                    "expected_result": "The user is navigated to the store/restaurant listing page, filtered to show only food vendors."
+                },
+                {
+                    "id": "MOB-CUST-HOME-04",
+                    "feature": "Navigation",
+                    "scenario": "Verify by tapping the \"Grocery Delivery\" button",
+                    "steps": "1. Tap the \"Grocery Delivery\" button.",
+                    "expected_result": "The user is navigated to the store listing page, filtered to show only grocery stores."
+                },
+                {
+                    "id": "MOB-CUST-HOME-05",
+                    "feature": "Navigation",
+                    "scenario": "Verify tapping the \"Pharmacy Delivery\" button",
+                    "steps": "1. Tap the \"Pharmacy Delivery\" button.",
+                    "expected_result": "The user is navigated to the store listing page, filtered to show only pharmacies."
+                },
+                {
+                    "id": "MOB-CUST-HOME-06",
+                    "feature": "Support",
+                    "scenario": "Verify by tapping the WhatsApp icon",
+                    "steps": "1. Tap the WhatsApp icon in the bottom-right corner.",
+                    "expected_result": "The WhatsApp application should open, initiating a chat with the pre-configured support number."
+                },
+                {
+                    "id": "MOB-CUST-HOME-07",
+                    "feature": "Side Menu",
+                    "scenario": "Verify by opening the side menu",
+                    "steps": "1. Tap the hamburger menu icon in the top-left corner.",
+                    "expected_result": "A side navigation drawer/menu should slide in from the left, revealing links to other sections of the app (e.g., Profile, Orders, Payments, etc.)."
+                }
+            ],
+            "side_navigation": [
+                {
+                    "id": "MOB-CUST-NAV-01",
+                    "feature": "Side Menu UI",
+                    "scenario": "Verify all elements of the side navigation drawer are displayed correctly",
+                    "steps": "1. From the Home Screen, tap the hamburger menu icon.",
+                    "expected_result": "The side navigation drawer opens from the left. It displays the user's name and image, a link to go \"Back to delivery etc\", and a list of menu items: My Profile, Your Bookings, Payment, Wallet, Promotions, Referral, Favourites, Age Verification, Settings, Support, and a Logout button."
+                },
+                {
+                    "id": "MOB-CUST-NAV-02",
+                    "feature": "My Profile",
+                    "scenario": "Verify navigation to the \"My Profile\" screen and its content",
+                    "steps": "1. Open the side menu.\n2. Tap on \"My Profile\".",
+                    "expected_result": "The user is navigated to the \"My Profile\" screen. The correct First Name, Last Name, Email, and Phone Number are displayed. \"Edit Profile\" and \"Change Password\" buttons are visible.\nPress edit profile and verify if the edit is working\nPress on chage password and verify chage password is working"
+                },
+                {
+                    "id": "MOB-CUST-NAV-03",
+                    "feature": "Your Bookings/Orders",
+                    "scenario": "Verify navigation to the \"Your Order\" screen and its content",
+                    "steps": "1. Open the side menu. \n2. Tap on \"Your Bookings\".",
+                    "expected_result": "The user is navigated to the \"Your Order\" screen. A list of past/current orders is displayed with details like Order ID, status, items, and total price. A \"View Receipt\" button is present for each order.\nCheck both past and upcoming tabs"
+                },
+                {
+                    "id": "MOB-CUST-NAV-04",
+                    "feature": "Payment",
+                    "scenario": "Verify navigation to the \"Payment\" screen and its options",
+                    "steps": "1. Open the side menu. \n2. Tap on \"Payment\".",
+                    "expected_result": "The user is navigated to the \"Payment Methods\" screen. Options for \"Cash\" and \"Online payment\" are displayed. The Wallet balance is also shown."
+                },
+                {
+                    "id": "MOB-CUST-NAV-05",
+                    "feature": "Wallet",
+                    "scenario": "Verify navigation to the \"Wallet\" screen",
+                    "steps": "1. Open the side menu. \n2. Tap on \"Wallet\".",
+                    "expected_result": "The user is navigated to the \"Wallet\" screen. The current wallet balance is displayed correctly, and an \"ADD AMOUNT\" button is visible and enabled.\nPress the add amount and test if it redirects to the payment page"
+                },
+                {
+                    "id": "MOB-CUST-NAV-06",
+                    "feature": "Promotions",
+                    "scenario": "Verify navigation to the \"Promo Code\" screen",
+                    "steps": "1. Open the side menu. \n2. Tap on \"Promotions\".",
+                    "expected_result": "The user is navigated to the \"PROMO CODE\" screen. An input field to enter a promo code and an \"APPLY\" button are visible."
+                },
+                {
+                    "id": "MOB-CUST-NAV-07",
+                    "feature": "Referral",
+                    "scenario": "Verify navigation to the \"Referral\" screen",
+                    "steps": "1. Open the side menu. \n2. Tap on \"Referral\".",
+                    "expected_result": "The user is navigated to the \"Referral\" screen. The user's unique referral code is displayed with an option to share it."
+                },
+                {
+                    "id": "MOB-CUST-NAV-08",
+                    "feature": "Favourites",
+                    "scenario": "Verify navigation to the \"Your Favourites\" screen",
+                    "steps": "1. Open the side menu. \n2. Tap on \"Favourites\".",
+                    "expected_result": "The user is navigated to the \"Your Favourites\" screen. A message \"No Data Found\" is displayed if no favourites have been added.\nOr a list of favorite stores is listed, with the option to delete"
+                },
+                {
+                    "id": "MOB-CUST-NAV-09",
+                    "feature": "Age Verification",
+                    "scenario": "Verify navigation to the \"Verification\" screen",
+                    "steps": "1. Open the side menu. \n2. Tap on \"Age Verification\".",
+                    "expected_result": "The user is navigated to the \"Verification\" screen. A prompt to \"Please submit your document to verify your age\" is shown with a \"SUBMIT\" button."
+                },
+                {
+                    "id": "MOB-CUST-NAV-10",
+                    "feature": "Settings",
+                    "scenario": "Verify navigation to the \"Settings\" screen and its options",
+                    "steps": "1. Open the side menu. \n2. Tap on \"Settings\".",
+                    "expected_result": "The user is navigated to the \"Settings\" screen. It displays the user's name and email. Options to manage Favourites (Add home, Add work), Currency, Language, Privacy Policy, and Terms & Conditions are all visible."
+                },
+                {
+                    "id": "MOB-CUST-NAV-11",
+                    "feature": "Support",
+                    "scenario": "Verify navigation to the \"Support\" screen",
+                    "steps": "1. Open the side menu. \n2. Tap on \"Support\".",
+                    "expected_result": "The user is navigated to the \"Support\" screen. Options to contact support via \"WhatsApp\" and \"Skype\" are displayed."
+                },
+                {
+                    "id": "MOB-CUST-NAV-12",
+                    "feature": "Logout",
+                    "scenario": "Verify logout functionality",
+                    "steps": "1. Open the side menu. \n2. Tap the \"Logout\" button.",
+                    "expected_result": "A confirmation prompt appears. Upon confirming, the user is logged out and returned to the initial \"Welcome Back\" screen."
+                }
+            ],
+            "ordering_flow": [
+                {
+                    "id": "MOB-CUST-ORD-01",
+                    "feature": "Store Listing",
+                    "scenario": "Verify UI and functionality of the store list screen",
+                    "steps": "1. From the home screen, tap any service type (e.g., \"Food Delivery\").",
+                    "expected_result": "A list of available stores appears. The screen includes a search bar, a filter icon, and a list of stores with their name, image, and estimated delivery time."
+                },
+                {
+                    "id": "MOB-CUST-ORD-02",
+                    "feature": "Store Listing",
+                    "scenario": "Verify searching for a specific store",
+                    "steps": "1. On the store listing screen, tap the search bar. \n2. Type the name of a known store (e.g., \"Burger Shop\").",
+                    "expected_result": "The list of stores filters in real-time to show only stores that match the search query."
+                },
+                {
+                    "id": "MOB-CUST-ORD-03",
+                    "feature": "Menu Page",
+                    "scenario": "Verify navigation to and UI of the store's menu page",
+                    "steps": "1. From the store list, tap on a store.",
+                    "expected_result": "The user is navigated to the store's detail page. The page displays the store's banner, name, and a list of its menu items, each with a name, price, and \"Add\" button."
+                },
+                {
+                    "id": "MOB-CUST-ORD-04",
+                    "feature": "Add to Cart",
+                    "scenario": "Verify adding an item to the cart",
+                    "steps": "1. On the menu page, tap the \"Add\" button next to an item.",
+                    "expected_result": "A bottom sheet or modal appears showing the item's details, quantity controls (+/-), and a final \"Add to basket\" button with the total price for the selected quantity."
+                },
+                {
+                    "id": "MOB-CUST-ORD-05",
+                    "feature": "Add to Cart",
+                    "scenario": "Verify adding multiple items to the basket",
+                    "steps": "1. Add one item to the basket. \n2. Go back to the menu and add a different item.",
+                    "expected_result": "The \"Your basket\" floating button at the bottom of the screen updates to show the correct total item count and subtotal."
+                },
+                {
+                    "id": "MOB-CUST-ORD-06",
+                    "feature": "Basket/Checkout",
+                    "scenario": "Verify UI and details on the \"Your basket\" screen",
+                    "steps": "1. Tap the \"Your basket\" button.",
+                    "expected_result": "The user is navigated to the checkout screen. It correctly displays the store name, delivery address, delivery time, a list of items with their quantities and prices, a subtotal, delivery fee, and a total amount."
+                },
+                {
+                    "id": "MOB-CUST-ORD-07",
+                    "feature": "Basket/Checkout",
+                    "scenario": "Verify changing delivery type",
+                    "steps": "1. On the \"Your basket\" screen, tap the \"Take Away\" option.",
+                    "expected_result": "The \"Delivery Fee\" should be removed from the order summary, and the total price should be recalculated."
+                },
+                {
+                    "id": "MOB-CUST-ORD-08",
+                    "feature": "Basket/Checkout",
+                    "scenario": "Verify applying a promo code",
+                    "steps": "1. On the \"Your basket\" screen, tap \"Add Promo Code\". \n2. Enter a valid code and apply it.",
+                    "expected_result": "A \"Promo\" line item with a negative value should appear in the order summary, and the total price should be reduced."
+                },
+                {
+                    "id": "MOB-CUST-ORD-09",
+                    "feature": "Basket/Checkout",
+                    "scenario": "Verify placing an order",
+                    "steps": "1. On the \"Your basket\" screen, confirm all details are correct. \n2. Tap the \"Place order\" button.",
+                    "expected_result": "The order is successfully placed, and the user is navigated to the \"Your Order\" tracking screen."
+                },
+                {
+                    "id": "MOB-CUST-ORD-10",
+                    "feature": "Order Tracking",
+                    "scenario": "Verify UI and status on the order tracking screen",
+                    "steps": "1. After placing an order, view the tracking screen.",
+                    "expected_result": "The screen displays a map, the order status (e.g., \"Confirming order with store\"), the estimated arrival time, and buttons to \"View Receipt\" and \"Cancel Order\"."
+                },
+                {
+                    "id": "MOB-CUST-ORD-11",
+                    "feature": "Order Receipt",
+                    "scenario": "Verify by viewing the order receipt",
+                    "steps": "1. On the order tracking screen, tap \"View Receipt\".",
+                    "expected_result": "A modal or new screen appears showing a detailed breakdown of the order, including items, subtotal, fees, tax, and the total amount paid."
+                },
+                {
+                    "id": "MOB-CUST-ORD-12",
+                    "feature": "Order Cancellation",
+                    "scenario": "Verify the order cancellation flow",
+                    "steps": "1. On the order tracking screen, tap \"Cancel Order\". \n2. Select a reason from the list. \n3. Tap \"Cancel Order\" to confirm.",
+                    "expected_result": "The cancellation reason screen appears. After confirming, the order status on the tracking screen updates to \"Cancelled\"."
+                }
+            ]
+        },
+        "store_application": {
+            "order_management": [
+                {
+                    "id": "MOB-STR-ORD-01",
+                    "feature": "Order List UI",
+                    "scenario": "Verify all elements on the main order screen are displayed correctly",
+                    "steps": "1. Log in to the Store application.",
+                    "expected_result": "The screen loads correctly, displaying the store name at the top. \nThe main view is divided into \"Current Orders,\" \"Out to delivery,\" and \"Completed Orders.\" \nA toggle button at the bottom shows the store's status (e.g., \"Accepting Orders\")."
+                },
+                {
+                    "id": "MOB-STR-ORD-02",
+                    "feature": "New Order",
+                    "scenario": "Verify a new order appears correctly",
+                    "steps": "1. Place a new order from the customer app. \n2. Observe the \"Current Orders\" list in the store app.",
+                    "expected_result": "The new order appears at the top of the \"Current Orders\" list with the correct Order ID and customer name. A notification also be received."
+                },
+                {
+                    "id": "MOB-STR-ORD-03",
+                    "feature": "Accept Order",
+                    "scenario": "Verify the \"Accept Orders\" flow",
+                    "steps": "1. On a new order, swipe left or tap to reveal the \"Accept Orders\" button. \n2. Tap \"Accept Orders\".",
+                    "expected_result": "The order is accepted. The UI updates to display a timer (e.g., \"20 Mins\") for preparation, and the order is moved to the main \"Current Orders\" list if it wasn't already there."
+                },
+                {
+                    "id": "MOB-STR-ORD-04",
+                    "feature": "Store Status",
+                    "scenario": "Verify toggling store status to \"Pause New Orders.\"",
+                    "steps": "1. Tap the \"Accepting Orders\" button at the bottom. \n2. Tap \"Pause New Orders\" from the options that appear.",
+                    "expected_result": "The button at the bottom updates to show \"Paused\". The store should not receive any new orders from customers."
+                },
+                {
+                    "id": "MOB-STR-ORD-05",
+                    "feature": "Order Details",
+                    "scenario": "Verify navigation to and UI of the Order Details screen",
+                    "steps": "1. Tap on any order in the list (e.g., Order #10068).",
+                    "expected_result": "The user is navigated to the \"Order Details\" screen. \nThe screen shows the Order ID, a progress tracker, customer details (name, phone), an itemized list, and the total price. \nButtons for \"DELAY ORDER\", \"CANCEL ORDER\", and \"ORDER IS READY\" are visible."
+                },
+                {
+                    "id": "MOB-STR-ORD-06",
+                    "feature": "Order Details",
+                    "scenario": "Verify customer contact functionality",
+                    "steps": "1. On the \"Order Details\" screen, tap the phone icon next to the customer's name.",
+                    "expected_result": "The phone's native dialer should open with the customer's phone number pre-filled."
+                },
+                {
+                    "id": "MOB-STR-ORD-07",
+                    "feature": "Order Management",
+                    "scenario": "Verify the \"Delay Order\" functionality",
+                    "steps": "1. On the \"Order Details\" screen, tap \"DELAY ORDER\".",
+                    "expected_result": "A new screen should appear, allowing the store to enter a new delay time and the reason for delaying"
+                },
+                {
+                    "id": "MOB-STR-ORD-08",
+                    "feature": "Order Management",
+                    "scenario": "Verify the \"Cancel Order\" functionality",
+                    "steps": "1. On the \"Order Details\" screen, tap \"CANCEL ORDER\".",
+                    "expected_result": "A confirmation prompt should appear. Upon confirming, the order should be marked as cancelled."
+                },
+                {
+                    "id": "MOB-STR-ORD-09",
+                    "feature": "Order Management",
+                    "scenario": "Verify the \"Order is Ready\" functionality",
+                    "steps": "1. On the \"Order Details\" screen, tap \"ORDER IS READY\".",
+                    "expected_result": "The order status updates. The progress tracker on the screen updates, and the order moves to the \"Out to delivery\" section on the main screen.\nThe order will be assigned to a delivery person, or if not foun,d the order will be returned to the restaurant to try again"
+                },
+                {
+                    "id": "MOB-STR-ORD-10",
+                    "feature": "Order Rating",
+                    "scenario": "Verify viewing and responding to order ratings",
+                    "steps": "1. On the main order screen, navigate to a \"Completed Order\". \n2. Tap the thumbs up/down icons.",
+                    "expected_result": "Tapping the icons should allow the store to view any ratings or feedback left by the customer for that order."
+                }
+            ],
+            "side_navigation": [
+                {
+                    "id": "MOB-STR-NAV-01",
+                    "feature": "Side Menu UI",
+                    "scenario": "Verify all elements of the side navigation drawer are displayed correctly",
+                    "steps": "1. From the main Orders screen, tap the hamburger menu icon in the top-left corner.",
+                    "expected_result": "The side navigation drawer opens. \nIt displays the store's name and image, and a list of menu items: Orders, Order History, Menu, Language, Currency, Pay to Shegerdeliveries, Support, Delete Account, and Logout."
+                },
+                {
+                    "id": "MOB-STR-NAV-02",
+                    "feature": "Navigation",
+                    "scenario": "Verify navigation to the \"Orders\" screen",
+                    "steps": "1. Open the side menu. \n2. Tap on \"Orders\".",
+                    "expected_result": "The user is navigated to the main order management screen, showing current and pending orders."
+                },
+                {
+                    "id": "MOB-STR-NAV-03",
+                    "feature": "Navigation",
+                    "scenario": "Verify navigation to the \"Order History\" screen",
+                    "steps": "1. Open the side menu. \n2. Tap on \"Order History\".",
+                    "expected_result": "The user is navigated to a screen listing all past/completed orders."
+                },
+                {
+                    "id": "MOB-STR-NAV-04",
+                    "feature": "Menu Management",
+                    "scenario": "Verify navigation to the \"Menu\" screen and its content",
+                    "steps": "1. Open the side menu. \n2. Tap on \"Menu\".",
+                    "expected_result": "The user is navigated to the \"Menu\" screen. \nA list of menu categories is displayed. \nTapping a category reveals the items within it, each with a toggle switch for availability."
+                },
+                {
+                    "id": "MOB-STR-NAV-05",
+                    "feature": "Menu Management",
+                    "scenario": "Verify toggling item availability",
+                    "steps": "1. Navigate to the \"Menu\" screen. \n2. Tap on a category to expand its items. \n3. Tap the green toggle switch next to an item to mark it as unavailable. \n4. Tap the toggle again to mark it as available.",
+                    "expected_result": "The toggle switch changes color (e.g., to gray) and status.\n The item should immediately become unavailable/available for customers."
+                },
+                {
+                    "id": "MOB-STR-NAV-06",
+                    "feature": "Settings",
+                    "scenario": "Verify changing the Language",
+                    "steps": "1. Open the side menu. \n2. Tap on \"Language\".",
+                    "expected_result": "A list or modal appears with available languages. \nSelecting a new language should update the app's UI text accordingly."
+                },
+                {
+                    "id": "MOB-STR-NAV-07",
+                    "feature": "Settings",
+                    "scenario": "Verify changing the Currency",
+                    "steps": "1. Open the side menu. \n2. Tap on \"Currency\".",
+                    "expected_result": "A list or modal appears with available currencies. \nSelecting a new currency should update all monetary values in the app."
+                },
+                {
+                    "id": "MOB-STR-NAV-08",
+                    "feature": "Payouts",
+                    "scenario": "Verify navigation to the \"Pay to Sheger Deliveries\" screen",
+                    "steps": "1. Open the side menu. \n2. Tap on \"Pay to Sheger Deliveries\".",
+                    "expected_result": "The user is navigated to a screen that shows the amount owed to Sheger Deliveries and provides payment options."
+                },
+                {
+                    "id": "MOB-STR-NAV-09",
+                    "feature": "Support",
+                    "scenario": "Verify navigation to the \"Support\" screen",
+                    "steps": "1. Open the side menu. \n2. Tap on \"Support\".",
+                    "expected_result": "The user is navigated to a screen with options to contact support, likely via WhatsApp, Skype, or email."
+                },
+                {
+                    "id": "MOB-STR-NAV-10",
+                    "feature": "Account Actions",
+                    "scenario": "Verify the \"Delete Account\" flow",
+                    "steps": "1. Open the side menu. \n2. Tap \"Delete Account\".",
+                    "expected_result": "A confirmation prompt appears. \nConfirming should initiate the account deletion process, possibly requiring an OTP or password verification."
+                },
+                {
+                    "id": "MOB-STR-NAV-11",
+                    "feature": "Logout",
+                    "scenario": "Verify logout functionality",
+                    "steps": "1. Open the side menu. \n2. Tap the \"Logout\" button.",
+                    "expected_result": "A confirmation prompt appears. Upon confirming, the user is logged out and returned to the store login screen."
+                }
+            ]
+        },
+        "driver_application": {
+            "order_flow": [
+                {
+                    "id": "MOB-DRV-ORD-01",
+                    "feature": "Status & New Order",
+                    "scenario": "Verify going online and receiving a new order request",
+                    "steps": "1. Launch the Driver application and log in. \n2. Tap the \"Offline\" button to switch to \"Online\". \n3. Wait for a new order to be assigned.",
+                    "expected_result": "The driver's status changes to \"Online\". \nA new order request appears on the screen, showing the pickup location, estimated distance/time, and a countdown timer to accept."
+                },
+                {
+                    "id": "MOB-DRV-ORD-02",
+                    "feature": "Accept Order",
+                    "scenario": "Verify accepting a new order",
+                    "steps": "1. On the new order request screen, tap the \"Accept\" button before the timer runs out.",
+                    "expected_result": "The order is accepted.\nThe screen transitions to the \"En Route\" view, showing the route to the pickup location (store) on a map."
+                },
+                {
+                    "id": "MOB-DRV-ORD-03",
+                    "feature": "Order Pickup",
+                    "scenario": "Verify \"Slide to Start Trip\" functionality",
+                    "steps": "1. Arrive at the pickup location. \n2. Swipe the \"SLIDE TO START TRIP\" button.",
+                    "expected_result": "The screen updates to the \"Pick-up Order\" view. \nIt displays the order details, including the list of items to be collected from the store."
+                },
+                {
+                    "id": "MOB-DRV-ORD-04",
+                    "feature": "Order Pickup",
+                    "scenario": "Verify confirming the pickup",
+                    "steps": "1. After collecting the items from the store, tap the \"Next\" button. \n2. On the \"How did the pickup go?\" screen, provide a rating (e.g., thumbs up). \n3. Tap \"Next\".",
+                    "expected_result": "The rating is submitted. The screen updates to show the order is \"Accepted\" and prompts the driver to confirm the pickup again."
+                },
+                {
+                    "id": "MOB-DRV-ORD-05",
+                    "feature": "En Route to Customer",
+                    "scenario": "Verify starting the trip to the customer",
+                    "steps": "1. After confirming the pickup, swipe the \"SLIDE TO START TRIP\" button.",
+                    "expected_result": "The screen transitions to the \"En Route\" view, now showing the route to the customer's drop-off location on the map."
+                },
+                {
+                    "id": "MOB-DRV-ORD-06",
+                    "feature": "Delivery",
+                    "scenario": "Verify completing the delivery",
+                    "steps": "1. Arrive at the customer's location. \n2. Swipe the \"SWIPE TO COLLECT CASH\" or \"SWIPE TO COMPLETE TRIP\" button at the bottom.",
+                    "expected_result": "The screen updates, prompting for delivery details."
+                },
+                {
+                    "id": "MOB-DRV-ORD-07",
+                    "feature": "Delivery Details",
+                    "scenario": "Verify selecting the recipient",
+                    "steps": "1. On the \"select recipient\" screen, choose the correct option (e.g., \"Zaman Mm (Intended Recipient)\"). \n2. Tap \"NEXT\".",
+                    "expected_result": "The selection is accepted, and the user is navigated to the final rating screen."
+                },
+                {
+                    "id": "MOB-DRV-ORD-08",
+                    "feature": "Delivery Rating",
+                    "scenario": "Verify submitting the delivery rating",
+                    "steps": "1. On the \"How do the delivery go?\" screen, provide a rating (e.g., thumbs up). \n2. Tap \"NEXT\".",
+                    "expected_result": "The rating is submitted. \nThe screen updates to show the final \"En Route\" map with a \"SWIPE TO COMPLETE TRIP\" button."
+                },
+                {
+                    "id": "MOB-DRV-ORD-09",
+                    "feature": "Trip Completion",
+                    "scenario": "Verify completing the trip",
+                    "steps": "1. Swipe the \"SWIPE TO COMPLETE TRIP\" button.",
+                    "expected_result": "The trip is marked as complete. \nThe driver is returned to the main \"Online\" screen, ready to receive new orders."
+                }
+            ],
+            "side_navigation": [
+                {
+                    "id": "MOB-DRV-NAV-01",
+                    "feature": "Side Menu UI",
+                    "scenario": "Verify all elements of the side navigation drawer are displayed correctly",
+                    "steps": "1. From the main screen, tap the hamburger menu icon in the top-left corner.",
+                    "expected_result": "The side navigation drawer opens. \nIt displays the driver's name and image, and a list of menu items: Your Jobs, Earnings, Manage Documents, Manage Vehicles, Pay to Admin, Ratings, Referral, Settings, Support, and Logout."
+                },
+                {
+                    "id": "MOB-DRV-NAV-02",
+                    "feature": "Your Jobs",
+                    "scenario": "Verify navigation to the \"Your Jobs\" screen and its content",
+                    "steps": "1. Open the side menu.\n 2. Tap on \"Your Jobs\".",
+                    "expected_result": "The user is navigated to the \"Your Jobs\" screen. It correctly displays tabs for \"Pending Jobs,\" \"Completed,\" jobs with a list of relevant orders under each."
+                },
+                {
+                    "id": "MOB-DRV-NAV-03",
+                    "feature": "Earnings",
+                    "scenario": "Verify navigation to the \"Earnings\" screen and its content",
+                    "steps": "1. Open the side menu. \n2. Tap on \"Earnings\".",
+                    "expected_result": "The user is navigated to the \"Earnings\" screen. \nIt displays the \"Total Earnings,\" a weekly earnings graph, and links to \"Jobs & Payments\" and \"Pay Statements\"."
+                },
+                {
+                    "id": "MOB-DRV-NAV-04",
+                    "feature": "Manage Documents",
+                    "scenario": "Verify navigation to the \"Manage Documents\" screen",
+                    "steps": "1. Open the side menu.\n 2. Tap on \"Manage Documents\".",
+                    "expected_result": "The user is navigated to the \"Manage Documents\" screen. \nIt lists required documents (e.g., \"Licence Front,\" \"Work Experience\") and their approval status (\"Approved\")."
+                },
+                {
+                    "id": "MOB-DRV-NAV-05",
+                    "feature": "Manage Vehicles",
+                    "scenario": "Verify navigation to the \"Vehicle Information\" screen",
+                    "steps": "1. Open the side menu.\n2. Tap on \"Manage Vehicles\".",
+                    "expected_result": "The user is navigated to the \"Vehicle Information\" screen, which displays the details of the driver's current vehicle (e.g., \"Nissan 200S\")."
+                },
+                {
+                    "id": "MOB-DRV-NAV-06",
+                    "feature": "Pay to Admin",
+                    "scenario": "Verify navigation to the \"Pay to Admin\" screen",
+                    "steps": "1. Open the side menu. \n2. Tap on \"Pay to Admin\".",
+                    "expected_result": "The user is navigated to the \"Pay to Admin\" screen. \nIt displays the amount owed and a \"PAY TO ADMIN\" button."
+                },
+                {
+                    "id": "MOB-DRV-NAV-07",
+                    "feature": "Ratings",
+                    "scenario": "Verify navigation to the \"Ratings\" screen",
+                    "steps": "1. Open the side menu. \n2. Tap on \"Ratings\".",
+                    "expected_result": "The user is navigated to the \"Ratings\" screen. It displays the driver's current star rating, lifetime jobs count, and cancelled jobs count."
+                },
+                {
+                    "id": "MOB-DRV-NAV-08",
+                    "feature": "Referral",
+                    "scenario": "Verify navigation to the \"Referral\" screen",
+                    "steps": "1. Open the side menu. \n2. Tap on \"Referral\".",
+                    "expected_result": "The user is navigated to the \"Referral\" screen. The user's unique invite code is displayed with an option to share it."
+                },
+                {
+                    "id": "MOB-DRV-NAV-09",
+                    "feature": "Settings",
+                    "scenario": "Verify navigation to the \"Settings\" screen and its options",
+                    "steps": "1. Open the side menu. 2. Tap on \"Settings\".",
+                    "expected_result": "The user is navigated to the \"Settings\" screen. It displays options to manage Currency and Language, and buttons for \"Sign out\" and \"Delete Account\"."
+                },
+                {
+                    "id": "MOB-DRV-NAV-10",
+                    "feature": "Logout",
+                    "scenario": "Verify logout functionality",
+                    "steps": "1. Open the side menu. \n2. Tap the \"Logout\" button.",
+                    "expected_result": "A confirmation prompt appears. Upon confirming, the user is logged out and returned to the driver login screen."
+                }
+            ]
+        }
+    }
+}
