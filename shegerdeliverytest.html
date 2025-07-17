@@ -225,9 +225,11 @@
 
             const stepsList = document.getElementById('modal-steps');
             stepsList.innerHTML = '';
+            // FIX: Remove the number from the beginning of the step string
             tc.steps.split('\n').forEach(step => {
                 const li = document.createElement('li');
-                li.innerHTML = step.replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank" class="text-indigo-600 hover:underline">$1</a>');
+                const cleanStep = step.replace(/^\d+\.\s*/, ''); // Removes "1. ", "2. ", etc.
+                li.innerHTML = cleanStep.replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank" class="text-indigo-600 hover:underline">$1</a>');
                 stepsList.appendChild(li);
             });
 
