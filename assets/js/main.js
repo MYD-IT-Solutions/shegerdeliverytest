@@ -9,62 +9,79 @@ const allTestCases = {};
 // Function to create a test case row in the HTML
 function createTestCase(tc) {
     allTestCases[tc.id] = tc; // Store full test case data for later use
+    // Collapsible details section with up/down icon
     const buttonData = `data-id="${tc.id}"`;
     return `
-            <div class="test-case-row grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
-                <div class="md:col-span-5">
-                    <button type="button" class="w-full p-2 rounded-md test-case-button" onclick="showTestCaseDetails(this)" ${buttonData}>
-                        <p class="font-semibold text-gray-800">${tc.id}</p>
-                        <p class="text-sm text-gray-600">${tc.scenario}</p>
+        <div class="test-case-row grid grid-cols-1 md:grid-cols-12 gap-4 items-start">
+            <div class="md:col-span-5">
+                <div class="flex items-start">
+                    <button type="button" class="test-case-toggle flex-shrink-0 mt-1 mr-3 group" data-toggle-detail="${tc.id}" aria-expanded="false" tabindex="0" style="outline:none;">
+                        <svg class="w-5 h-5 text-gray-500 group-hover:text-indigo-600 transition-transform transform rotate-0" data-toggle-icon="${tc.id}" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /></svg>
                     </button>
-                </div>
-                <div class="md:col-span-3">
-                    <select name="${tc.id}_status" class="w-full p-2 border border-gray-300 rounded-md shadow-sm" required data-status-select="${tc.id}">
-                        <option value="" selected disabled>Select status</option>
-                        <option value="Pass">Pass</option>
-                        <option value="Fail">Fail</option>
-                        <option value="Blocked">Blocked</option>
-                    </select>
-                    <div class="text-xs text-red-600 mt-1 hidden" data-detail-error="${tc.id}">Please read the test case detail before selecting a status.</div>
-                </div>
-                <div class="md:col-span-4">
-                    <input type="text" name="${tc.id}_comment" placeholder="Comments (Required for Fail/Blocked)" class="w-full p-2 border border-gray-300 rounded-md shadow-sm" data-comment-input="${tc.id}">
+                    <div class="flex flex-col">
+                        <span class="font-semibold text-gray-800">${tc.id}</span>
+                        <span class="text-sm text-gray-600 mt-1">${tc.scenario}</span>
+                    </div>
                 </div>
             </div>
-            `;
-
+            <div class="md:col-span-3">
+                <select name="${tc.id}_status" class="w-full p-2 border border-gray-300 rounded-md shadow-sm" required data-status-select="${tc.id}">
+                    <option value="" selected disabled>Select status</option>
+                    <option value="Pass">Pass</option>
+                    <option value="Fail">Fail</option>
+                    <option value="Blocked">Blocked</option>
+                </select>
+                <div class="text-xs text-red-600 mt-1 hidden" data-detail-error="${tc.id}">Please read the test case detail before selecting a status.</div>
+            </div>
+            <div class="md:col-span-4">
+                <input type="text" name="${tc.id}_comment" placeholder="Comments (Required for Fail/Blocked)" class="w-full p-2 border border-gray-300 rounded-md shadow-sm" data-comment-input="${tc.id}">
+            </div>
+        </div>
+        <div class="test-case-detail collapse-detail bg-gray-50 border border-gray-200 rounded-lg mt-2 p-4 hidden" id="detail-${tc.id}" style="grid-column: 1 / -1;">
+            <h3 class="font-semibold text-lg mb-2 text-gray-800">Feature: ${tc.feature}</h3>
+            <h4 class="font-semibold text-md mb-1 text-gray-700">Test Scenario</h4>
+            <p class="mb-3 text-gray-600">${tc.scenario}</p>
+            <h4 class="font-semibold text-md mb-1 text-gray-700">Test Steps</h4>
+            <ol class="list-decimal list-inside space-y-2 mb-3 text-gray-600">
+                ${tc.steps.split('\n').map(step => `<li>${step.replace(/^(\d+\.\s*)/, '')}</li>`).join('')}
+            </ol>
+            <h4 class="font-semibold text-md mb-1 text-gray-700">Expected Result</h4>
+            <div class="expected-result text-gray-700">${tc.expected_result}</div>
+        </div>
+    `;
 }
 
-// Function to show the test case details modal
-window.showTestCaseDetails = function (button) {
-    const id = button.getAttribute('data-id');
-    const tc = allTestCases[id];
 
-    if (!tc) return;
-
-    document.getElementById('modal-title').textContent = `${tc.id} - ${tc.feature}`;
-    document.getElementById('modal-scenario').textContent = tc.scenario;
-    document.getElementById('modal-expected-result').textContent = tc.expected_result;
-
-    const stepsList = document.getElementById('modal-steps');
-    stepsList.innerHTML = '';
-    // FIX: Remove the number from the beginning of the step string
-    tc.steps.split('\n').forEach(step => {
-        const li = document.createElement('li');
-        const cleanStep = step.replace(/^\d+\.\s*/, ''); // Removes "1. ", "2. ", etc.
-        li.innerHTML = cleanStep.replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank" class="text-indigo-600 hover:underline">$1</a>');
-        stepsList.appendChild(li);
+// Collapsible details logic
+function setupCollapsibleDetails() {
+    document.querySelectorAll('.test-case-toggle').forEach(btn => {
+        btn.addEventListener('click', function (e) {
+            const id = btn.getAttribute('data-toggle-detail');
+            const detail = document.getElementById('detail-' + id);
+            const icon = btn.querySelector('svg[data-toggle-icon]');
+            const expanded = btn.getAttribute('aria-expanded') === 'true';
+            if (expanded) {
+                detail.classList.add('hidden');
+                btn.setAttribute('aria-expanded', 'false');
+                if (icon) icon.classList.remove('rotate-180');
+            } else {
+                detail.classList.remove('hidden');
+                btn.setAttribute('aria-expanded', 'true');
+                if (icon) icon.classList.add('rotate-180');
+                // Mark as read (for production mode)
+                if (!IS_DEVELOPMENT_MODE) {
+                    window.testCaseRead[id] = true;
+                }
+            }
+        });
+        // Keyboard accessibility
+        btn.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                btn.click();
+            }
+        });
     });
-
-    // Mark as read (for production mode)
-    if (!IS_DEVELOPMENT_MODE) {
-        window.testCaseRead[id] = true;
-    }
-
-    const testCaseModal = document.getElementById('test-case-modal');
-    testCaseModal.classList.remove('hidden');
-    setTimeout(() => testCaseModal.classList.remove('opacity-0'), 10);
-    setTimeout(() => testCaseModal.querySelector('.modal-container').classList.remove('scale-95'), 10);
 }
 
 // Main script execution
@@ -320,6 +337,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 }
             });
+            // Setup collapsible details after rendering
+            setupCollapsibleDetails();
             // Restore form data after all fields are present
             restoreFormDataFromStorage();
             setupRestoreOnInputs();
