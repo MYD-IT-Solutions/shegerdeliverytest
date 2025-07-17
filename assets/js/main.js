@@ -18,7 +18,7 @@ function createTestCase(tc) {
                     <button type="button" class="test-case-toggle flex-shrink-0 mt-1 mr-3 group" data-toggle-detail="${tc.id}" aria-expanded="false" tabindex="0" style="outline:none;">
                         <svg class="w-5 h-5 text-gray-500 group-hover:text-indigo-600 transition-transform transform rotate-0" data-toggle-icon="${tc.id}" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /></svg>
                     </button>
-                    <div class="flex flex-col">
+                    <div class="flex flex-col cursor-pointer" data-toggle-detail-click="${tc.id}">
                         <span class="font-semibold text-gray-800">${tc.id}</span>
                         <span class="text-sm text-gray-600 mt-1">${tc.scenario}</span>
                     </div>
@@ -58,25 +58,31 @@ function createTestCase(tc) {
 
 // Collapsible details logic
 function setupCollapsibleDetails() {
+    // Toggle logic for both icon and id/scenario
+    function toggleDetailById(id) {
+        const btn = document.querySelector(`.test-case-toggle[data-toggle-detail="${id}"]`);
+        const detail = document.getElementById('detail-' + id);
+        const icon = btn ? btn.querySelector('svg[data-toggle-icon]') : null;
+        const expanded = btn && btn.getAttribute('aria-expanded') === 'true';
+        if (expanded) {
+            detail.classList.add('hidden');
+            if (btn) btn.setAttribute('aria-expanded', 'false');
+            if (icon) icon.classList.remove('rotate-180');
+        } else {
+            detail.classList.remove('hidden');
+            if (btn) btn.setAttribute('aria-expanded', 'true');
+            if (icon) icon.classList.add('rotate-180');
+            // Mark as read (for production mode)
+            if (!IS_DEVELOPMENT_MODE) {
+                window.testCaseRead[id] = true;
+            }
+        }
+    }
+
     document.querySelectorAll('.test-case-toggle').forEach(btn => {
         btn.addEventListener('click', function (e) {
             const id = btn.getAttribute('data-toggle-detail');
-            const detail = document.getElementById('detail-' + id);
-            const icon = btn.querySelector('svg[data-toggle-icon]');
-            const expanded = btn.getAttribute('aria-expanded') === 'true';
-            if (expanded) {
-                detail.classList.add('hidden');
-                btn.setAttribute('aria-expanded', 'false');
-                if (icon) icon.classList.remove('rotate-180');
-            } else {
-                detail.classList.remove('hidden');
-                btn.setAttribute('aria-expanded', 'true');
-                if (icon) icon.classList.add('rotate-180');
-                // Mark as read (for production mode)
-                if (!IS_DEVELOPMENT_MODE) {
-                    window.testCaseRead[id] = true;
-                }
-            }
+            toggleDetailById(id);
         });
         // Keyboard accessibility
         btn.addEventListener('keydown', function (e) {
@@ -85,6 +91,22 @@ function setupCollapsibleDetails() {
                 btn.click();
             }
         });
+    });
+    // Also allow clicking the id/scenario area
+    document.querySelectorAll('[data-toggle-detail-click]').forEach(el => {
+        el.addEventListener('click', function (e) {
+            const id = el.getAttribute('data-toggle-detail-click');
+            toggleDetailById(id);
+        });
+        el.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                el.click();
+            }
+        });
+        el.setAttribute('tabindex', '0');
+        el.setAttribute('role', 'button');
+        el.setAttribute('aria-label', 'Show test case details');
     });
 }
 
@@ -109,6 +131,14 @@ document.addEventListener('DOMContentLoaded', () => {
             // Optionally clear all form fields
             const form = document.getElementById('test-form');
             if (form) form.reset();
+            // Restore test_date to today's date after reset
+            const today = new Date();
+            const year = today.getFullYear();
+            const month = String(today.getMonth() + 1).padStart(2, '0');
+            const day = String(today.getDate()).padStart(2, '0');
+            const formattedDate = `${year}-${month}-${day}`;
+            const testDateInput = document.getElementById('test_date');
+            if (testDateInput) testDateInput.value = formattedDate;
             // Optionally reload page to fully reset state
             // location.reload();
         });
