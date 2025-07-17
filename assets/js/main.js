@@ -105,6 +105,18 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('test_date').value = formattedDate;
 
     // Progress bar rendering
+    // Track the highest step the user has reached (for clickable stepper)
+    let maxStepReached = currentStep;
+    // Try to restore maxStepReached from storage
+    const savedMaxStep = localStorage.getItem('sdtest_maxStepReached');
+    if (savedMaxStep) {
+        maxStepReached = parseInt(savedMaxStep, 10) || currentStep;
+    }
+
+    function saveMaxStepToStorage() {
+        localStorage.setItem('sdtest_maxStepReached', maxStepReached);
+    }
+
     function renderProgressBar() {
         const progressBar = document.getElementById('progress-bar');
         progressBar.innerHTML = '';
@@ -115,10 +127,20 @@ document.addEventListener('DOMContentLoaded', () => {
             if (i < currentStep) status = 'completed';
             else if (i === currentStep) status = 'active';
             else status = 'upcoming';
+            // Make step number clickable if allowed
+            let clickable = (i <= maxStepReached + 1);
+            let stepCircle = '';
+            if (status === 'completed') {
+                stepCircle = `<div class="w-8 h-8 flex items-center justify-center rounded-full mb-1 bg-green-500 text-white cursor-pointer stepper-step" data-step="${i}">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                </div>`;
+            } else if (status === 'active') {
+                stepCircle = `<div class="w-8 h-8 flex items-center justify-center rounded-full mb-1 bg-indigo-600 text-white cursor-pointer stepper-step" data-step="${i}">${i}</div>`;
+            } else {
+                stepCircle = `<div class="w-8 h-8 flex items-center justify-center rounded-full mb-1 bg-gray-200 text-gray-400 ${clickable ? 'cursor-pointer stepper-step' : ''}" data-step="${i}">${i}</div>`;
+            }
             stepDiv.innerHTML = `
-                <div class="w-8 h-8 flex items-center justify-center rounded-full mb-1 ${status === 'completed' ? 'bg-green-500 text-white' : status === 'active' ? 'bg-indigo-600 text-white' : 'bg-gray-200 text-gray-400'}">
-                    ${status === 'completed' ? '<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>' : i}
-                </div>
+                ${stepCircle}
                 <span class="text-xs ${status === 'active' ? 'font-bold text-indigo-700' : status === 'completed' ? 'text-green-700' : 'text-gray-400'}">Step ${i}</span>
             `;
             progressBar.appendChild(stepDiv);
@@ -129,6 +151,38 @@ document.addEventListener('DOMContentLoaded', () => {
                 progressBar.appendChild(bar);
             }
         }
+
+        // Add click listeners to step circles
+        setTimeout(() => {
+            document.querySelectorAll('.stepper-step').forEach(el => {
+                const stepNum = parseInt(el.getAttribute('data-step'), 10);
+                // Only allow click if stepNum <= maxStepReached + 1
+                if (stepNum <= maxStepReached + 1) {
+                    el.addEventListener('click', () => {
+                        // If moving forward, validate all required fields in between
+                        if (stepNum > currentStep) {
+                            for (let s = currentStep; s < stepNum; s++) {
+                                const stepEl = document.querySelector(`.step[data-step="${s}"]`);
+                                const requiredInputs = stepEl.querySelectorAll('input[required], select[required]');
+                                for (let input of requiredInputs) {
+                                    if (!input.value) {
+                                        input.focus();
+                                        input.classList.add('border-red-500');
+                                        input.reportValidity();
+                                        setTimeout(() => input.classList.remove('border-red-500'), 1200);
+                                        return;
+                                    }
+                                }
+                            }
+                        }
+                        if (stepNum <= maxStepReached + 1) {
+                            currentStep = stepNum;
+                            showStep(currentStep);
+                        }
+                    });
+                }
+            });
+        }, 0);
     }
 
     // Show/hide steps
@@ -145,6 +199,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('submit-btn').classList.toggle('hidden', step !== TOTAL_STEPS);
         renderProgressBar();
         saveStepToStorage();
+        saveMaxStepToStorage();
     }
 
     // Navigation
@@ -163,6 +218,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
             currentStep++;
+            if (currentStep > maxStepReached) {
+                maxStepReached = currentStep;
+            }
             showStep(currentStep);
             saveFormDataToStorage();
         }
@@ -239,6 +297,11 @@ document.addEventListener('DOMContentLoaded', () => {
             // Restore form data after all fields are present
             restoreFormDataFromStorage();
             setupRestoreOnInputs();
+            // Update maxStepReached if user has filled more steps (after restore)
+            if (currentStep > maxStepReached) {
+                maxStepReached = currentStep;
+                saveMaxStepToStorage();
+            }
         })
         .catch(error => console.error('Error loading test cases:', error));
 
@@ -283,6 +346,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Clear localStorage on submit
         localStorage.removeItem('sdtest_formData');
         localStorage.removeItem('sdtest_currentStep');
+        localStorage.removeItem('sdtest_maxStepReached');
     });
 
     const closeModal = (modal) => {
