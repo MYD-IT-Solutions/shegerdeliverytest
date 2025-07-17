@@ -44,10 +44,10 @@ function createTestCase(tc) {
             <h4 class="font-semibold text-md mb-1 text-gray-700">Test Steps</h4>
             <ol class="list-decimal list-inside space-y-2 mb-3 text-gray-600">
                 ${tc.steps.split('\n').map(step => {
-                    const cleanStep = step.replace(/^(\d+\.\s*)/, '');
-                    // Convert URLs to links
-                    return `<li>${cleanStep.replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank" class="text-indigo-600 hover:underline">$1</a>')}</li>`;
-                }).join('')}
+        const cleanStep = step.replace(/^(\d+\.\s*)/, '');
+        // Convert URLs to links
+        return `<li>${cleanStep.replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank" class="text-indigo-600 hover:underline">$1</a>')}</li>`;
+    }).join('')}
             </ol>
             <h4 class="font-semibold text-md mb-1 text-gray-700">Expected Result</h4>
             <div class="expected-result text-gray-700">${tc.expected_result}</div>
