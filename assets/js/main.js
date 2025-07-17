@@ -58,7 +58,7 @@ window.showTestCaseDetails = function (button) {
 // Main script execution
 document.addEventListener('DOMContentLoaded', () => {
     // Toggle this variable to require all tests or not
-    window.isAllRequired = true;
+    window.isAllRequired = false;
 
     // Set today's date automatically
     const today = new Date();
@@ -102,16 +102,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 const commentInput = document.querySelector(`[data-comment-input="${id}"]`);
                 if (statusSelect && commentInput) {
                     statusSelect.addEventListener('change', function () {
-                        if (statusSelect.value === 'Fail' || statusSelect.value === 'Blocked') {
+                        if (window.isAllRequired && (statusSelect.value === 'Fail' || statusSelect.value === 'Blocked')) {
                             commentInput.required = true;
                         } else {
                             commentInput.required = false;
                         }
                     });
                     // Set initial required state
-                    if (statusSelect.value === 'Fail' || statusSelect.value === 'Blocked') {
+                    if (window.isAllRequired && (statusSelect.value === 'Fail' || statusSelect.value === 'Blocked')) {
                         commentInput.required = true;
                     } else {
+                        commentInput.required = false;
+                    }
+                    // Remove required attribute from select and comment if isAllRequired is false
+                    if (!window.isAllRequired) {
+                        statusSelect.required = false;
                         commentInput.required = false;
                     }
                 }
