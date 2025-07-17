@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     var steps = [
         {
-            html: `<h3 class="font-semibold text-indigo-800 mb-2 text-lg">Welcome to the Test Execution Walkthrough</h3>
+            html: `<h3 class="font-semibold text-indigo-800 mb-2 text-lg">Welcome to Manual Testing Doc</h3>
 <p class="text-gray-700 mb-2">This quick guide will show you how to fill out and submit a test case. Click <b>Next</b> to begin.</p>`
         },
         {
