@@ -1,6 +1,8 @@
 // DEVELOPMENT MODE FLAG
 const IS_DEVELOPMENT_MODE = false; // Set to false for production/live
 
+// Track which test cases have been read (by id)
+window.testCaseRead = window.testCaseRead || {};
 
 const allTestCases = {};
 
@@ -30,8 +32,6 @@ function createTestCase(tc) {
                 </div>
             </div>
             `;
-    // Track which test cases have been read (by id)
-    const testCaseRead = {};
 
 }
 
@@ -58,7 +58,7 @@ window.showTestCaseDetails = function (button) {
 
     // Mark as read (for production mode)
     if (!IS_DEVELOPMENT_MODE) {
-        testCaseRead[id] = true;
+        window.testCaseRead[id] = true;
     }
 
     const testCaseModal = document.getElementById('test-case-modal');
@@ -289,8 +289,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     statusSelect.addEventListener('change', function (e) {
                         // Only enforce in production/live mode
                         if (!IS_DEVELOPMENT_MODE) {
-                            if (!testCaseRead[id]) {
-                                statusSelect.value = '';
+                            if (!window.testCaseRead[id]) {
+                                statusSelect.selectedIndex = 0; // Reset to "Select status"
                                 if (detailError) {
                                     detailError.classList.remove('hidden');
                                 }
