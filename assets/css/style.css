@@ -1,0 +1,51 @@
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+.form-section {
+    border: 1px solid #e2e8f0;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    background-color: white;
+}
+
+.form-section-header {
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.test-case-row {
+    padding: 1rem 0;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.test-case-row:last-child {
+    border-bottom: none;
+}
+
+.test-case-button {
+    text-align: left;
+    transition: background-color 0.2s ease;
+}
+
+.test-case-button:hover {
+    background-color: #f9fafb;
+}
+
+.expected-result {
+    border-left: 4px solid #10b981;
+    background-color: #f0fdf4;
+    padding: 0.75rem 1rem;
+    margin-top: 1rem;
+}
+
+/* Modal styles */
+.modal-overlay {
+    transition: opacity 0.3s ease;
+}
+
+.modal-container {
+    transition: transform 0.3s ease;
+}
