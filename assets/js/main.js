@@ -1,5 +1,11 @@
 // DEVELOPMENT MODE FLAG
-const IS_DEVELOPMENT_MODE = false; // Set to false for production/live
+let IS_DEVELOPMENT_MODE = false; // Set to false for production/live
+window.IS_DEVELOPMENT_MODE = IS_DEVELOPMENT_MODE;
+window.setDevModeFlag = function (val) {
+    IS_DEVELOPMENT_MODE = !!val;
+    window.IS_DEVELOPMENT_MODE = IS_DEVELOPMENT_MODE;
+    window.isAllRequired = !IS_DEVELOPMENT_MODE;
+};
 
 // Track which test cases have been read (by id)
 window.testCaseRead = window.testCaseRead || {};
@@ -340,14 +346,19 @@ document.addEventListener('DOMContentLoaded', () => {
             return response.json();
         })
         .then(data => {
+            // Walkthrough: only load WEB-LND-01 if walkthrough is active
+            let walkthroughActive = false;
+            try { walkthroughActive = !localStorage.getItem('sdtest_walkthrough_done'); } catch (e) { }
             const containers = {
-                'web-common-pages': [...data.web_application.common_pages.landing_page, ...data.web_application.common_pages.login_registration],
-                'web-customer-portal': [...data.web_application.customer_portal.user_profile, ...data.web_application.customer_portal.store_listing, ...data.web_application.customer_portal.store_detail, ...data.web_application.customer_portal.checkout, ...data.web_application.customer_portal.order_tracking],
-                'web-store-portal': [...data.web_application.store_portal.dashboard, ...data.web_application.store_portal.payouts, ...data.web_application.store_portal.menu, ...data.web_application.store_portal.offers, ...data.web_application.store_portal.preparation_time, ...data.web_application.store_portal.orders],
-                'web-provider-portal': [...data.web_application.provider_portal.profile, ...data.web_application.provider_portal.orders],
-                'mobile-customer-app': [...data.mobile_application.customer_application.login_registration, ...data.mobile_application.customer_application.service_selection, ...data.mobile_application.customer_application.side_navigation, ...data.mobile_application.customer_application.ordering_flow],
-                'mobile-store-app': [...data.mobile_application.store_application.order_management, ...data.mobile_application.store_application.side_navigation],
-                'mobile-driver-app': [...data.mobile_application.driver_application.order_flow, ...data.mobile_application.driver_application.side_navigation],
+                'web-common-pages': walkthroughActive
+                    ? [data.web_application.common_pages.landing_page.find(tc => tc.id === 'WEB-LND-01')].filter(Boolean)
+                    : [...data.web_application.common_pages.landing_page, ...data.web_application.common_pages.login_registration],
+                'web-customer-portal': walkthroughActive ? [] : [...data.web_application.customer_portal.user_profile, ...data.web_application.customer_portal.store_listing, ...data.web_application.customer_portal.store_detail, ...data.web_application.customer_portal.checkout, ...data.web_application.customer_portal.order_tracking],
+                'web-store-portal': walkthroughActive ? [] : [...data.web_application.store_portal.dashboard, ...data.web_application.store_portal.payouts, ...data.web_application.store_portal.menu, ...data.web_application.store_portal.offers, ...data.web_application.store_portal.preparation_time, ...data.web_application.store_portal.orders],
+                'web-provider-portal': walkthroughActive ? [] : [...data.web_application.provider_portal.profile, ...data.web_application.provider_portal.orders],
+                'mobile-customer-app': walkthroughActive ? [] : [...data.mobile_application.customer_application.login_registration, ...data.mobile_application.customer_application.service_selection, ...data.mobile_application.customer_application.side_navigation, ...data.mobile_application.customer_application.ordering_flow],
+                'mobile-store-app': walkthroughActive ? [] : [...data.mobile_application.store_application.order_management, ...data.mobile_application.store_application.side_navigation],
+                'mobile-driver-app': walkthroughActive ? [] : [...data.mobile_application.driver_application.order_flow, ...data.mobile_application.driver_application.side_navigation],
             };
             for (const containerId in containers) {
                 const container = document.getElementById(containerId);
@@ -419,6 +430,29 @@ document.addEventListener('DOMContentLoaded', () => {
     const exportJsonBtn = document.getElementById('export-json-btn');
 
     form.addEventListener('submit', function (e) {
+        // Prevent submit during walkthrough except at the final walkthrough step on step 2
+        var walkthroughActive = false;
+        try { walkthroughActive = !localStorage.getItem('sdtest_walkthrough_done'); } catch (err) { }
+        var allowSubmit = true;
+        if (walkthroughActive) {
+            // Only allow submit if on step 2 and walkthrough is at the last step (step 6 in walkthrough array)
+            var step2 = document.querySelector('.step[data-step="2"]');
+            var walkthroughBox = document.getElementById('walkthrough-box');
+            var walkthroughContent = document.getElementById('walkthrough-content');
+            // Try to detect if walkthrough is at the submit step
+            var isOnStep2 = step2 && !step2.classList.contains('hidden');
+            var isWalkthroughSubmitStep = false;
+            if (window.walkthroughStepIndex !== undefined) {
+                isWalkthroughSubmitStep = window.walkthroughStepIndex === 6;
+            } else if (walkthroughBox && walkthroughContent) {
+                // Fallback: check if walkthrough box contains 'Submit Your Results'
+                isWalkthroughSubmitStep = walkthroughContent.innerHTML.includes('Submit Your Results');
+            }
+            if (!(isOnStep2 && isWalkthroughSubmitStep)) {
+                e.preventDefault();
+                return false;
+            }
+        }
         // Let browser validation handle required fields
         if (!form.checkValidity()) {
             // Let the browser show the error
