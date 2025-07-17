@@ -5,7 +5,20 @@ window.setDevModeFlag = function (val) {
     IS_DEVELOPMENT_MODE = !!val;
     window.IS_DEVELOPMENT_MODE = IS_DEVELOPMENT_MODE;
     window.isAllRequired = !IS_DEVELOPMENT_MODE;
+    // Show/hide the reset walkthrough button based on dev mode
+    var resetWalkthroughBtn = document.getElementById('reset-walkthrough-btn');
+    if (resetWalkthroughBtn) {
+        resetWalkthroughBtn.style.display = IS_DEVELOPMENT_MODE ? 'block' : 'none';
+    }
 };
+
+// On DOMContentLoaded, set the reset walkthrough button visibility
+document.addEventListener('DOMContentLoaded', function () {
+    var resetWalkthroughBtn = document.getElementById('reset-walkthrough-btn');
+    if (resetWalkthroughBtn) {
+        resetWalkthroughBtn.style.display = IS_DEVELOPMENT_MODE ? 'block' : 'none';
+    }
+});
 
 // Track which test cases have been read (by id)
 window.testCaseRead = window.testCaseRead || {};
