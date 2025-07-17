@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sheger Deliveries - Test Execution Form</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .form-section {
+            border: 1px solid #e2e8f0;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            background-color: white;
+        }
+
+        .form-section-header {
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .test-case-row {
+            padding: 1rem 0;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .test-case-row:last-child {
+            border-bottom: none;
+        }
+
+        /* Modal styles */
+        .modal-overlay {
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-container {
+            transition: transform 0.3s ease;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+
+    <form id="test-form">
+        <div class="container mx-auto p-4 md:p-8 max-w-4xl">
+
+            <!-- Form Header -->
+            <div class="bg-white p-6 rounded-xl shadow-sm mb-8">
+                <h1 class="text-3xl font-bold text-gray-900">Sheger Deliveries - Test Execution</h1>
+                <p class="text-gray-600 mt-2">Please fill out this form for each testing session. Mark the status of
+                    each test case and provide comments for any 'Fail' or 'Blocked' results.</p>
+            </div>
+
+            <!-- Tester Information Section -->
+            <div class="form-section shadow-sm">
+                <div class="form-section-header">
+                    <h2 class="text-xl font-semibold">Tester Information</h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="tester_name" class="block text-sm font-medium text-gray-700 mb-1">Tester
+                            Name</label>
+                        <input type="text" id="tester_name" name="tester_name"
+                            class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+                            required>
+                    </div>
+                    <div>
+                        <label for="test_date" class="block text-sm font-medium text-gray-700 mb-1">Date of
+                            Testing</label>
+                        <input type="text" id="test_date" name="test_date"
+                            class="w-full p-2 border-gray-300 rounded-md shadow-sm bg-gray-100" readonly>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Function to create a test case row -->
+            <script>
+                function createTestCase(id, scenario) {
+                    return `
+                    <div class="test-case-row grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
+                        <div class="md:col-span-5">
+                            <p class="font-semibold text-gray-800">${id}</p>
+                            <p class="text-sm text-gray-600">${scenario}</p>
+                        </div>
+                        <div class="md:col-span-3">
+                            <select name="${id}_status" class="w-full p-2 border border-gray-300 rounded-md shadow-sm">
+                                <option value="Not Tested" selected>Not Tested</option>
+                                <option value="Pass">Pass</option>
+                                <option value="Fail">Fail</option>
+                                <option value="Blocked">Blocked</option>
+                            </select>
+                        </div>
+                        <div class="md:col-span-4">
+                            <input type="text" name="${id}_comment" placeholder="Comments (Required for Fail/Blocked)" class="w-full p-2 border border-gray-300 rounded-md shadow-sm">
+                        </div>
+                    </div>
+                    `;
+                }
+            </script>
+
+            <!-- Web Application Sections -->
+            <div class="form-section shadow-sm">
+                <div class="form-section-header">
+                    <h2 class="text-2xl font-bold">2. Web Application</h2>
+                </div>
+                <h3 class="text-lg font-semibold text-gray-700 mt-4 mb-2">2.1 Common Pages</h3>
+                <div id="web-common-pages"></div>
+                <h3 class="text-lg font-semibold text-gray-700 mt-6 mb-2">2.2 Customer Portal</h3>
+                <div id="web-customer-portal"></div>
+                <h3 class="text-lg font-semibold text-gray-700 mt-6 mb-2">2.3 Store Portal</h3>
+                <div id="web-store-portal"></div>
+                <h3 class="text-lg font-semibold text-gray-700 mt-6 mb-2">2.4 Provider Portal</h3>
+                <div id="web-provider-portal"></div>
+            </div>
+
+            <!-- Mobile Application Sections -->
+            <div class="form-section shadow-sm">
+                <div class="form-section-header">
+                    <h2 class="text-2xl font-bold">3. Mobile Application</h2>
+                </div>
+                <h3 class="text-lg font-semibold text-gray-700 mt-4 mb-2">3.1 Customer Application</h3>
+                <div id="mobile-customer-app"></div>
+                <h3 class="text-lg font-semibold text-gray-700 mt-6 mb-2">3.2 Store Application</h3>
+                <div id="mobile-store-app"></div>
+                <h3 class="text-lg font-semibold text-gray-700 mt-6 mb-2">3.3 Driver Application</h3>
+                <div id="mobile-driver-app"></div>
+            </div>
+
+            <button type="submit"
+                class="w-full bg-indigo-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-indigo-700 transition-colors duration-300 shadow-md">Submit
+                Test Results</button>
+        </div>
+    </form>
+
+    <!-- Results Modal -->
+    <div id="results-modal"
+        class="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center p-4 z-50 modal-overlay hidden opacity-0">
+        <div
+            class="bg-white rounded-xl shadow-2xl w-full max-w-3xl max-h-[90vh] overflow-hidden flex flex-col modal-container transform scale-95">
+            <div class="p-6 border-b border-gray-200">
+                <h2 class="text-2xl font-bold">Test Execution Summary</h2>
+            </div>
+            <div class="p-6 overflow-y-auto flex-grow">
+                <h3 class="font-semibold text-lg mb-2">Tester Info:</h3>
+                <p id="modal-tester-info" class="mb-4 p-3 bg-gray-100 rounded-md"></p>
+                <h3 class="font-semibold text-lg mb-2">Results (JSON):</h3>
+                <p class="text-sm text-gray-600 mb-2">You can copy the text below and paste it into a JSON viewer or a
+                    spreadsheet.</p>
+                <textarea id="modal-results-json"
+                    class="w-full h-64 p-3 border border-gray-300 rounded-md font-mono text-sm bg-gray-50"
+                    readonly></textarea>
+            </div>
+            <div class="p-4 bg-gray-50 border-t border-gray-200 flex justify-end space-x-3">
+                <button id="export-json-btn"
+                    class="bg-green-600 text-white font-bold py-2 px-5 rounded-lg hover:bg-green-700 transition-colors">Export
+                    JSON</button>
+                <button id="close-modal-btn"
+                    class="bg-indigo-600 text-white font-bold py-2 px-5 rounded-lg hover:bg-indigo-700 transition-colors">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- ALL TEST CASES ---
+        const testCases = {
+            webCommon: [
+                { id: "WEB-LND-01", scenario: "Page load and location detection" }, { id: "WEB-LND-02", scenario: "Header logo link" }, { id: "WEB-LND-03", scenario: "'Login' button navigation" }, { id: "WEB-LND-04", scenario: "Search with detected address" }, { id: "WEB-LND-05", scenario: "Changing service type" }, { id: "WEB-LND-06", scenario: "Searching with a new address" }, { id: "WEB-LND-07", scenario: "Search fails with no address" }, { id: "WEB-LND-08", scenario: "Clicking a popular restaurant" }, { id: "WEB-LND-09", scenario: "User App Store/Play Store links" }, { id: "WEB-LND-10", scenario: "Driver App Store/Play Store links" }, { id: "WEB-LND-11", scenario: "Store App Store/Play Store links" }, { id: "WEB-LND-12", scenario: "Footer navigation links" }, { id: "WEB-LND-13", scenario: "Language and currency selectors" }, { id: "WEB-LND-14", scenario: "Responsiveness on mobile" }, { id: "WEB-LND-15", scenario: "Location permission denied" },
+                { id: "WEB-LOGIN-01", scenario: "Login page UI" }, { id: "WEB-LOGIN-02", scenario: "Switching user tabs" }, { id: "WEB-LOGIN-03", scenario: "Successful user login" }, { id: "WEB-LOGIN-04", scenario: "Login with unregistered number" }, { id: "WEB-LOGIN-05", scenario: "Login with incorrect password" }, { id: "WEB-LOGIN-06", scenario: "'Forgot Password' link" }, { id: "WEB-LOGIN-07", scenario: "'Sign Up' link" }, { id: "WEB-REG-01", scenario: "Navigate to User Signup" }, { id: "WEB-REG-02", scenario: "Successful registration with OTP" }, { id: "WEB-REG-03", scenario: "Registration with existing email" }, { id: "WEB-REG-04", scenario: "Registration with existing mobile" }, { id: "WEB-REG-05", scenario: "Validation for empty fields" }, { id: "WEB-REG-06", scenario: "OTP validation with incorrect code" },
+            ],
+            webCustomer: [
+                { id: "WEB-PRF-01", scenario: "Profile data displayed correctly" }, { id: "WEB-PRF-02", scenario: "Profile side navigation" }, { id: "WEB-PRF-03", scenario: "Upload valid profile picture" }, { id: "WEB-PRF-04", scenario: "Upload invalid profile picture" }, { id: "WEB-PRF-05", scenario: "My Orders history displayed" }, { id: "WEB-PRF-06", scenario: "Wallet balance and add money" }, { id: "WEB-PRF-07", scenario: "Wallet validation for invalid amount" }, { id: "WEB-PRF-08", scenario: "Apply valid promo code" }, { id: "WEB-PRF-09", scenario: "Apply invalid promo code" }, { id: "WEB-PRF-10", scenario: "'Log Out' functionality" }, { id: "WEB-PRF-11", scenario: "'Delete Account' flow" }, { id: "WEB-PRF-12", scenario: "Cancel 'Delete Account'" },
+                { id: "WEB-SL-01", scenario: "Store Listing: Initial page elements" }, { id: "WEB-SL-02", scenario: "Store Listing: Search for a store" }, { id: "WEB-SL-03", scenario: "Store Listing: Search for an item" }, { id: "WEB-SL-04", scenario: "Store Listing: Search with no results" }, { id: "WEB-SL-05", scenario: "Store Listing: Switch to 'Pickup'" }, { id: "WEB-SL-06", scenario: "Store Listing: Filter by category" }, { id: "WEB-SL-07", scenario: "Store Listing: Verify store card info" }, { id: "WEB-SL-08", scenario: "Store Listing: Navigate to details" }, { id: "WEB-SL-09", scenario: "Store Listing: Header 'Orders' link" },
+                { id: "WEB-DTL-01", scenario: "Store Detail: Initial page elements" }, { id: "WEB-DTL-02", scenario: "Store Detail: Expand/collapse 'Info'" }, { id: "WEB-DTL-03", scenario: "Store Detail: Schedule Order modal" }, { id: "WEB-DTL-04", scenario: "Store Detail: Filter by category" }, { id: "WEB-DTL-05", scenario: "Store Detail: Search for menu item" }, { id: "WEB-DTL-06", scenario: "Store Detail: Add item to cart" }, { id: "WEB-DTL-07", scenario: "Store Detail: Modify quantity in popup" }, { id: "WEB-DTL-08", scenario: "Store Detail: Add special instructions" }, { id: "WEB-DTL-09", scenario: "Store Detail: Cart bar updates" }, { id: "WEB-DTL-10", scenario: "Store Detail: Modify quantity from cart bar" }, { id: "WEB-DTL-11", scenario: "Store Detail: Remove item from cart" }, { id: "WEB-DTL-12", scenario: "Store Detail: 'Clear Cart' functionality" }, { id: "WEB-DTL-13", scenario: "Store Detail: Navigate to checkout" },
+                { id: "WEB-CHK-01", scenario: "Checkout: Verify page loads with correct data" }, { id: "WEB-CHK-02", scenario: "Checkout: Modify item quantity" }, { id: "WEB-CHK-03", scenario: "Checkout: Remove an item" }, { id: "WEB-CHK-04", scenario: "Checkout: Change delivery address" }, { id: "WEB-CHK-05", scenario: "Checkout: Add delivery note" }, { id: "WEB-CHK-06", scenario: "Checkout: Switch to Takeaway" }, { id: "WEB-CHK-07", scenario: "Checkout: Schedule an order" }, { id: "WEB-CHK-08", scenario: "Checkout: Apply valid promo" }, { id: "WEB-CHK-09", scenario: "Checkout: Apply invalid promo" }, { id: "WEB-CHK-10", scenario: "Checkout: Add provider tip" }, { id: "WEB-CHK-11", scenario: "Checkout: Switch payment method" }, { id: "WEB-CHK-12", scenario: "Checkout: Use wallet balance" }, { id: "WEB-CHK-13", scenario: "Checkout: Place Cash on Delivery order" },
+                { id: "WEB-TRK-01", scenario: "Tracking: Verify static elements" }, { id: "WEB-TRK-02", scenario: "Tracking: Verify initial status" }, { id: "WEB-TRK-03", scenario: "Tracking: Verify progress bar updates" }, { id: "WEB-TRK-04", scenario: "Tracking: Verify store link" }, { id: "WEB-TRK-05", scenario: "Tracking: Open cancellation modal" }, { id: "WEB-TRK-06", scenario: "Tracking: Submit cancellation" }, { id: "WEB-TRK-07", scenario: "Tracking: Close cancellation modal" },
+            ],
+            webStore: [
+                { id: "WEB-STR-DASH-01", scenario: "Dashboard: Verify UI elements" }, { id: "WEB-STR-DASH-02", scenario: "Dashboard: User dropdown menu" }, { id: "WEB-STR-DASH-03", scenario: "Dashboard: Profile & Sign out links" }, { id: "WEB-STR-DASH-04", scenario: "Dashboard: Availability toggle" }, { id: "WEB-STR-DASH-05", scenario: "Dashboard: Sidebar navigation" }, { id: "WEB-STR-DASH-06", scenario: "Dashboard: Support dropdown" }, { id: "WEB-STR-DASH-07", scenario: "Dashboard: Sales widgets" }, { id: "WEB-STR-DASH-08", scenario: "Dashboard: Service quality metrics" }, { id: "WEB-STR-DASH-09", scenario: "Dashboard: Customer satisfaction" }, { id: "WEB-STR-DASH-10", scenario: "Dashboard: Delete Account flow" },
+                { id: "WEB-STR-PAY-01", scenario: "Payouts: Verify UI elements" }, { id: "WEB-STR-PAY-02", scenario: "Payouts: Navigate to weekly details" }, { id: "WEB-STR-PAY-03", scenario: "Payouts: Export weekly statement" }, { id: "WEB-STR-PAY-04", scenario: "Payouts: 'Add Payout' modal flow" }, { id: "WEB-STR-PAY-05", scenario: "Payouts: Bank Transfer validation" }, { id: "WEB-STR-PAY-06", scenario: "Payouts: Add valid Bank Transfer" }, { id: "WEB-STR-PAY-07", scenario: "Payouts: Add valid PayPal" }, { id: "WEB-STR-PAY-08", scenario: "Payouts: Add valid Stripe" },
+                { id: "WEB-STR-MENU-01", scenario: "Menu: Verify UI elements" }, { id: "WEB-STR-MENU-02", scenario: "Menu: Download sample data" }, { id: "WEB-STR-MENU-03", scenario: "Menu: Import valid file" }, { id: "WEB-STR-MENU-04", scenario: "Menu: Add new menu" }, { id: "WEB-STR-MENU-05", scenario: "Menu: Edit existing menu" }, { id: "WEB-STR-MENU-06", scenario: "Menu: Add new category" }, { id: "WEB-STR-MENU-07", scenario: "Menu: Edit category name" }, { id: "WEB-STR-MENU-08", scenario: "Menu: Add new item" }, { id: "WEB-STR-MENU-09", scenario: "Menu: New item form validation" }, { id: "WEB-STR-MENU-10", scenario: "Menu: Edit existing item" }, { id: "WEB-STR-MENU-11", scenario: "Menu: Delete an item" }, { id: "WEB-STR-MENU-12", scenario: "Menu: Change translation language" },
+                { id: "WEB-STR-OFFER-01", scenario: "Offers: Verify UI elements" }, { id: "WEB-STR-OFFER-02", scenario: "Offers: Open 'Add Offer' modal" }, { id: "WEB-STR-OFFER-03", scenario: "Offers: New offer form validation" }, { id: "WEB-STR-OFFER-04", scenario: "Offers: Add valid offer" }, { id: "WEB-STR-OFFER-05", scenario: "Offers: Edit existing offer" }, { id: "WEB-STR-OFFER-06", scenario: "Offers: Toggle offer status" }, { id: "WEB-STR-OFFER-07", scenario: "Offers: Delete an offer" },
+                { id: "WEB-STR-PREP-01", scenario: "Prep Time: Verify UI elements" }, { id: "WEB-STR-PREP-02", scenario: "Prep Time: Update default time" }, { id: "WEB-STR-PREP-03", scenario: "Prep Time: Add new time slot" }, { id: "WEB-STR-PREP-04", scenario: "Prep Time: Save new time slot" }, { id: "WEB-STR-PREP-05", scenario: "Prep Time: Incomplete slot validation" }, { id: "WEB-STR-PREP-06", scenario: "Prep Time: Invalid time range" }, { id: "WEB-STR-PREP-07", scenario: "Prep Time: Remove time slot" },
+                { id: "WEB-STR-ORD-01", scenario: "Store Orders: Verify UI elements" }, { id: "WEB-STR-ORD-02", scenario: "Store Orders: Filter by 'Today'" }, { id: "WEB-STR-ORD-03", scenario: "Store Orders: Filter by custom date" }, { id: "WEB-STR-ORD-04", scenario: "Store Orders: Reset filter" }, { id: "WEB-STR-ORD-05", scenario: "Store Orders: 'View' action button" }, { id: "WEB-STR-ORD-06", scenario: "Store Orders: Search table" }, { id: "WEB-STR-ORD-07", scenario: "Store Orders: Sort table" }, { id: "WEB-STR-ORD-08", scenario: "Store Orders: Export data" },
+            ],
+            webProvider: [
+                { id: "WEB-PPRF-01", scenario: "Provider Profile: Verify UI elements" }, { id: "WEB-PPRF-02", scenario: "Provider Profile: Verify name and image" }, { id: "WEB-PPRF-03", scenario: "Provider Profile: Navigation links" }, { id: "WEB-PPRF-04", scenario: "Provider Profile: Read-only data" }, { id: "WEB-PPRF-05", scenario: "Provider Profile: 'Log Out'" }, { id: "WEB-PPRF-06", scenario: "Provider Profile: 'Delete Account'" },
+                { id: "WEB-PORD-01", scenario: "Provider Orders: Verify UI elements" }, { id: "WEB-PORD-02", scenario: "Provider Orders: Summary card data" }, { id: "WEB-PORD-03", scenario: "Provider Orders: History table populates" }, { id: "WEB-PORD-04", scenario: "Provider Orders: Navigate to detail page" }, { id: "WEB-PORD-05", scenario: "Provider Orders: Pagination" },
+            ],
+            mobileCustomer: [
+                { id: "MOB-CUST-LGN-01", scenario: 'Login: "Welcome Back" screen UI' }, { id: "MOB-CUST-LGN-02", scenario: 'Login: "Continue with Phone" flow' }, { id: "MOB-CUST-LGN-03", scenario: 'Login: "Register" navigation' }, { id: "MOB-CUST-LGN-04", scenario: 'Login: Google login' }, { id: "MOB-CUST-LGN-05", scenario: 'Login: Facebook login' }, { id: "MOB-CUST-LGN-06", scenario: 'Login: Apple Login' }, { id: "MOB-CUST-LGN-07", scenario: 'Login: Language selector' }, { id: "MOB-CUST-LGN-08", scenario: 'Login: Currency selector' },
+                { id: "MOB-CUST-HOME-01", scenario: "Home: Verify UI elements" }, { id: "MOB-CUST-HOME-02", scenario: "Home: Tap delivery address bar" }, { id: "MOB-CUST-HOME-03", scenario: "Home: Tap 'Food Delivery'" }, { id: "MOB-CUST-HOME-04", scenario: "Home: Tap 'Grocery Delivery'" }, { id: "MOB-CUST-HOME-05", scenario: "Home: Tap 'Pharmacy Delivery'" }, { id: "MOB-CUST-HOME-06", scenario: "Home: Tap WhatsApp icon" }, { id: "MOB-CUST-HOME-07", scenario: "Home: Open side menu" },
+                { id: "MOB-CUST-NAV-01", scenario: "Nav: Verify side menu UI" }, { id: "MOB-CUST-NAV-02", scenario: "Nav: 'My Profile' screen" }, { id: "MOB-CUST-NAV-03", scenario: "Nav: 'Your Bookings' screen" }, { id: "MOB-CUST-NAV-04", scenario: "Nav: 'Payment' screen" }, { id: "MOB-CUST-NAV-05", scenario: "Nav: 'Wallet' screen" }, { id: "MOB-CUST-NAV-06", scenario: "Nav: 'Promotions' screen" }, { id: "MOB-CUST-NAV-07", scenario: "Nav: 'Referral' screen" }, { id: "MOB-CUST-NAV-08", scenario: "Nav: 'Favourites' screen" }, { id: "MOB-CUST-NAV-09", scenario: "Nav: 'Age Verification' screen" }, { id: "MOB-CUST-NAV-10", scenario: "Nav: 'Settings' screen" }, { id: "MOB-CUST-NAV-11", scenario: "Nav: 'Support' screen" }, { id: "MOB-CUST-NAV-12", scenario: "Nav: Logout functionality" },
+                { id: "MOB-CUST-ORD-01", scenario: "Order Flow: Store list UI" }, { id: "MOB-CUST-ORD-02", scenario: "Order Flow: Search for store" }, { id: "MOB-CUST-ORD-03", scenario: "Order Flow: Menu page UI" }, { id: "MOB-CUST-ORD-04", scenario: "Order Flow: Add item to cart" }, { id: "MOB-CUST-ORD-05", scenario: "Order Flow: Add multiple items" }, { id: "MOB-CUST-ORD-06", scenario: "Order Flow: Basket screen UI" }, { id: "MOB-CUST-ORD-07", scenario: "Order Flow: Change delivery type" }, { id: "MOB-CUST-ORD-08", scenario: "Order Flow: Apply promo code" }, { id: "MOB-CUST-ORD-09", scenario: "Order Flow: Place order" }, { id: "MOB-CUST-ORD-10", scenario: "Order Flow: Order tracking screen UI" }, { id: "MOB-CUST-ORD-11", scenario: "Order Flow: View order receipt" }, { id: "MOB-CUST-ORD-12", scenario: "Order Flow: Cancel order" },
+            ],
+            mobileStore: [
+                { id: "MOB-STR-ORD-01", scenario: "Store Orders: Main screen UI" }, { id: "MOB-STR-ORD-02", scenario: "Store Orders: New order appears" }, { id: "MOB-STR-ORD-03", scenario: "Store Orders: Accept order flow" }, { id: "MOB-STR-ORD-04", scenario: "Store Orders: Pause new orders" }, { id: "MOB-STR-ORD-05", scenario: "Store Orders: Navigate to order details" }, { id: "MOB-STR-ORD-06", scenario: "Store Orders: Contact customer" }, { id: "MOB-STR-ORD-07", scenario: "Store Orders: Delay order" }, { id: "MOB-STR-ORD-08", scenario: "Store Orders: Cancel order" }, { id: "MOB-STR-ORD-09", scenario: "Store Orders: 'Order is Ready'" }, { id: "MOB-STR-ORD-10", scenario: "Store Orders: View ratings" },
+                { id: "MOB-STR-NAV-01", scenario: "Store Nav: Verify side menu UI" }, { id: "MOB-STR-NAV-02", scenario: "Store Nav: Navigate to Orders" }, { id: "MOB-STR-NAV-03", scenario: "Store Nav: Navigate to Order History" }, { id: "MOB-STR-NAV-04", scenario: "Store Nav: Navigate to Menu" }, { id: "MOB-STR-NAV-05", scenario: "Store Nav: Toggle item availability" }, { id: "MOB-STR-NAV-06", scenario: "Store Nav: Change Language" }, { id: "MOB-STR-NAV-07", scenario: "Store Nav: Change Currency" }, { id: "MOB-STR-NAV-08", scenario: "Store Nav: 'Pay to Shegerdeliveries'" }, { id: "MOB-STR-NAV-09", scenario: "Store Nav: 'Support' screen" }, { id: "MOB-STR-NAV-10", scenario: "Store Nav: 'Delete Account' flow" }, { id: "MOB-STR-NAV-11", scenario: "Store Nav: Logout functionality" },
+            ],
+            mobileDriver: [
+                { id: "MOB-DRV-ORD-01", scenario: "Driver Flow: Go online & receive order" }, { id: "MOB-DRV-ORD-02", scenario: "Driver Flow: Accept order" }, { id: "MOB-DRV-ORD-03", scenario: "Driver Flow: 'Slide to Start Trip'" }, { id: "MOB-DRV-ORD-04", scenario: "Driver Flow: Confirm pickup" }, { id: "MOB-DRV-ORD-05", scenario: "Driver Flow: Start trip to customer" }, { id: "MOB-DRV-ORD-06", scenario: "Driver Flow: Complete delivery" }, { id: "MOB-DRV-ORD-07", scenario: "Driver Flow: Select recipient" }, { id: "MOB-DRV-ORD-08", scenario: "Driver Flow: Submit delivery rating" }, { id: "MOB-DRV-ORD-09", scenario: "Driver Flow: Complete trip" },
+                { id: "MOB-DRV-NAV-01", scenario: "Driver Nav: Verify side menu UI" }, { id: "MOB-DRV-NAV-02", scenario: "Driver Nav: 'Your Jobs' screen" }, { id: "MOB-DRV-NAV-03", scenario: "Driver Nav: 'Earnings' screen" }, { id: "MOB-DRV-NAV-04", scenario: "Driver Nav: 'Manage Documents'" }, { id: "MOB-DRV-NAV-05", scenario: "Driver Nav: 'Vehicle Information'" }, { id: "MOB-DRV-NAV-06", scenario: "Driver Nav: 'Pay to Admin'" }, { id: "MOB-DRV-NAV-07", scenario: "Driver Nav: 'Ratings' screen" }, { id: "MOB-DRV-NAV-08", scenario: "Driver Nav: 'Referral' screen" }, { id: "MOB-DRV-NAV-09", scenario: "Driver Nav: 'Settings' screen" }, { id: "MOB-DRV-NAV-10", scenario: "Driver Nav: Logout functionality" },
+            ]
+        };
+
+        // --- SCRIPT TO POPULATE AND HANDLE FORM ---
+        document.addEventListener('DOMContentLoaded', () => {
+            // Set today's date automatically and make it readonly
+            const today = new Date();
+            const year = today.getFullYear();
+            const month = String(today.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
+            const day = String(today.getDate()).padStart(2, '0');
+            const formattedDate = `${year}-${month}-${day}`;
+            const dateInput = document.getElementById('test_date');
+            dateInput.value = formattedDate;
+            dateInput.readOnly = true; // Make the field non-editable
+            dateInput.type = 'text'; // Change type to text to prevent date picker UI on some browsers
+
+            const containers = {
+                'web-common-pages': testCases.webCommon,
+                'web-customer-portal': testCases.webCustomer,
+                'web-store-portal': testCases.webStore,
+                'web-provider-portal': testCases.webProvider,
+                'mobile-customer-app': testCases.mobileCustomer,
+                'mobile-store-app': testCases.mobileStore,
+                'mobile-driver-app': testCases.mobileDriver,
+            };
+
+            for (const containerId in containers) {
+                const container = document.getElementById(containerId);
+                if (container) {
+                    containers[containerId].forEach(tc => {
+                        container.innerHTML += createTestCase(tc.id, tc.scenario);
+                    });
+                }
+            }
+
+            const form = document.getElementById('test-form');
+            const modal = document.getElementById('results-modal');
+            const closeModalBtn = document.getElementById('close-modal-btn');
+            const exportJsonBtn = document.getElementById('export-json-btn');
+
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                const formData = new FormData(form);
+                const results = {
+                    testerName: formData.get('tester_name'),
+                    testDate: formData.get('test_date'),
+                    results: []
+                };
+
+                for (const section in testCases) {
+                    testCases[section].forEach(tc => {
+                        const status = formData.get(`${tc.id}_status`);
+                        if (status !== 'Not Tested') {
+                            results.results.push({
+                                id: tc.id,
+                                scenario: tc.scenario,
+                                status: status,
+                                comment: formData.get(`${tc.id}_comment`) || ''
+                            });
+                        }
+                    });
+                }
+
+                document.getElementById('modal-tester-info').textContent = `Tester: ${results.testerName} | Date: ${results.testDate}`;
+                document.getElementById('modal-results-json').value = JSON.stringify(results, null, 2);
+
+                modal.classList.remove('hidden');
+                setTimeout(() => modal.classList.remove('opacity-0'), 10);
+                setTimeout(() => modal.querySelector('.modal-container').classList.remove('scale-95'), 10);
+
+            });
+
+            const closeModal = () => {
+                modal.classList.add('opacity-0');
+                modal.querySelector('.modal-container').classList.add('scale-95');
+                setTimeout(() => modal.classList.add('hidden'), 300);
+            };
+
+            const exportResults = () => {
+                const jsonString = document.getElementById('modal-results-json').value;
+                const blob = new Blob([jsonString], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                const testerName = document.getElementById('tester_name').value.replace(/ /g, '_') || 'tester';
+                const testDate = document.getElementById('test_date').value || 'date';
+                a.href = url;
+                a.download = `test-results_${testerName}_${testDate}.json`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            };
+
+            closeModalBtn.addEventListener('click', closeModal);
+            exportJsonBtn.addEventListener('click', exportResults);
+
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>
