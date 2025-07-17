@@ -56,9 +56,11 @@ window.showTestCaseDetails = function (button) {
 }
 
 // Main script execution
+
 document.addEventListener('DOMContentLoaded', () => {
-    // Toggle this variable to require all tests or not
-    window.isAllRequired = false;
+    // Stepper logic
+    const TOTAL_STEPS = 8;
+    let currentStep = 1;
 
     // Set today's date automatically
     const today = new Date();
@@ -68,12 +70,81 @@ document.addEventListener('DOMContentLoaded', () => {
     const formattedDate = `${year}-${month}-${day}`;
     document.getElementById('test_date').value = formattedDate;
 
-    // Fetch data and populate the form
+    // Progress bar rendering
+    function renderProgressBar() {
+        const progressBar = document.getElementById('progress-bar');
+        progressBar.innerHTML = '';
+        for (let i = 1; i <= TOTAL_STEPS; i++) {
+            const stepDiv = document.createElement('div');
+            stepDiv.className = 'flex-1 flex flex-col items-center';
+            let status = '';
+            if (i < currentStep) status = 'completed';
+            else if (i === currentStep) status = 'active';
+            else status = 'upcoming';
+            stepDiv.innerHTML = `
+                <div class="w-8 h-8 flex items-center justify-center rounded-full mb-1 ${status === 'completed' ? 'bg-green-500 text-white' : status === 'active' ? 'bg-indigo-600 text-white' : 'bg-gray-200 text-gray-400'}">
+                    ${status === 'completed' ? '<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>' : i}
+                </div>
+                <span class="text-xs ${status === 'active' ? 'font-bold text-indigo-700' : status === 'completed' ? 'text-green-700' : 'text-gray-400'}">Step ${i}</span>
+            `;
+            progressBar.appendChild(stepDiv);
+            if (i < TOTAL_STEPS) {
+                const bar = document.createElement('div');
+                bar.className = `h-1 flex-1 mx-1 ${i < currentStep ? 'bg-green-500' : 'bg-gray-200'}`;
+                bar.style.marginTop = '16px';
+                progressBar.appendChild(bar);
+            }
+        }
+    }
+
+    // Show/hide steps
+    function showStep(step) {
+        document.querySelectorAll('.step').forEach(el => {
+            el.classList.add('hidden');
+            if (parseInt(el.getAttribute('data-step')) === step) {
+                el.classList.remove('hidden');
+            }
+        });
+        // Buttons
+        document.getElementById('prev-btn').style.display = step === 1 ? 'none' : '';
+        document.getElementById('next-btn').style.display = step === TOTAL_STEPS ? 'none' : '';
+        document.getElementById('submit-btn').classList.toggle('hidden', step !== TOTAL_STEPS);
+        renderProgressBar();
+    }
+
+    // Navigation
+    document.getElementById('next-btn').addEventListener('click', () => {
+        if (currentStep < TOTAL_STEPS) {
+            // Validate required fields for current step
+            const currentStepEl = document.querySelector(`.step[data-step="${currentStep}"]`);
+            const requiredInputs = currentStepEl.querySelectorAll('input[required], select[required]');
+            for (let input of requiredInputs) {
+                if (!input.value) {
+                    input.focus();
+                    input.classList.add('border-red-500');
+                    setTimeout(() => input.classList.remove('border-red-500'), 1200);
+                    return;
+                }
+            }
+            currentStep++;
+            showStep(currentStep);
+        }
+    });
+    document.getElementById('prev-btn').addEventListener('click', () => {
+        if (currentStep > 1) {
+            currentStep--;
+            showStep(currentStep);
+        }
+    });
+
+    // Initial render
+    showStep(currentStep);
+
+    // Populate test cases as before
+    window.isAllRequired = false;
     fetch('assets/data/testcase.json')
         .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
+            if (!response.ok) throw new Error('Network response was not ok');
             return response.json();
         })
         .then(data => {
@@ -86,7 +157,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 'mobile-store-app': [...data.mobile_application.store_application.order_management, ...data.mobile_application.store_application.side_navigation],
                 'mobile-driver-app': [...data.mobile_application.driver_application.order_flow, ...data.mobile_application.driver_application.side_navigation],
             };
-
             for (const containerId in containers) {
                 const container = document.getElementById(containerId);
                 if (container) {
@@ -95,7 +165,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
                 }
             }
-
             // Add browser-level required logic for status and comment fields
             Object.keys(allTestCases).forEach(id => {
                 const statusSelect = document.querySelector(`[data-status-select="${id}"]`);
