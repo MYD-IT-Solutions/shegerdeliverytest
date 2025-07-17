@@ -95,6 +95,25 @@ document.addEventListener('DOMContentLoaded', () => {
     const TOTAL_STEPS = 8;
     let currentStep = 1;
 
+    // Reset Progress button logic
+    const resetBtn = document.getElementById('reset-progress-btn');
+    if (resetBtn) {
+        resetBtn.addEventListener('click', () => {
+            // Clear localStorage progress and form data
+            localStorage.removeItem('sdtest_formData');
+            localStorage.removeItem('sdtest_currentStep');
+            localStorage.removeItem('sdtest_maxStepReached');
+            // Reset step and form
+            currentStep = 1;
+            showStep(currentStep);
+            // Optionally clear all form fields
+            const form = document.getElementById('test-form');
+            if (form) form.reset();
+            // Optionally reload page to fully reset state
+            // location.reload();
+        });
+    }
+
     // Restore progress and form data from localStorage if available
     const savedStep = localStorage.getItem('sdtest_currentStep');
     if (savedStep) {
