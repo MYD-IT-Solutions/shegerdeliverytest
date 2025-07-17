@@ -62,6 +62,40 @@ document.addEventListener('DOMContentLoaded', () => {
     const TOTAL_STEPS = 8;
     let currentStep = 1;
 
+    // Restore progress and form data from localStorage if available
+    const savedStep = localStorage.getItem('sdtest_currentStep');
+    if (savedStep) {
+        currentStep = parseInt(savedStep, 10) || 1;
+    }
+
+    function saveStepToStorage() {
+        localStorage.setItem('sdtest_currentStep', currentStep);
+    }
+
+    function saveFormDataToStorage() {
+        const form = document.getElementById('test-form');
+        const formData = new FormData(form);
+        const obj = {};
+        for (let [k, v] of formData.entries()) {
+            obj[k] = v;
+        }
+        localStorage.setItem('sdtest_formData', JSON.stringify(obj));
+    }
+
+    function restoreFormDataFromStorage() {
+        const data = localStorage.getItem('sdtest_formData');
+        if (!data) return;
+        try {
+            const obj = JSON.parse(data);
+            for (let k in obj) {
+                const el = document.querySelector(`[name="${k}"]`);
+                if (el) {
+                    el.value = obj[k];
+                }
+            }
+        } catch { }
+    }
+
     // Set today's date automatically
     const today = new Date();
     const year = today.getFullYear();
@@ -110,6 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('next-btn').style.display = step === TOTAL_STEPS ? 'none' : '';
         document.getElementById('submit-btn').classList.toggle('hidden', step !== TOTAL_STEPS);
         renderProgressBar();
+        saveStepToStorage();
     }
 
     // Navigation
@@ -129,14 +164,23 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             currentStep++;
             showStep(currentStep);
+            saveFormDataToStorage();
         }
     });
     document.getElementById('prev-btn').addEventListener('click', () => {
         if (currentStep > 1) {
             currentStep--;
             showStep(currentStep);
+            saveFormDataToStorage();
         }
     });
+
+    // Restore form data if available after test cases are loaded
+    function setupRestoreOnInputs() {
+        // Save on any input/select change
+        document.getElementById('test-form').addEventListener('input', saveFormDataToStorage);
+        document.getElementById('test-form').addEventListener('change', saveFormDataToStorage);
+    }
 
     // Initial render
     showStep(currentStep);
@@ -177,6 +221,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         } else {
                             commentInput.required = false;
                         }
+                        saveFormDataToStorage();
                     });
                     // Set initial required state
                     if (window.isAllRequired && (statusSelect.value === 'Fail' || statusSelect.value === 'Blocked')) {
@@ -191,6 +236,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 }
             });
+            // Restore form data after all fields are present
+            restoreFormDataFromStorage();
+            setupRestoreOnInputs();
         })
         .catch(error => console.error('Error loading test cases:', error));
 
@@ -232,6 +280,9 @@ document.addEventListener('DOMContentLoaded', () => {
         resultsModal.classList.remove('hidden');
         setTimeout(() => resultsModal.classList.remove('opacity-0'), 10);
         setTimeout(() => resultsModal.querySelector('.modal-container').classList.remove('scale-95'), 10);
+        // Clear localStorage on submit
+        localStorage.removeItem('sdtest_formData');
+        localStorage.removeItem('sdtest_currentStep');
     });
 
     const closeModal = (modal) => {
