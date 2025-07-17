@@ -14,15 +14,15 @@ function createTestCase(tc) {
                     </button>
                 </div>
                 <div class="md:col-span-3">
-                    <select name="${tc.id}_status" class="w-full p-2 border border-gray-300 rounded-md shadow-sm">
-                        <option value="Not Tested" selected>Not Tested</option>
+                    <select name="${tc.id}_status" class="w-full p-2 border border-gray-300 rounded-md shadow-sm" required data-status-select="${tc.id}">
+                        <option value="" selected disabled>Select status</option>
                         <option value="Pass">Pass</option>
                         <option value="Fail">Fail</option>
                         <option value="Blocked">Blocked</option>
                     </select>
                 </div>
                 <div class="md:col-span-4">
-                    <input type="text" name="${tc.id}_comment" placeholder="Comments (Required for Fail/Blocked)" class="w-full p-2 border border-gray-300 rounded-md shadow-sm">
+                    <input type="text" name="${tc.id}_comment" placeholder="Comments (Required for Fail/Blocked)" class="w-full p-2 border border-gray-300 rounded-md shadow-sm" data-comment-input="${tc.id}">
                 </div>
             </div>
             `;
@@ -95,6 +95,27 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
                 }
             }
+
+            // Add browser-level required logic for status and comment fields
+            Object.keys(allTestCases).forEach(id => {
+                const statusSelect = document.querySelector(`[data-status-select="${id}"]`);
+                const commentInput = document.querySelector(`[data-comment-input="${id}"]`);
+                if (statusSelect && commentInput) {
+                    statusSelect.addEventListener('change', function () {
+                        if (statusSelect.value === 'Fail' || statusSelect.value === 'Blocked') {
+                            commentInput.required = true;
+                        } else {
+                            commentInput.required = false;
+                        }
+                    });
+                    // Set initial required state
+                    if (statusSelect.value === 'Fail' || statusSelect.value === 'Blocked') {
+                        commentInput.required = true;
+                    } else {
+                        commentInput.required = false;
+                    }
+                }
+            });
         })
         .catch(error => console.error('Error loading test cases:', error));
 
@@ -107,6 +128,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const exportJsonBtn = document.getElementById('export-json-btn');
 
     form.addEventListener('submit', function (e) {
+        // Let browser validation handle required fields
+        if (!form.checkValidity()) {
+            // Let the browser show the error
+            return;
+        }
         e.preventDefault();
         const formData = new FormData(form);
         const results = {
@@ -114,22 +140,10 @@ document.addEventListener('DOMContentLoaded', () => {
             testDate: formData.get('test_date'),
             results: []
         };
-
-        let missingTests = [];
-        let missingComments = [];
-
         for (const id in allTestCases) {
             const status = formData.get(`${id}_status`);
             const comment = formData.get(`${id}_comment`) || '';
-            if (window.isAllRequired) {
-                if (!status || status === 'Not Tested') {
-                    missingTests.push(id);
-                }
-                if ((status === 'Fail' || status === 'Blocked') && comment.trim() === '') {
-                    missingComments.push(id);
-                }
-            }
-            if (status && status !== 'Not Tested') {
+            if (status) {
                 results.results.push({
                     id: id,
                     scenario: allTestCases[id].scenario,
@@ -138,21 +152,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             }
         }
-
-        if (window.isAllRequired) {
-            if (missingTests.length > 0) {
-                alert('All tests must be marked as Pass, Fail, or Blocked. Please update the following test(s):\n' + missingTests.join(', '));
-                return;
-            }
-            if (missingComments.length > 0) {
-                alert('Comments are required for all Failed or Blocked tests. Please provide comments for the following test(s):\n' + missingComments.join(', '));
-                return;
-            }
-        }
-
         document.getElementById('modal-tester-info').textContent = `Tester: ${results.testerName} | Date: ${results.testDate}`;
         document.getElementById('modal-results-json').value = JSON.stringify(results, null, 2);
-
         resultsModal.classList.remove('hidden');
         setTimeout(() => resultsModal.classList.remove('opacity-0'), 10);
         setTimeout(() => resultsModal.querySelector('.modal-container').classList.remove('scale-95'), 10);
