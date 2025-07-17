@@ -1,3 +1,6 @@
+// DEVELOPMENT MODE FLAG
+const IS_DEVELOPMENT_MODE = false; // Set to false for production/live
+
 
 const allTestCases = {};
 
@@ -20,12 +23,16 @@ function createTestCase(tc) {
                         <option value="Fail">Fail</option>
                         <option value="Blocked">Blocked</option>
                     </select>
+                    <div class="text-xs text-red-600 mt-1 hidden" data-detail-error="${tc.id}">Please read the test case detail before selecting a status.</div>
                 </div>
                 <div class="md:col-span-4">
                     <input type="text" name="${tc.id}_comment" placeholder="Comments (Required for Fail/Blocked)" class="w-full p-2 border border-gray-300 rounded-md shadow-sm" data-comment-input="${tc.id}">
                 </div>
             </div>
             `;
+    // Track which test cases have been read (by id)
+    const testCaseRead = {};
+
 }
 
 // Function to show the test case details modal
@@ -48,6 +55,11 @@ window.showTestCaseDetails = function (button) {
         li.innerHTML = cleanStep.replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank" class="text-indigo-600 hover:underline">$1</a>');
         stepsList.appendChild(li);
     });
+
+    // Mark as read (for production mode)
+    if (!IS_DEVELOPMENT_MODE) {
+        testCaseRead[id] = true;
+    }
 
     const testCaseModal = document.getElementById('test-case-modal');
     testCaseModal.classList.remove('hidden');
@@ -244,7 +256,7 @@ document.addEventListener('DOMContentLoaded', () => {
     showStep(currentStep);
 
     // Populate test cases as before
-    window.isAllRequired = true;
+    window.isAllRequired = !IS_DEVELOPMENT_MODE;
     fetch('assets/data/testcase.json')
         .then(response => {
             if (!response.ok) throw new Error('Network response was not ok');
@@ -272,8 +284,22 @@ document.addEventListener('DOMContentLoaded', () => {
             Object.keys(allTestCases).forEach(id => {
                 const statusSelect = document.querySelector(`[data-status-select="${id}"]`);
                 const commentInput = document.querySelector(`[data-comment-input="${id}"]`);
+                const detailError = document.querySelector(`[data-detail-error="${id}"]`);
                 if (statusSelect && commentInput) {
-                    statusSelect.addEventListener('change', function () {
+                    statusSelect.addEventListener('change', function (e) {
+                        // Only enforce in production/live mode
+                        if (!IS_DEVELOPMENT_MODE) {
+                            if (!testCaseRead[id]) {
+                                statusSelect.value = '';
+                                if (detailError) {
+                                    detailError.classList.remove('hidden');
+                                }
+                                setTimeout(() => {
+                                    if (detailError) detailError.classList.add('hidden');
+                                }, 2500);
+                                return;
+                            }
+                        }
                         if (window.isAllRequired && (statusSelect.value === 'Fail' || statusSelect.value === 'Blocked')) {
                             commentInput.required = true;
                         } else {
