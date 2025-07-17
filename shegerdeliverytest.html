@@ -151,14 +151,20 @@
 
             <!-- Navigation Buttons -->
             <div class="flex justify-between items-center mt-8">
-                <button type="button" id="reset-progress-btn"
-                    class="bg-gray-300 text-gray-700 font-bold py-2 px-6 rounded-lg hover:bg-gray-400 transition-colors">Reset
-                    Progress</button>
-                <button type="button" id="next-btn"
-                    class="bg-indigo-600 text-white font-bold py-2 px-6 rounded-lg hover:bg-indigo-700 transition-colors">Next</button>
-                <button type="submit" id="submit-btn"
-                    class="bg-green-600 text-white font-bold py-2 px-6 rounded-lg hover:bg-green-700 transition-colors hidden">Submit
-                    Test Results</button>
+                <div>
+                    <button type="button" id="reset-progress-btn"
+                        class="bg-gray-300 text-gray-700 font-bold py-2 px-6 rounded-lg hover:bg-gray-400 transition-colors">Reset
+                        Progress</button>
+                </div>
+                <div class="flex space-x-4 items-center">
+                    <button type="button" id="prev-btn"
+                        class="bg-gray-200 text-gray-700 font-bold py-2 px-6 rounded-lg hover:bg-gray-300 transition-colors">Previous</button>
+                    <button type="button" id="next-btn"
+                        class="bg-indigo-600 text-white font-bold py-2 px-6 rounded-lg hover:bg-indigo-700 transition-colors">Next</button>
+                    <button type="submit" id="submit-btn"
+                        class="bg-green-600 text-white font-bold py-2 px-6 rounded-lg hover:bg-green-700 transition-colors hidden">Submit
+                        Test Results</button>
+                </div>
             </div>
         </div>
     </form>
