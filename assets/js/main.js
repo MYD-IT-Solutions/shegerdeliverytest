@@ -221,9 +221,11 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 stepCircle = `<div class="w-8 h-8 flex items-center justify-center rounded-full mb-1 bg-gray-200 text-gray-400 ${clickable ? 'cursor-pointer stepper-step' : ''}" data-step="${i}">${i}</div>`;
             }
+            // Only show label on md+ screens, just number on mobile
             stepDiv.innerHTML = `
                 ${stepCircle}
-                <span class="text-xs ${status === 'active' ? 'font-bold text-indigo-700' : status === 'completed' ? 'text-green-700' : 'text-gray-400'}">Step ${i}</span>
+                <span class="text-xs ${status === 'active' ? 'font-bold text-indigo-700' : status === 'completed' ? 'text-green-700' : 'text-gray-400'} hidden md:inline">Step ${i}</span>
+                <span class="text-xs ${status === 'active' ? 'font-bold text-indigo-700' : status === 'completed' ? 'text-green-700' : 'text-gray-400'} md:hidden">${i}</span>
             `;
             progressBar.appendChild(stepDiv);
             if (i < TOTAL_STEPS) {
