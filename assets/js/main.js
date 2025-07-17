@@ -57,6 +57,9 @@ window.showTestCaseDetails = function (button) {
 
 // Main script execution
 document.addEventListener('DOMContentLoaded', () => {
+    // Toggle this variable to require all tests or not
+    window.isAllRequired = true;
+
     // Set today's date automatically
     const today = new Date();
     const year = today.getFullYear();
@@ -95,7 +98,6 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .catch(error => console.error('Error loading test cases:', error));
 
-
     // Modal and Form Submission Logic
     const form = document.getElementById('test-form');
     const resultsModal = document.getElementById('results-modal');
@@ -113,15 +115,38 @@ document.addEventListener('DOMContentLoaded', () => {
             results: []
         };
 
+        let missingTests = [];
+        let missingComments = [];
+
         for (const id in allTestCases) {
             const status = formData.get(`${id}_status`);
+            const comment = formData.get(`${id}_comment`) || '';
+            if (window.isAllRequired) {
+                if (!status || status === 'Not Tested') {
+                    missingTests.push(id);
+                }
+                if ((status === 'Fail' || status === 'Blocked') && comment.trim() === '') {
+                    missingComments.push(id);
+                }
+            }
             if (status && status !== 'Not Tested') {
                 results.results.push({
                     id: id,
                     scenario: allTestCases[id].scenario,
                     status: status,
-                    comment: formData.get(`${id}_comment`) || ''
+                    comment: comment
                 });
+            }
+        }
+
+        if (window.isAllRequired) {
+            if (missingTests.length > 0) {
+                alert('All tests must be marked as Pass, Fail, or Blocked. Please update the following test(s):\n' + missingTests.join(', '));
+                return;
+            }
+            if (missingComments.length > 0) {
+                alert('Comments are required for all Failed or Blocked tests. Please provide comments for the following test(s):\n' + missingComments.join(', '));
+                return;
             }
         }
 
