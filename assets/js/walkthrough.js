@@ -174,7 +174,7 @@ document.addEventListener('DOMContentLoaded', function () {
             autoAdvance: 1500
         },
         {
-            html: `<b>That's it!</b><br><span class="text-gray-700">You've completed the walkthrough. Now you can start your own test session. Good luck!</span>`
+            html: `<b>That's it!</b><br><span class="text-gray-700">export the json file and send it on telegram \n You've completed the walkthrough. Now you can start your own test session. Good luck!</span>`
         }
     ];
     var step = 0;
