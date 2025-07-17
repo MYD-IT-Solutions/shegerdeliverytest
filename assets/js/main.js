@@ -122,6 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (!input.value) {
                     input.focus();
                     input.classList.add('border-red-500');
+                    input.reportValidity(); // Show browser's required message
                     setTimeout(() => input.classList.remove('border-red-500'), 1200);
                     return;
                 }
@@ -141,7 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
     showStep(currentStep);
 
     // Populate test cases as before
-    window.isAllRequired = false;
+    window.isAllRequired = true;
     fetch('assets/data/testcase.json')
         .then(response => {
             if (!response.ok) throw new Error('Network response was not ok');
