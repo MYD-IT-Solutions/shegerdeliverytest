@@ -281,6 +281,11 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('prev-btn').style.display = step === 1 ? 'none' : '';
         document.getElementById('next-btn').style.display = step === TOTAL_STEPS ? 'none' : '';
         document.getElementById('submit-btn').classList.toggle('hidden', step !== TOTAL_STEPS);
+        // Show reset only on step 1
+        var resetBtn = document.getElementById('reset-progress-btn');
+        if (resetBtn) {
+            resetBtn.style.display = step === 1 ? '' : 'none';
+        }
         renderProgressBar();
         saveStepToStorage();
         saveMaxStepToStorage();
