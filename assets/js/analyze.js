@@ -3,9 +3,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const responseFileInput = document.getElementById('response-file');
     const analysisSection = document.getElementById('analysis-section');
     const uploadSection = document.getElementById('upload-section');
+    const responseTabs = document.getElementById('response-tabs');
 
     let statusChartInstance = null;
     let categoryChartInstance = null;
+    let fullResponseData = [];
 
     uploadBtn.addEventListener('click', () => {
         const file = responseFileInput.files[0];
@@ -52,9 +54,31 @@ document.addEventListener('DOMContentLoaded', () => {
         reader.readAsText(file);
     });
 
+    responseTabs.addEventListener('click', (e) => {
+        if (e.target.classList.contains('tab-btn')) {
+            const status = e.target.getAttribute('data-status');
+
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('border-indigo-500', 'text-indigo-600');
+                btn.classList.add('text-gray-500', 'hover:text-gray-700', 'hover:border-gray-300');
+            });
+            e.target.classList.add('border-indigo-500', 'text-indigo-600');
+            e.target.classList.remove('text-gray-500', 'hover:text-gray-700', 'hover:border-gray-300');
+
+            let filteredData = fullResponseData;
+            if (status === 'fail') {
+                filteredData = fullResponseData.filter(item => item.status.toLowerCase() === 'fail');
+            } else if (status === 'blocked') {
+                filteredData = fullResponseData.filter(item => item.status.toLowerCase() === 'blocked');
+            }
+            renderResponseList(filteredData);
+        }
+    });
+
     function displayAnalysis(data) {
         console.log("Displaying analysis for data:", data);
         const validData = data.filter(item => item && item.status);
+        fullResponseData = validData;
         console.log("Filtered data with status:", validData);
 
         const totalCount = validData.length;
