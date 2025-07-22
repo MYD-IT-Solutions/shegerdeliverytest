@@ -34,54 +34,57 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     uploadBtn.addEventListener('click', () => {
-        const file = responseFileInput.files[0];
-        if (!file) {
-            alert('Please select a JSON file to upload.');
+        const files = responseFileInput.files;
+        if (files.length === 0) {
+            alert('Please select one or more JSON files to upload.');
             return;
         }
 
-        const reader = new FileReader();
-        reader.onload = (event) => {
-            console.log("Attempting to read file...");
-            if (!event.target.result) {
-                console.error("File content is empty.");
-                alert("The selected file is empty.");
-                return;
-            }
-            console.log("File content read successfully. Length:", event.target.result.length);
-            console.log("File content snippet:", event.target.result.substring(0, 500));
+        const allResults = [];
+        const testerInfos = new Set();
+        let filesProcessed = 0;
 
-            try {
-                const jsonData = JSON.parse(event.target.result);
-                console.log("JSON parsed successfully:", jsonData);
-
-                if (jsonData && jsonData.results && Array.isArray(jsonData.results)) {
-                    console.log("'results' array found. Proceeding with analysis.");
-
-                    // Display tester info
-                    document.getElementById('tester-name').textContent = jsonData.testerName || 'N/A';
-                    document.getElementById('test-date').textContent = jsonData.testDate || 'N/A';
-                    document.getElementById('tester-info').classList.remove('hidden');
-
-                    displayAnalysis(jsonData.results);
-                    uploadSection.classList.add('hidden');
-                    analysisSection.classList.remove('hidden');
-                } else {
-                    console.error("Invalid JSON format: 'results' array not found in the parsed data.", jsonData);
-                    alert('Invalid JSON format: "results" array not found.');
+        Array.from(files).forEach(file => {
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                try {
+                    const jsonData = JSON.parse(event.target.result);
+                    if (jsonData && jsonData.results && Array.isArray(jsonData.results)) {
+                        allResults.push(...jsonData.results);
+                        testerInfos.add(`Tester: ${jsonData.testerName || 'N/A'} on ${jsonData.testDate || 'N/A'}`);
+                    } else {
+                        console.warn(`File ${file.name} has an invalid format and was skipped.`);
+                    }
+                } catch (error) {
+                    console.error(`Error parsing ${file.name}:`, error);
+                    alert(`Could not parse ${file.name}. It may be an invalid JSON file.`);
                 }
-            } catch (error) {
-                console.error("Error parsing JSON:", error);
-                alert('Invalid JSON file. Check console for details.');
-            }
-        };
 
-        reader.onerror = (error) => {
-            console.error("Error reading file:", error);
-            alert("An error occurred while reading the file.");
-        };
+                filesProcessed++;
+                if (filesProcessed === files.length) {
+                    // All files have been processed
+                    if (allResults.length > 0) {
+                        document.getElementById('tester-info-list').innerHTML = [...testerInfos].map(info => `<li>${info}</li>`).join('');
+                        document.getElementById('tester-info').classList.remove('hidden');
 
-        reader.readAsText(file);
+                        displayAnalysis(allResults);
+                        uploadSection.classList.add('hidden');
+                        analysisSection.classList.remove('hidden');
+                    } else {
+                        alert("No valid test results found in the selected files.");
+                    }
+                }
+            };
+            reader.onerror = (error) => {
+                console.error(`Error reading file ${file.name}:`, error);
+                alert(`An error occurred while reading ${file.name}.`);
+                filesProcessed++;
+                if (filesProcessed === files.length && allResults.length > 0) {
+                    displayAnalysis(allResults);
+                }
+            };
+            reader.readAsText(file);
+        });
     });
 
     responseTabs.addEventListener('click', (e) => {

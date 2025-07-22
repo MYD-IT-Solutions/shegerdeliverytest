@@ -16,6 +16,7 @@
             <div id="tester-info" class="hidden mt-2 text-sm text-gray-600">
                 <strong>Tester:</strong> <span id="tester-name"></span> | <strong>Test Date:</strong> <span
                     id="test-date"></span>
+                <ul id="tester-info-list" class="list-disc ml-6 mt-2"></ul>
             </div>
         </div>
     </header>
@@ -23,7 +24,7 @@
         <section id="upload-section" class="bg-white p-6 rounded-lg shadow mb-6">
             <h2 class="text-2xl font-bold mb-4">Upload JSON File</h2>
             <div class="flex items-center">
-                <input type="file" id="response-file" accept="application/json"
+                <input type="file" id="response-file" accept="application/json" multiple
                     class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100">
                 <button id="upload-btn"
                     class="ml-4 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">Upload</button>
