@@ -50,7 +50,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 try {
                     const jsonData = JSON.parse(event.target.result);
                     if (jsonData && jsonData.results && Array.isArray(jsonData.results)) {
-                        allResults.push(...jsonData.results);
+                        // Attach tester info to each result
+                        const resultsWithTester = jsonData.results.map(r => ({
+                            ...r,
+                            testerName: jsonData.testerName || 'N/A',
+                            testDate: jsonData.testDate || 'N/A'
+                        }));
+                        allResults.push(...resultsWithTester);
                         testerInfos.add(`Tester: ${jsonData.testerName || 'N/A'} on ${jsonData.testDate || 'N/A'}`);
                     } else {
                         console.warn(`File ${file.name} has an invalid format and was skipped.`);
