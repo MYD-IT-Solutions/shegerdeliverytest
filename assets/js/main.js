@@ -1,5 +1,5 @@
 // DEVELOPMENT MODE FLAG
-let IS_DEVELOPMENT_MODE = false; // Set to false for production/live
+let IS_DEVELOPMENT_MODE = true; // Set to false for production/live
 window.IS_DEVELOPMENT_MODE = IS_DEVELOPMENT_MODE;
 window.setDevModeFlag = function (val) {
     IS_DEVELOPMENT_MODE = !!val;
@@ -437,9 +437,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Modal and Form Submission Logic
     const form = document.getElementById('test-form');
     const resultsModal = document.getElementById('results-modal');
-    const testCaseModal = document.getElementById('test-case-modal');
-    const closeModalBtn = document.getElementById('close-modal-btn');
-    const closeTestCaseModalBtn = document.getElementById('close-test-case-modal-btn');
     const exportJsonBtn = document.getElementById('export-json-btn');
 
     form.addEventListener('submit', function (e) {
@@ -495,20 +492,12 @@ document.addEventListener('DOMContentLoaded', () => {
         resultsModal.classList.remove('hidden');
         setTimeout(() => resultsModal.classList.remove('opacity-0'), 10);
         setTimeout(() => resultsModal.querySelector('.modal-container').classList.remove('scale-95'), 10);
+        exportResults();
         // Clear localStorage on submit
         localStorage.removeItem('sdtest_formData');
         localStorage.removeItem('sdtest_currentStep');
         localStorage.removeItem('sdtest_maxStepReached');
     });
-
-    const closeModal = (modal) => {
-        modal.classList.add('opacity-0');
-        modal.querySelector('.modal-container').classList.add('scale-95');
-        setTimeout(() => modal.classList.add('hidden'), 300);
-    };
-
-    closeModalBtn.addEventListener('click', () => closeModal(resultsModal));
-    closeTestCaseModalBtn.addEventListener('click', () => closeModal(testCaseModal));
 
     const exportResults = () => {
         const jsonString = document.getElementById('modal-results-json').value;
@@ -528,9 +517,10 @@ document.addEventListener('DOMContentLoaded', () => {
     exportJsonBtn.addEventListener('click', exportResults);
 
     resultsModal.addEventListener('click', (e) => {
-        if (e.target === resultsModal) closeModal(resultsModal);
-    });
-    testCaseModal.addEventListener('click', (e) => {
-        if (e.target === testCaseModal) closeModal(testCaseModal);
+        if (e.target === resultsModal) {
+            resultsModal.classList.add('opacity-0');
+            resultsModal.querySelector('.modal-container').classList.add('scale-95');
+            setTimeout(() => resultsModal.classList.add('hidden'), 300);
+        }
     });
 });

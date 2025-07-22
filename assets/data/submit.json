@@ -1,0 +1,1332 @@
+{
+    "testerName": "Melaku Demeke",
+    "testDate": "2025-07-22",
+    "results": [
+        {
+            "id": "WEB-LND-01",
+            "scenario": "Verify page load and location detection (Permission Allowed)",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-LND-02",
+            "scenario": "Verify header logo link",
+            "status": "Fail",
+            "comment": "logo not visible"
+        },
+        {
+            "id": "WEB-LND-03",
+            "scenario": "Verify \"Login\" button navigation",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-LND-04",
+            "scenario": "Verify search with detected address and default service",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-LND-05",
+            "scenario": "Verify changing service type",
+            "status": "Blocked",
+            "comment": "service type not showing"
+        },
+        {
+            "id": "WEB-LND-06",
+            "scenario": "Verify searching with a new, valid address",
+            "status": "Pass",
+            "comment": "pass comment test"
+        },
+        {
+            "id": "WEB-LND-07",
+            "scenario": "Verify search fails with no address",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-LND-08",
+            "scenario": "Verify clicking a restaurant link",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-LND-09",
+            "scenario": "Verify User App Store and Play Store links",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-LND-10",
+            "scenario": "Verify Driver/Provider App Store and Play Store links",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-LND-11",
+            "scenario": "Verify Store/Restaurant App Store and Play Store links",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-LND-12",
+            "scenario": "Verify footer navigation links",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-LND-13",
+            "scenario": "Verify language and currency selectors",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-LND-14",
+            "scenario": "Verify mobile/tablet view",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-LND-15",
+            "scenario": "Verify behavior when location permission is denied",
+            "status": "Fail",
+            "comment": "when denied locaiton not found and no restorant displayed"
+        },
+        {
+            "id": "WEB-LOGIN-01",
+            "scenario": "Verify UI and default state of the Login page",
+            "status": "Blocked",
+            "comment": "have no google icon"
+        },
+        {
+            "id": "WEB-LOGIN-02",
+            "scenario": "Verify switching between User, Provider, and Store tabs",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-LOGIN-03",
+            "scenario": "Verify login with a valid mobile number and password",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-LOGIN-04",
+            "scenario": "Verify login fails with an unregistered mobile number",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-LOGIN-05",
+            "scenario": "Verify login fails with an incorrect password",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-LOGIN-06",
+            "scenario": "Verify \"Forgot Password\" link navigates correctly",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-LOGIN-07",
+            "scenario": "Verify \"Sign Up\" link navigates to the signup gateway",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-REG-01",
+            "scenario": "Verify navigation to the User Signup page",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-REG-02",
+            "scenario": "Verify successful registration with valid data and OTP",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-REG-03",
+            "scenario": "Verify registration fails with an existing email",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-REG-04",
+            "scenario": "Verify registration fails with an existing mobile number",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-REG-05",
+            "scenario": "Verify validation for empty required fields",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-REG-06",
+            "scenario": "Verify OTP validation with an incorrect code",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-PRF-01",
+            "scenario": "Verify that user data is displayed correctly",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-PRF-02",
+            "scenario": "Verify that the side navigation works correctly",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-PRF-03",
+            "scenario": "Verify uploading a valid profile picture",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-PRF-04",
+            "scenario": "Verify attempting to upload an invalid file type",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-PRF-05",
+            "scenario": "Verify order history is displayed",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-PRF-06",
+            "scenario": "Verify wallet balance and add money functionality",
+            "status": "Fail",
+            "comment": "add money not working"
+        },
+        {
+            "id": "WEB-PRF-07",
+            "scenario": "Verify validation for invalid wallet amount",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-PRF-08",
+            "scenario": "Verify applying a valid promo code",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-PRF-09",
+            "scenario": "Verify applying an invalid promo code",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-PRF-10",
+            "scenario": "Verify \"Log Out\" functionality",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-PRF-11",
+            "scenario": "Verify \"Delete Account\" confirmation flow",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-PRF-12",
+            "scenario": "Verify the cancellation of the \"Delete Account\" action",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-SL-01",
+            "scenario": "Verify initial page elements",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-SL-02",
+            "scenario": "Verify searching for a store name",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-SL-03",
+            "scenario": "Verify searching for a food item",
+            "status": "Fail",
+            "comment": "it does't show for food search only restorant name"
+        },
+        {
+            "id": "WEB-SL-04",
+            "scenario": "Verify search with no results",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-SL-05",
+            "scenario": "Verify switching to \"Pickup\"",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-SL-06",
+            "scenario": "Verify filtering by a top category",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-SL-07",
+            "scenario": "Verify store information is correct",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-SL-08",
+            "scenario": "Verify navigation to store details",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-SL-09",
+            "scenario": "Verify the \"Orders\" link",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-DTL-01",
+            "scenario": "Verify initial page elements and store information",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-DTL-02",
+            "scenario": "Verify expanding and collapsing the \"Info\" section",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-DTL-03",
+            "scenario": "Verify opening and interacting with the \"Schedule Order\" modal",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-DTL-04",
+            "scenario": "Verify filtering menu items by category",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-DTL-05",
+            "scenario": "Verify searching for a specific menu item",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-DTL-06",
+            "scenario": "Verify adding an item to the cart",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-DTL-07",
+            "scenario": "Verify quantity modification in the item popup",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-DTL-08",
+            "scenario": "Verify adding special instructions",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-DTL-09",
+            "scenario": "Verify increasing/decreasing quantity from the cart bar",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-DTL-10",
+            "scenario": "Verify removing an item from the cart",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-DTL-11",
+            "scenario": "Verify \"Clear Cart\" functionality",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-DTL-12",
+            "scenario": "Verify navigation to checkout",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-CHK-01",
+            "scenario": "Verify page loads with correct order details",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-CHK-02",
+            "scenario": "Modify item quantity from checkout",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-CHK-03",
+            "scenario": "Remove an item from checkout",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-CHK-04",
+            "scenario": "Change delivery address",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-CHK-05",
+            "scenario": "Add a delivery note",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-CHK-06",
+            "scenario": "Switch to Takeaway",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-CHK-07",
+            "scenario": "Schedule an order for a later time",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-CHK-08",
+            "scenario": "Apply a valid promo code",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-CHK-09",
+            "scenario": "Apply an invalid promo code",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-CHK-10",
+            "scenario": "Add a tip for the provider",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-CHK-11",
+            "scenario": "Switch payment method",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-CHK-12",
+            "scenario": "Use the wallet balance",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-CHK-13",
+            "scenario": "Place a \"Cash on Delivery\" order",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-TRK-01",
+            "scenario": "Verify all static elements are displayed correctly",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-TRK-02",
+            "scenario": "Verify the progress bar shows the correct initial status",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-TRK-03",
+            "scenario": "Verify the progress bar updates as the order progresses",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-TRK-04",
+            "scenario": "Verify store link navigates correctly",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-TRK-05",
+            "scenario": "Verify by opening the cancellation modal",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-TRK-06",
+            "scenario": "Verify submitting a cancellation request",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-TRK-07",
+            "scenario": "Verify closing the cancellation modal",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-STR-DASH-01",
+            "scenario": "Verify all dashboard elements are displayed correctly",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-STR-DASH-02",
+            "scenario": "Verify user dropdown menu",
+            "status": "Fail",
+            "comment": "drop down not showing"
+        },
+        {
+            "id": "WEB-STR-DASH-03",
+            "scenario": "Verify \"Profile\" and \"Sign out\" links",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-STR-DASH-04",
+            "scenario": "Verify store availability toggle",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-STR-DASH-05",
+            "scenario": "Verify that all links navigate to the correct pages",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-STR-DASH-06",
+            "scenario": "Verify the \"Support\" dropdown",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-STR-DASH-07",
+            "scenario": "Verify that the sales data is displayed",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-STR-DASH-08",
+            "scenario": "Verify service quality metrics",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-STR-DASH-09",
+            "scenario": "Verify customer satisfaction metrics",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-STR-DASH-10",
+            "scenario": "Verify \"Delete Account\" flow",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-STR-PAY-01",
+            "scenario": "Verify all elements on the Payouts page are displayed correctly",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-STR-PAY-02",
+            "scenario": "Verify navigation to the weekly payout details",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-STR-PAY-03",
+            "scenario": "Verify exporting a weekly statement",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-STR-PAY-04",
+            "scenario": "Verify the \"Add Payout Method\" modal flow",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-STR-PAY-05",
+            "scenario": "Verify form validation for adding a Bank Transfer account",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-STR-PAY-06",
+            "scenario": "Verify adding a valid Bank Transfer account",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-STR-MENU-01",
+            "scenario": "Verify all elements on the Menu page are displayed correctly",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-STR-MENU-02",
+            "scenario": "Verify downloading the sample data file",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-STR-MENU-03",
+            "scenario": "Verify importing a valid menu file",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-STR-MENU-04",
+            "scenario": "Verify adding a new menu",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-STR-MENU-05",
+            "scenario": "Verify editing an existing menu",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-STR-MENU-06",
+            "scenario": "Verify adding a new category",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-STR-MENU-07",
+            "scenario": "Verify editing a category name",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-STR-MENU-08",
+            "scenario": "Verify adding a new menu item",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-STR-MENU-09",
+            "scenario": "Verify form validation for a new item",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-STR-MENU-10",
+            "scenario": "Verify editing an existing menu item",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-STR-MENU-11",
+            "scenario": "Verify deleting an item",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-STR-MENU-12",
+            "scenario": "Verify by changing the translation language",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-STR-OFFER-01",
+            "scenario": "Verify all elements on the Offers page are displayed correctly",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-STR-OFFER-02",
+            "scenario": "Verify opening the \"Add Offer\" modal",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-STR-OFFER-03",
+            "scenario": "Verify form validation for a new offer",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-STR-OFFER-04",
+            "scenario": "Verify adding a valid offer",
+            "status": "Blocked",
+            "comment": "modal not closing"
+        },
+        {
+            "id": "WEB-STR-OFFER-05",
+            "scenario": "Verify editing an existing offer",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-STR-OFFER-06",
+            "scenario": "Verify by toggling the offer status",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-STR-OFFER-07",
+            "scenario": "Verify deleting an offer",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-STR-PREP-01",
+            "scenario": "Verify all elements on the Preparation Time page are displayed correctly",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-STR-PREP-02",
+            "scenario": "Verify updating the default preparation time",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-STR-PREP-03",
+            "scenario": "Verify adding a new specific time slot",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-STR-PREP-04",
+            "scenario": "Verify the configuration and saving of a new time slot",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-STR-PREP-05",
+            "scenario": "Verify validation for an incomplete time slot",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-STR-PREP-06",
+            "scenario": "Verify validation for an invalid time range",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-STR-PREP-07",
+            "scenario": "Verify removing a specific time slot",
+            "status": "Fail",
+            "comment": "time slot not removed"
+        },
+        {
+            "id": "WEB-STR-ORD-01",
+            "scenario": "Verify all elements on the Orders page are displayed correctly",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-STR-ORD-02",
+            "scenario": "Verify filtering orders by \"Today\"",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-STR-ORD-03",
+            "scenario": "Verify filtering orders by a custom date range",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-STR-ORD-04",
+            "scenario": "Verify resetting the filter to \"Overall.\"",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-STR-ORD-05",
+            "scenario": "Verify the \"View\" action button",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-STR-ORD-06",
+            "scenario": "Verify searching within the table",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-STR-ORD-07",
+            "scenario": "Verify sorting the table by Order ID",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-STR-ORD-08",
+            "scenario": "Verify exporting data",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-PPRF-01",
+            "scenario": "Verify all elements on the profile page are displayed correctly",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-PPRF-02",
+            "scenario": "Verify provider name and image are correct",
+            "status": "Fail",
+            "comment": "not the same name"
+        },
+        {
+            "id": "WEB-PPRF-03",
+            "scenario": "Verify navigation links work correctly",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-PPRF-04",
+            "scenario": "Verify user data is displayed and read-only",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-PPRF-05",
+            "scenario": "Verify \"Log Out\" functionality",
+            "status": "Fail",
+            "comment": "logout works but when it relods logs in again "
+        },
+        {
+            "id": "WEB-PPRF-06",
+            "scenario": "Verify \"Delete Account\" confirmation flow",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-PORD-01",
+            "scenario": "Verify all elements on the \"My Orders\" page are displayed correctly",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-PORD-02",
+            "scenario": "Verify that the summary card data is accurate",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-PORD-03",
+            "scenario": "Verify that the order history table populates with data",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-PORD-04",
+            "scenario": "Verify navigation to the order detail page",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "WEB-PORD-05",
+            "scenario": "Verify table pagination functionality",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "MOB-CUST-LGN-01",
+            "scenario": "Verify all elements on the \"Welcome Back\" screen",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "MOB-CUST-LGN-02",
+            "scenario": "Verify \"Continue with Phone Number\" flow",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "MOB-CUST-LGN-03",
+            "scenario": "Verify \"Register\" button navigation",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "MOB-CUST-LGN-04",
+            "scenario": "Verify the \"Google\" login button",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "MOB-CUST-LGN-05",
+            "scenario": "Verify the \"Facebook\" login button",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "MOB-CUST-LGN-06",
+            "scenario": "Verify the \"Apple Login\" button",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "MOB-CUST-LGN-07",
+            "scenario": "Verify Language selector",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "MOB-CUST-LGN-08",
+            "scenario": "Verify Currency selector",
+            "status": "Blocked",
+            "comment": "why is users allowed to chose curency"
+        },
+        {
+            "id": "MOB-CUST-HOME-01",
+            "scenario": "Verify all elements on the Home screen",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "MOB-CUST-HOME-02",
+            "scenario": "Verify by tapping the delivery address/status bar",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "MOB-CUST-HOME-03",
+            "scenario": "Verify tapping the \"Food Delivery\" button",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "MOB-CUST-HOME-04",
+            "scenario": "Verify by tapping the \"Grocery Delivery\" button",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "MOB-CUST-HOME-05",
+            "scenario": "Verify tapping the \"Pharmacy Delivery\" button",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "MOB-CUST-HOME-06",
+            "scenario": "Verify by tapping the WhatsApp icon",
+            "status": "Blocked",
+            "comment": "we should use telegram"
+        },
+        {
+            "id": "MOB-CUST-HOME-07",
+            "scenario": "Verify by opening the side menu",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "MOB-CUST-NAV-01",
+            "scenario": "Verify all elements of the side navigation drawer are displayed correctly",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "MOB-CUST-NAV-02",
+            "scenario": "Verify navigation to the \"My Profile\" screen and its content",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "MOB-CUST-NAV-03",
+            "scenario": "Verify navigation to the \"Your Order\" screen and its content",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "MOB-CUST-NAV-04",
+            "scenario": "Verify navigation to the \"Payment\" screen and its options",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "MOB-CUST-NAV-05",
+            "scenario": "Verify navigation to the \"Wallet\" screen",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "MOB-CUST-NAV-06",
+            "scenario": "Verify navigation to the \"Promo Code\" screen",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "MOB-CUST-NAV-07",
+            "scenario": "Verify navigation to the \"Referral\" screen",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "MOB-CUST-NAV-08",
+            "scenario": "Verify navigation to the \"Your Favourites\" screen",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "MOB-CUST-NAV-09",
+            "scenario": "Verify navigation to the \"Verification\" screen",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "MOB-CUST-NAV-10",
+            "scenario": "Verify navigation to the \"Settings\" screen and its options",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "MOB-CUST-NAV-11",
+            "scenario": "Verify navigation to the \"Support\" screen",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "MOB-CUST-NAV-12",
+            "scenario": "Verify logout functionality",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "MOB-CUST-ORD-01",
+            "scenario": "Verify UI and functionality of the store list screen",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "MOB-CUST-ORD-02",
+            "scenario": "Verify searching for a specific store",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "MOB-CUST-ORD-03",
+            "scenario": "Verify navigation to and UI of the store's menu page",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "MOB-CUST-ORD-04",
+            "scenario": "Verify adding an item to the cart",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "MOB-CUST-ORD-05",
+            "scenario": "Verify adding multiple items to the basket",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "MOB-CUST-ORD-06",
+            "scenario": "Verify UI and details on the \"Your basket\" screen",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "MOB-CUST-ORD-07",
+            "scenario": "Verify changing delivery type",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "MOB-CUST-ORD-08",
+            "scenario": "Verify applying a promo code",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "MOB-CUST-ORD-09",
+            "scenario": "Verify placing an order",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "MOB-CUST-ORD-10",
+            "scenario": "Verify UI and status on the order tracking screen",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "MOB-CUST-ORD-11",
+            "scenario": "Verify by viewing the order receipt",
+            "status": "Pass",
+            "comment": "pass test comment"
+        },
+        {
+            "id": "MOB-CUST-ORD-12",
+            "scenario": "Verify the order cancellation flow",
+            "status": "Blocked",
+            "comment": "should not be canceld after some time"
+        },
+        {
+            "id": "MOB-STR-ORD-01",
+            "scenario": "Verify all elements on the main order screen are displayed correctly",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "MOB-STR-ORD-02",
+            "scenario": "Verify a new order appears correctly",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "MOB-STR-ORD-03",
+            "scenario": "Verify the \"Accept Orders\" flow",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "MOB-STR-ORD-04",
+            "scenario": "Verify toggling store status to \"Pause New Orders.\"",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "MOB-STR-ORD-05",
+            "scenario": "Verify navigation to and UI of the Order Details screen",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "MOB-STR-ORD-06",
+            "scenario": "Verify customer contact functionality",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "MOB-STR-ORD-07",
+            "scenario": "Verify the \"Delay Order\" functionality",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "MOB-STR-ORD-08",
+            "scenario": "Verify the \"Cancel Order\" functionality",
+            "status": "Fail",
+            "comment": "should not be canced after certain time"
+        },
+        {
+            "id": "MOB-STR-ORD-09",
+            "scenario": "Verify the \"Order is Ready\" functionality",
+            "status": "Fail",
+            "comment": "yes just test"
+        },
+        {
+            "id": "MOB-STR-ORD-10",
+            "scenario": "Verify viewing and responding to order ratings",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "MOB-STR-NAV-01",
+            "scenario": "Verify all elements of the side navigation drawer are displayed correctly",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "MOB-STR-NAV-02",
+            "scenario": "Verify navigation to the \"Orders\" screen",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "MOB-STR-NAV-03",
+            "scenario": "Verify navigation to the \"Order History\" screen",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "MOB-STR-NAV-04",
+            "scenario": "Verify navigation to the \"Menu\" screen and its content",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "MOB-STR-NAV-05",
+            "scenario": "Verify toggling item availability",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "MOB-STR-NAV-06",
+            "scenario": "Verify changing the Language",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "MOB-STR-NAV-07",
+            "scenario": "Verify changing the Currency",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "MOB-STR-NAV-08",
+            "scenario": "Verify navigation to the \"Pay to Sheger Deliveries\" screen",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "MOB-STR-NAV-09",
+            "scenario": "Verify navigation to the \"Support\" screen",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "MOB-STR-NAV-10",
+            "scenario": "Verify the \"Delete Account\" flow",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "MOB-STR-NAV-11",
+            "scenario": "Verify logout functionality",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "MOB-DRV-ORD-01",
+            "scenario": "Verify going online and receiving a new order request",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "MOB-DRV-ORD-02",
+            "scenario": "Verify accepting a new order",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "MOB-DRV-ORD-03",
+            "scenario": "Verify \"Slide to Start Trip\" functionality",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "MOB-DRV-ORD-04",
+            "scenario": "Verify confirming the pickup",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "MOB-DRV-ORD-05",
+            "scenario": "Verify starting the trip to the customer",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "MOB-DRV-ORD-06",
+            "scenario": "Verify completing the delivery",
+            "status": "Fail",
+            "comment": "works"
+        },
+        {
+            "id": "MOB-DRV-ORD-07",
+            "scenario": "Verify selecting the recipient",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "MOB-DRV-ORD-08",
+            "scenario": "Verify submitting the delivery rating",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "MOB-DRV-ORD-09",
+            "scenario": "Verify completing the trip",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "MOB-DRV-NAV-01",
+            "scenario": "Verify all elements of the side navigation drawer are displayed correctly",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "MOB-DRV-NAV-02",
+            "scenario": "Verify navigation to the \"Your Jobs\" screen and its content",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "MOB-DRV-NAV-03",
+            "scenario": "Verify navigation to the \"Earnings\" screen and its content",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "MOB-DRV-NAV-04",
+            "scenario": "Verify navigation to the \"Manage Documents\" screen",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "MOB-DRV-NAV-05",
+            "scenario": "Verify navigation to the \"Vehicle Information\" screen",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "MOB-DRV-NAV-06",
+            "scenario": "Verify navigation to the \"Pay to Admin\" screen",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "MOB-DRV-NAV-07",
+            "scenario": "Verify navigation to the \"Ratings\" screen",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "MOB-DRV-NAV-08",
+            "scenario": "Verify navigation to the \"Referral\" screen",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "MOB-DRV-NAV-09",
+            "scenario": "Verify navigation to the \"Settings\" screen and its options",
+            "status": "Pass",
+            "comment": ""
+        },
+        {
+            "id": "MOB-DRV-NAV-10",
+            "scenario": "Verify logout functionality",
+            "status": "Pass",
+            "comment": ""
+        }
+    ]
+}
