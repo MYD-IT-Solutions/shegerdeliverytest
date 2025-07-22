@@ -57,6 +57,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (jsonData && jsonData.results && Array.isArray(jsonData.results)) {
                     console.log("'results' array found. Proceeding with analysis.");
+
+                    // Display tester info
+                    document.getElementById('tester-name').textContent = jsonData.testerName || 'N/A';
+                    document.getElementById('test-date').textContent = jsonData.testDate || 'N/A';
+                    document.getElementById('tester-info').classList.remove('hidden');
+
                     displayAnalysis(jsonData.results);
                     uploadSection.classList.add('hidden');
                     analysisSection.classList.remove('hidden');
