@@ -8,6 +8,30 @@ document.addEventListener('DOMContentLoaded', () => {
     let statusChartInstance = null;
     let categoryChartInstance = null;
     let fullResponseData = [];
+    let allTestCases = {};
+
+    // Fetch all test cases to have details available for display
+    fetch('assets/data/testcase.json')
+        .then(response => response.json())
+        .then(data => {
+            for (const key in data) {
+                if (data.hasOwnProperty(key)) {
+                    for (const section in data[key]) {
+                        if (data[key].hasOwnProperty(section)) {
+                            for (const page in data[key][section]) {
+                                if (data[key][section].hasOwnProperty(page) && Array.isArray(data[key][section][page])) {
+                                    data[key][section][page].forEach(tc => {
+                                        allTestCases[tc.id] = tc;
+                                    });
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            console.log("All test cases loaded and mapped.");
+        }).catch(error => console.error('Error loading testcase.json:', error));
+
 
     uploadBtn.addEventListener('click', () => {
         const file = responseFileInput.files[0];
@@ -215,13 +239,49 @@ document.addEventListener('DOMContentLoaded', () => {
         data.forEach((item, index) => {
             const div = document.createElement('div');
             div.className = 'p-4 hover:bg-gray-50 cursor-pointer border-b';
+            const testCaseDetails = allTestCases[item.id] || {};
+
+            let resultHtml = '';
+            const status = item.status.toLowerCase();
+            if (status === 'pass') {
+                resultHtml = `<div class="p-3 rounded-lg bg-green-100 text-green-800"><strong>Status:</strong> Passed</div>`;
+            } else if (status === 'fail') {
+                resultHtml = `<div class="p-3 rounded-lg bg-red-100 text-red-800">
+                    <p class="font-bold">Status: Failed</p>
+                    <p><strong>Comment:</strong> ${item.comment || 'No comment provided.'}</p>
+                </div>`;
+            } else if (status === 'blocked') {
+                resultHtml = `<div class="p-3 rounded-lg bg-yellow-100 text-yellow-800">
+                    <p class="font-bold">Status: Blocked</p>
+                    <p><strong>Comment:</strong> ${item.comment || 'No comment provided.'}</p>
+                </div>`;
+            }
+
             div.innerHTML = `
                 <div class="flex justify-between items-center">
                     <p class="font-semibold">${item.id || `Response ${index + 1}`} - <span class="font-bold ${getStatusColor(item.status)}">${item.status.toUpperCase()}</span></p>
                     <p class="text-sm text-gray-500">${item.scenario || ''}</p>
                 </div>
-                <div class="hidden mt-4 p-4 bg-gray-100 rounded">
-                    <pre class="text-sm">${JSON.stringify(item, null, 2)}</pre>
+                <div class="hidden mt-4 p-4 bg-gray-50 border border-gray-200 rounded-lg space-y-4">
+                    <h3 class="font-semibold text-lg text-gray-800">Feature: ${testCaseDetails.feature || 'N/A'}</h3>
+                    <div>
+                        <h4 class="font-semibold text-md text-gray-700">Test Scenario</h4>
+                        <p class="text-gray-600">${testCaseDetails.scenario || 'N/A'}</p>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-md text-gray-700">Test Steps</h4>
+                        <ol class="list-decimal list-inside space-y-1 text-gray-600">
+                            ${(testCaseDetails.steps || 'N/A').split('\n').map(step => `<li>${step.replace(/^(\d+\.\s*)/, '')}</li>`).join('')}
+                        </ol>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-md text-gray-700">Expected Result</h4>
+                        <div class="text-gray-600">${testCaseDetails.expected_result || 'N/A'}</div>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-md text-gray-700">User Test Result</h4>
+                        ${resultHtml}
+                    </div>
                 </div>
             `;
             div.addEventListener('click', () => {
