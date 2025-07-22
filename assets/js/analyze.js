@@ -99,6 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             options: {
                 responsive: true,
+                aspectRatio: 2,
                 plugins: {
                     legend: {
                         position: 'top',
