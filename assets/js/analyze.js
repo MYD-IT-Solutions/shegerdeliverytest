@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const uploadSection = document.getElementById('upload-section');
 
     let statusChartInstance = null;
-    let responseTimeChartInstance = null;
+    let categoryChartInstance = null;
 
     uploadBtn.addEventListener('click', () => {
         const file = responseFileInput.files[0];
@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('blocked-count').textContent = blockedCount;
 
         renderStatusChart(passedCount, failedCount, blockedCount);
-        renderResponseTimeChart(validData);
+        renderCategoryChart(validData);
         renderResponseList(validData);
     }
 
@@ -112,41 +112,71 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    function renderResponseTimeChart(data) {
-        const ctx = document.getElementById('response-time-chart').getContext('2d');
-        const labels = data.map((item, index) => item.id || `Response ${index + 1}`);
-        const responseTimes = data.map(item => item.responseTime || 0);
+    function renderCategoryChart(data) {
+        const ctx = document.getElementById('category-chart').getContext('2d');
 
-        if (responseTimeChartInstance) {
-            responseTimeChartInstance.destroy();
+        const categories = {};
+        data.forEach(item => {
+            if (!item.id) return;
+            const category = item.id.substring(0, item.id.lastIndexOf('-'));
+            if (!categories[category]) {
+                categories[category] = { passed: 0, failed: 0, blocked: 0 };
+            }
+            const status = item.status.toLowerCase();
+            if (status === 'pass') categories[category].passed++;
+            else if (status === 'fail') categories[category].failed++;
+            else if (status === 'blocked') categories[category].blocked++;
+        });
+
+        const labels = Object.keys(categories);
+        const passedData = labels.map(label => categories[label].passed);
+        const failedData = labels.map(label => categories[label].failed);
+        const blockedData = labels.map(label => categories[label].blocked);
+
+        if (categoryChartInstance) {
+            categoryChartInstance.destroy();
         }
 
-        responseTimeChartInstance = new Chart(ctx, {
-            type: 'line',
+        categoryChartInstance = new Chart(ctx, {
+            type: 'bar',
             data: {
                 labels: labels,
-                datasets: [{
-                    label: 'Response Time (ms)',
-                    data: responseTimes,
-                    fill: false,
-                    borderColor: 'rgb(75, 192, 192)',
-                    tension: 0.1
-                }]
+                datasets: [
+                    {
+                        label: 'Passed',
+                        data: passedData,
+                        backgroundColor: 'rgba(75, 192, 192, 0.8)',
+                    },
+                    {
+                        label: 'Failed',
+                        data: failedData,
+                        backgroundColor: 'rgba(255, 99, 132, 0.8)',
+                    },
+                    {
+                        label: 'Blocked',
+                        data: blockedData,
+                        backgroundColor: 'rgba(255, 206, 86, 0.8)',
+                    }
+                ]
             },
             options: {
                 responsive: true,
                 scales: {
+                    x: {
+                        stacked: true,
+                    },
                     y: {
+                        stacked: true,
                         beginAtZero: true
                     }
                 },
                 plugins: {
                     legend: {
-                        display: false
+                        position: 'top',
                     },
                     title: {
                         display: true,
-                        text: 'Response Time Analysis'
+                        text: 'Test Results by Category'
                     }
                 }
             }
@@ -163,7 +193,7 @@ document.addEventListener('DOMContentLoaded', () => {
             div.innerHTML = `
                 <div class="flex justify-between items-center">
                     <p class="font-semibold">${item.id || `Response ${index + 1}`} - <span class="font-bold ${getStatusColor(item.status)}">${item.status.toUpperCase()}</span></p>
-                    <p class="text-sm text-gray-500">Response Time: ${item.responseTime || 'N/A'} ms</p>
+                    <p class="text-sm text-gray-500">${item.scenario || ''}</p>
                 </div>
                 <div class="hidden mt-4 p-4 bg-gray-100 rounded">
                     <pre class="text-sm">${JSON.stringify(item, null, 2)}</pre>
