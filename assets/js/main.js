@@ -438,6 +438,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('test-form');
     const resultsModal = document.getElementById('results-modal');
     const exportJsonBtn = document.getElementById('export-json-btn');
+    const closeModalBtn = document.getElementById('close-modal-btn');
 
     form.addEventListener('submit', function (e) {
         // Prevent submit during walkthrough except at the final walkthrough step on step 2
@@ -523,4 +524,12 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => resultsModal.classList.add('hidden'), 300);
         }
     });
+
+    if (closeModalBtn) {
+        closeModalBtn.addEventListener('click', () => {
+            resultsModal.classList.add('opacity-0');
+            resultsModal.querySelector('.modal-container').classList.add('scale-95');
+            setTimeout(() => resultsModal.classList.add('hidden'), 300);
+        });
+    }
 });
