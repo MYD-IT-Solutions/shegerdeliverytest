@@ -247,37 +247,34 @@ document.addEventListener('DOMContentLoaded', () => {
         const responseList = document.getElementById('response-list');
         responseList.innerHTML = '';
 
-        data.forEach((item, index) => {
+        // Group responses by test case ID
+        const grouped = {};
+        data.forEach(item => {
+            if (!item.id) return;
+            if (!grouped[item.id]) grouped[item.id] = [];
+            grouped[item.id].push(item);
+        });
+
+        Object.keys(grouped).forEach((testId, idx) => {
+            const group = grouped[testId];
+            const testCaseDetails = allTestCases[testId] || {};
+            // Show summary status: if any fail, show fail; else if any blocked, show blocked; else pass
+            let summaryStatus = 'pass';
+            if (group.some(r => r.status.toLowerCase() === 'fail')) summaryStatus = 'fail';
+            else if (group.some(r => r.status.toLowerCase() === 'blocked')) summaryStatus = 'blocked';
+
             const div = document.createElement('div');
             div.className = 'p-4 hover:bg-gray-50 cursor-pointer border-b';
-            const testCaseDetails = allTestCases[item.id] || {};
-
-            let resultHtml = '';
-            const status = item.status.toLowerCase();
-            if (status === 'pass') {
-                resultHtml = `<div class="p-3 rounded-lg bg-green-100 text-green-800"><strong>Status:</strong> Passed</div>`;
-            } else if (status === 'fail') {
-                resultHtml = `<div class="p-3 rounded-lg bg-red-100 text-red-800">
-                    <p class="font-bold">Status: Failed</p>
-                    <p><strong>Comment:</strong> ${item.comment || 'No comment provided.'}</p>
-                </div>`;
-            } else if (status === 'blocked') {
-                resultHtml = `<div class="p-3 rounded-lg bg-yellow-100 text-yellow-800">
-                    <p class="font-bold">Status: Blocked</p>
-                    <p><strong>Comment:</strong> ${item.comment || 'No comment provided.'}</p>
-                </div>`;
-            }
-
             div.innerHTML = `
                 <div class="flex justify-between items-center">
-                    <p class="font-semibold">${item.id || `Response ${index + 1}`} - <span class="font-bold ${getStatusColor(item.status)}">${item.status.toUpperCase()}</span></p>
-                    <p class="text-sm text-gray-500">${item.scenario || ''}</p>
+                    <p class="font-semibold">${testId} - <span class="font-bold ${getStatusColor(summaryStatus)}">${summaryStatus.toUpperCase()}</span></p>
+                    <p class="text-sm text-gray-500">${group[0].scenario || ''}</p>
                 </div>
                 <div class="hidden mt-4 p-4 bg-gray-50 border border-gray-200 rounded-lg space-y-4">
                     <h3 class="font-semibold text-lg text-gray-800">Feature: ${testCaseDetails.feature || 'N/A'}</h3>
                     <div>
                         <h4 class="font-semibold text-md text-gray-700">Test Scenario</h4>
-                        <p class="text-gray-600">${testCaseDetails.scenario || 'N/A'}</p>
+                        <p class="text-gray-600">${testCaseDetails.scenario || group[0].scenario || 'N/A'}</p>
                     </div>
                     <div>
                         <h4 class="font-semibold text-md text-gray-700">Test Steps</h4>
@@ -290,8 +287,18 @@ document.addEventListener('DOMContentLoaded', () => {
                         <div class="text-gray-600">${testCaseDetails.expected_result || 'N/A'}</div>
                     </div>
                     <div>
-                        <h4 class="font-semibold text-md text-gray-700">User Test Result</h4>
-                        ${resultHtml}
+                        <h4 class="font-semibold text-md text-gray-700">All Tester Results</h4>
+                        <ul class="space-y-2">
+                            ${group.map(r => {
+                let color = getStatusColor(r.status);
+                let statusLabel = r.status ? r.status.toUpperCase() : 'N/A';
+                let comment = r.comment ? `<div class='text-xs text-gray-500'><strong>Comment:</strong> ${r.comment}</div>` : '';
+                let tester = r.testerName ? `<span class='text-xs text-gray-400'>by ${r.testerName}${r.testDate ? ' on ' + r.testDate : ''}</span>` : '';
+                return `<li class="border rounded p-2 ${color.replace('text-', 'bg-')} bg-opacity-10">
+                                    <span class="font-bold ${color}">${statusLabel}</span> ${tester} ${comment}
+                                </li>`;
+            }).join('')}
+                        </ul>
                     </div>
                 </div>
             `;
