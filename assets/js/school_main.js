@@ -293,46 +293,27 @@ document.addEventListener('DOMContentLoaded', () => {
     showStep(currentStep);
 
     window.isAllRequired = !IS_DEVELOPMENT_MODE;
-    fetch('assets/data/manual_testcase.json')
+    fetch('assets/data/schooltest.json')
         .then(response => {
             if (!response.ok) throw new Error('Network response was not ok');
             return response.json();
         })
         .then(data => {
+            function collectTestcases(node, acc = []) {
+                if (!node) return acc;
+                if (Array.isArray(node)) {
+                    node.forEach(item => acc.push(item));
+                    return acc;
+                }
+                if (typeof node === 'object') {
+                    Object.values(node).forEach(val => collectTestcases(val, acc));
+                }
+                return acc;
+            }
+
             const containers = {
-                'public-site': [
-                    ...(data.web_application?.public_site?.home || []),
-                    ...(data.web_application?.public_site?.about || []),
-                    ...(data.web_application?.public_site?.teachers || []),
-                    ...(data.web_application?.public_site?.admission || []),
-                    ...(data.web_application?.public_site?.gallery || []),
-                    ...(data.web_application?.public_site?.notice_list || []),
-                    ...(data.web_application?.public_site?.event_list || []),
-                    ...(data.web_application?.public_site?.blog || []),
-                    ...(data.web_application?.public_site?.contact || []),
-                    ...(data.web_application?.public_site?.login_registration || []),
-                ],
-                'admin-portal': [
-                    ...(data.web_application?.admin_portal?.authentication || []),
-                    ...(data.web_application?.admin_portal?.dashboard || []),
-                    ...(data.web_application?.admin_portal?.students || []),
-                    ...(data.web_application?.admin_portal?.teachers || []),
-                    ...(data.web_application?.admin_portal?.parents || []),
-                    ...(data.web_application?.admin_portal?.classes_sections || []),
-                    ...(data.web_application?.admin_portal?.subjects || []),
-                    ...(data.web_application?.admin_portal?.attendance || []),
-                    ...(data.web_application?.admin_portal?.exams_marks || []),
-                    ...(data.web_application?.admin_portal?.routine_timetable || []),
-                    ...(data.web_application?.admin_portal?.library || []),
-                    ...(data.web_application?.admin_portal?.hostel_transport || []),
-                    ...(data.web_application?.admin_portal?.fees_finance || []),
-                    ...(data.web_application?.admin_portal?.communication || []),
-                    ...(data.web_application?.admin_portal?.content_management || []),
-                    ...(data.web_application?.admin_portal?.reports || []),
-                    ...(data.web_application?.admin_portal?.settings_permissions || []),
-                    ...(data.web_application?.admin_portal?.user_profile || []),
-                    ...(data.web_application?.admin_portal?.errors_states || []),
-                ]
+                'public-site': collectTestcases(data.web_application?.public_site),
+                'admin-portal': collectTestcases(data.web_application?.admin_portal)
             };
             for (const containerId in containers) {
                 const container = document.getElementById(containerId);

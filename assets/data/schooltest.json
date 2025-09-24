@@ -1,0 +1,345 @@
+{
+    "web_application": {
+        "public_site": {
+            "home": [
+                {
+                    "id": "PUB-HOME-01",
+                    "feature": "Page Load",
+                    "scenario": "Verify homepage loads successfully",
+                    "steps": "1. Navigate to the site root (/).",
+                    "expected_result": "Page renders without errors."
+                },
+                {
+                    "id": "PUB-HOME-02",
+                    "feature": "Navigation Links",
+                    "scenario": "Verify main navbar links work",
+                    "steps": "1. Click links: Home, Contact, About, KB Web.",
+                    "expected_result": "Each link routes to the correct page with active state set."
+                }
+            ],
+            "login_registration": [
+                {
+                    "id": "PUB-LOGIN-01",
+                    "feature": "Login Page Load",
+                    "scenario": "Verify login page loads",
+                    "steps": "1. Navigate to /login.",
+                    "expected_result": "Login form renders with username/email and password fields."
+                },
+                {
+                    "id": "PUB-LOGIN-02",
+                    "feature": "Successful Login",
+                    "scenario": "Login with valid credentials",
+                    "steps": "1. Enter valid credentials. 2. Submit.",
+                    "expected_result": "User is authenticated and redirected to the admin dashboard."
+                }
+            ]
+        },
+        "admin_portal": {
+            "dashboard": [
+                {
+                    "id": "ADM-DB-01",
+                    "feature": "Overview Widgets",
+                    "scenario": "Verify dashboard data displays correctly",
+                    "steps": "1. Login. 2. Navigate to Dashboard.",
+                    "expected_result": "All key metrics, charts, and lists show accurate data without errors."
+                }
+            ],
+            "students": [
+                {
+                    "id": "ADM-STD-01",
+                    "feature": "Listing & Filters",
+                    "scenario": "Verify filters and search",
+                    "steps": "1. Open Students. 2. Filter by class and section. 3. Search by name.",
+                    "expected_result": "List updates correctly to reflect filters and search query."
+                },
+                {
+                    "id": "ADM-STD-02",
+                    "feature": "Add Student",
+                    "scenario": "Create a new student",
+                    "steps": "1. Click Add. 2. Fill mandatory fields. 3. Save.",
+                    "expected_result": "Student is created and visible in the list."
+                },
+                {
+                    "id": "ADM-STD-03",
+                    "feature": "Edit & Delete",
+                    "scenario": "Edit and delete student",
+                    "steps": "1. Edit contact details and save. 2. Delete the student and confirm.",
+                    "expected_result": "Edits persist; deletion removes the record from the list."
+                }
+            ],
+            "parents": [
+                {
+                    "id": "ADM-PAR-01",
+                    "feature": "Add & Link",
+                    "scenario": "Create parent and link to student",
+                    "steps": "1. Add parent. 2. Link to an existing student.",
+                    "expected_result": "Parent created and linked; student profile shows guardian details."
+                }
+            ],
+            "teacher": [
+                {
+                    "id": "ADM-TCH-01",
+                    "feature": "Status Toggle",
+                    "scenario": "Disable/enable teacher status",
+                    "steps": "1. Toggle a teacher's status.",
+                    "expected_result": "Status updates and reflects in listings."
+                },
+                {
+                    "id": "ADM-TCH-02",
+                    "feature": "CRUD",
+                    "scenario": "Add, edit, and delete teacher",
+                    "steps": "1. Add a teacher. 2. Edit details/subject assignment. 3. Delete the teacher.",
+                    "expected_result": "Operations succeed; list reflects changes."
+                }
+            ],
+            "user": [
+                {
+                    "id": "ADM-USR-01",
+                    "feature": "CRUD & Status",
+                    "scenario": "Add, edit, change status, delete user",
+                    "steps": "1. Add user. 2. Edit details. 3. Change status. 4. Delete.",
+                    "expected_result": "All operations succeed and reflect in user list."
+                }
+            ],
+            "academic": {
+                "classes": [
+                    {
+                        "id": "ADM-CLS-01",
+                        "feature": "CRUD",
+                        "scenario": "Edit, delete, and add class",
+                        "steps": "1. Edit a class. 2. Delete a class. 3. Add a new class.",
+                        "expected_result": "Changes persist; new class appears in selectors."
+                    }
+                ],
+                "sections": [
+                    {
+                        "id": "ADM-SCT-01",
+                        "feature": "Add & Assign",
+                        "scenario": "Add section and assign to class",
+                        "steps": "1. Add section. 2. Assign to a class.",
+                        "expected_result": "Section created and visible under the selected class."
+                    }
+                ]
+            },
+            "subject": [
+                {
+                    "id": "ADM-SUB-01",
+                    "feature": "Create Types",
+                    "scenario": "Create mandatory and optional subjects",
+                    "steps": "1. Create mandatory subject. 2. Create optional subject.",
+                    "expected_result": "Both subjects are saved and visible."
+                },
+                {
+                    "id": "ADM-SUB-02",
+                    "feature": "Edit & Delete",
+                    "scenario": "Edit and delete subject",
+                    "steps": "1. Edit subject details. 2. Delete a subject.",
+                    "expected_result": "Edits persist; deleted subject is removed."
+                },
+                {
+                    "id": "ADM-SUB-03",
+                    "feature": "Listing by Class",
+                    "scenario": "Verify subject listing for selected class",
+                    "steps": "1. Select a class filter.",
+                    "expected_result": "List shows only subjects for the selected class."
+                }
+            ],
+            "attendance": [
+                {
+                    "id": "ADM-ATT-01",
+                    "feature": "Student Attendance",
+                    "scenario": "Take student attendance",
+                    "steps": "1. Select date, class, section. 2. Mark statuses. 3. Save.",
+                    "expected_result": "Attendance saved and persists on reload."
+                },
+                {
+                    "id": "ADM-ATT-02",
+                    "feature": "Teacher Attendance",
+                    "scenario": "Take teacher attendance",
+                    "steps": "1. Select date. 2. Mark statuses. 3. Save.",
+                    "expected_result": "Teacher attendance stored correctly."
+                },
+                {
+                    "id": "ADM-ATT-03",
+                    "feature": "User Attendance",
+                    "scenario": "Take user attendance",
+                    "steps": "1. Open user attendance. 2. Mark and save.",
+                    "expected_result": "User attendance stored correctly."
+                }
+            ],
+            "exam": [
+                {
+                    "id": "ADM-EXM-01",
+                    "feature": "Term Structure",
+                    "scenario": "Create quarters/semesters",
+                    "steps": "1. Configure exam terms as quarters or semesters.",
+                    "expected_result": "Selected structure saved and usable across modules."
+                }
+            ],
+            "mark": [
+                {
+                    "id": "ADM-MRK-01",
+                    "feature": "Marks Entry",
+                    "scenario": "Add marks for a student",
+                    "steps": "1. Select class/section/subject/exam. 2. Enter marks. 3. Save.",
+                    "expected_result": "Marks saved and visible in listing."
+                },
+                {
+                    "id": "ADM-MRK-02",
+                    "feature": "Download Marksheet",
+                    "scenario": "Download correct marksheet",
+                    "steps": "1. Generate/download marksheet.",
+                    "expected_result": "Downloaded marksheet contains correct student and marks data."
+                },
+                {
+                    "id": "ADM-MRK-03",
+                    "feature": "Upload Marks",
+                    "scenario": "Upload marks via file",
+                    "steps": "1. Upload marks file. 2. Confirm import.",
+                    "expected_result": "Marks update according to uploaded data."
+                }
+            ],
+            "mark_distribution": [
+                {
+                    "id": "ADM-MRD-01",
+                    "feature": "Create Types",
+                    "scenario": "Create mark distribution types",
+                    "steps": "1. Add distribution type (e.g., Quiz, Assignment).",
+                    "expected_result": "Distribution type saved and listed."
+                },
+                {
+                    "id": "ADM-MRD-02",
+                    "feature": "Edit & Delete",
+                    "scenario": "Edit and delete distribution types",
+                    "steps": "1. Edit an existing type. 2. Delete a type.",
+                    "expected_result": "Edits persist; deleted type removed from list."
+                }
+            ],
+            "summary_setup": [
+                {
+                    "id": "ADM-SUM-01",
+                    "feature": "Summary Exam",
+                    "scenario": "Add summary exam and marks",
+                    "steps": "1. Create summary exam. 2. Add marks to summary exam.",
+                    "expected_result": "Summary exam saved and marks reflected."
+                },
+                {
+                    "id": "ADM-SUM-02",
+                    "feature": "Integration",
+                    "scenario": "Update main marking system",
+                    "steps": "1. Apply summary to main marking system.",
+                    "expected_result": "Main marks updated based on summary configuration."
+                }
+            ],
+            "coscholastic": [
+                {
+                    "id": "ADM-COS-01",
+                    "feature": "Categories",
+                    "scenario": "Add co-scholastic category",
+                    "steps": "1. Add category and save.",
+                    "expected_result": "Category listed and usable."
+                },
+                {
+                    "id": "ADM-COS-02",
+                    "feature": "Areas & Grades",
+                    "scenario": "Add area and grade",
+                    "steps": "1. Add area. 2. Add grade.",
+                    "expected_result": "Area and grade listed under co-scholastic."
+                },
+                {
+                    "id": "ADM-COS-03",
+                    "feature": "Listing & CRUD",
+                    "scenario": "Verify list and edit/delete",
+                    "steps": "1. View list. 2. Edit an item. 3. Delete an item.",
+                    "expected_result": "List shows all entries; edits persist; deletions remove entries."
+                }
+            ],
+            "coscholastic_mark_entry": [
+                {
+                    "id": "ADM-COSM-01",
+                    "feature": "Entry",
+                    "scenario": "Enter co-scholastic marks",
+                    "steps": "1. Select class/section. 2. Enter grades/marks. 3. Save.",
+                    "expected_result": "Entries saved and visible in listing."
+                },
+                {
+                    "id": "ADM-COSM-02",
+                    "feature": "Download Marksheet",
+                    "scenario": "Download co-scholastic marksheet",
+                    "steps": "1. Download marksheet.",
+                    "expected_result": "Downloaded file reflects correct grades/marks."
+                },
+                {
+                    "id": "ADM-COSM-03",
+                    "feature": "Upload",
+                    "scenario": "Upload co-scholastic marks",
+                    "steps": "1. Upload file. 2. Confirm import.",
+                    "expected_result": "Marks updated based on uploaded data."
+                }
+            ],
+            "reports": {
+                "reportcard": [
+                    {
+                        "id": "ADM-RPT-01",
+                        "feature": "Generation & Print",
+                        "scenario": "Generate and print report card",
+                        "steps": "1. Generate report card. 2. Print.",
+                        "expected_result": "Report card renders correctly and prints without layout issues."
+                    }
+                ],
+                "roster": [
+                    {
+                        "id": "ADM-RPT-02",
+                        "feature": "Roster Creation",
+                        "scenario": "Create roster",
+                        "steps": "1. Generate roster based on selected filters.",
+                        "expected_result": "Roster is created with accurate entries."
+                    }
+                ],
+                "grade_report_card": [
+                    {
+                        "id": "ADM-RPT-03",
+                        "feature": "Grade-based Report Card",
+                        "scenario": "Generate grade-based report card",
+                        "steps": "1. Generate grade report card.",
+                        "expected_result": "Grade report card matches expected structure and data."
+                    }
+                ],
+                "id_card_report": [
+                    {
+                        "id": "ADM-RPT-04",
+                        "feature": "ID Card",
+                        "scenario": "Generate ID cards with QR and customization",
+                        "steps": "1. Generate ID cards. 2. Verify QR code. 3. Change color. 4. Add principal signature.",
+                        "expected_result": "ID cards render correctly; QR works; color and signature changes apply."
+                    }
+                ]
+            },
+            "settings_permissions": [
+                {
+                    "id": "ADM-SET-01",
+                    "feature": "General Settings",
+                    "scenario": "Update site title and logo",
+                    "steps": "1. Open Settings. 2. Change site title and upload logo. 3. Save.",
+                    "expected_result": "Changes persist; public site shows updated title/logo."
+                }
+            ],
+            "errors_states": [
+                {
+                    "id": "ADM-ERR-01",
+                    "feature": "Permission Error",
+                    "scenario": "Access forbidden page",
+                    "steps": "1. As restricted role, navigate to a disallowed module.",
+                    "expected_result": "Error/permission page displays without leaking data."
+                },
+                {
+                    "id": "ADM-ERR-02",
+                    "feature": "404",
+                    "scenario": "Visit unknown route",
+                    "steps": "1. Navigate to a non-existing URL.",
+                    "expected_result": "Custom 404 page renders with link back to home."
+                }
+            ]
+        }
+    }
+}

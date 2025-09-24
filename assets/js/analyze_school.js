@@ -11,24 +11,20 @@ document.addEventListener('DOMContentLoaded', () => {
     let allTestCases = {};
 
     // Load all school testcases for detail lookup
-    fetch('assets/data/manual_testcase.json')
+    fetch('assets/data/schooltest.json')
         .then(response => response.json())
         .then(data => {
-            for (const top in data) {
-                if (!data.hasOwnProperty(top)) continue;
-                const group = data[top];
-                for (const section in group) {
-                    if (!group.hasOwnProperty(section)) continue;
-                    const pages = group[section];
-                    for (const page in pages) {
-                        if (!pages.hasOwnProperty(page)) continue;
-                        const arr = pages[page];
-                        if (Array.isArray(arr)) {
-                            arr.forEach(tc => { allTestCases[tc.id] = tc; });
-                        }
-                    }
+            function walk(node) {
+                if (!node) return;
+                if (Array.isArray(node)) {
+                    node.forEach(tc => { if (tc && tc.id) allTestCases[tc.id] = tc; });
+                    return;
+                }
+                if (typeof node === 'object') {
+                    Object.values(node).forEach(walk);
                 }
             }
+            walk(data);
         }).catch(err => console.error('Error loading manual_testcase.json:', err));
 
     uploadBtn.addEventListener('click', () => {
