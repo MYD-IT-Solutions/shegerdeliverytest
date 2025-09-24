@@ -1,0 +1,402 @@
+{
+    "web_application": {
+        "public_site": {
+            "home": [
+                {
+                    "id": "PUB-HOME-01",
+                    "feature": "Page Load",
+                    "scenario": "Verify homepage loads with key sections",
+                    "steps": "1. Navigate to the site root (/).",
+                    "expected_result": "Topbar, navbar, hero/intro, latest notices, events, blog summaries, and footer render without errors."
+                },
+                {
+                    "id": "PUB-HOME-02",
+                    "feature": "Navigation",
+                    "scenario": "Verify navbar links routing",
+                    "steps": "1. Click each navbar link: Home, Contact, About, KB Web",
+                    "expected_result": "Each link routes to its correct page; active state highlights the current page."
+                },
+                {
+                    "id": "PUB-HOME-03",
+                    "feature": "Login Link",
+                    "scenario": "Verify login link routes",
+                    "steps": "1. Click Login in the navbar/topbar.",
+                    "expected_result": "User is routed to the frontend login page (/login)."
+                }
+            ],
+            "about": [
+                {
+                    "id": "PUB-ABOUT-01",
+                    "feature": "Content",
+                    "scenario": "Verify About page sections",
+                    "steps": "1. Navigate to /about.",
+                    "expected_result": "Banner/title, mission/vision text, and team highlights render correctly."
+                }
+            ],
+            "teachers": [
+                {
+                    "id": "PUB-TCHR-01",
+                    "feature": "List",
+                    "scenario": "Verify teacher list loads",
+                    "steps": "1. Navigate to /teacher.",
+                    "expected_result": "Teacher cards with name, subject, and image are listed; pagination (if any) works."
+                }
+            ],
+            "admission": [
+                {
+                    "id": "PUB-ADM-01",
+                    "feature": "Form UI",
+                    "scenario": "Verify Admission form fields",
+                    "steps": "1. Navigate to /admission. 2. Inspect required inputs (name, class, contact, etc.).",
+                    "expected_result": "All mandatory fields are present and marked; submit button disabled until valid."
+                },
+                {
+                    "id": "PUB-ADM-02",
+                    "feature": "Validation",
+                    "scenario": "Verify client-side validations",
+                    "steps": "1. Leave required fields blank. 2. Click Submit.",
+                    "expected_result": "Inline errors appear next to empty/invalid fields; no submission occurs."
+                }
+            ],
+            "gallery": [
+                {
+                    "id": "PUB-GAL-01",
+                    "feature": "Grid",
+                    "scenario": "Verify gallery thumbnails and lightbox",
+                    "steps": "1. Navigate to /gallery. 2. Click a thumbnail.",
+                    "expected_result": "Images load with correct aspect; clicking opens a lightbox with navigation."
+                }
+            ],
+            "notice_list": [
+                {
+                    "id": "PUB-NOT-01",
+                    "feature": "List",
+                    "scenario": "Verify notices list and details",
+                    "steps": "1. Navigate to /notice. 2. Click a notice item.",
+                    "expected_result": "List shows titles and dates; clicking routes to notice details with full content."
+                }
+            ],
+            "event_list": [
+                {
+                    "id": "PUB-EVT-01",
+                    "feature": "List",
+                    "scenario": "Verify events list and details",
+                    "steps": "1. Navigate to /event. 2. Click an event item.",
+                    "expected_result": "List shows events with date/time; detail page renders description and images."
+                }
+            ],
+            "blog": [
+                {
+                    "id": "PUB-BLG-01",
+                    "feature": "Listing",
+                    "scenario": "Verify blog list and pagination",
+                    "steps": "1. Navigate to /blog. 2. Scroll and use pagination (if present).",
+                    "expected_result": "Posts render with title, excerpt, date; pagination loads subsequent pages."
+                },
+                {
+                    "id": "PUB-BLG-02",
+                    "feature": "Details",
+                    "scenario": "Verify blog details page",
+                    "steps": "1. Click a blog post.",
+                    "expected_result": "Full post content, author/date, and related posts (if any) display correctly."
+                }
+            ],
+            "contact": [
+                {
+                    "id": "PUB-CON-01",
+                    "feature": "Form",
+                    "scenario": "Verify contact submission validation",
+                    "steps": "1. Navigate to /contact. 2. Submit empty form. 3. Submit valid data.",
+                    "expected_result": "Errors shown for empty fields; valid submission shows success message."
+                }
+            ],
+            "login_registration": [
+                {
+                    "id": "PUB-LOGIN-01",
+                    "feature": "Login UI",
+                    "scenario": "Verify login page loads",
+                    "steps": "1. Navigate to /login.",
+                    "expected_result": "Login form appears with username/email and password fields; errors show for invalid attempts."
+                },
+                {
+                    "id": "PUB-LOGIN-02",
+                    "feature": "Forgot Password",
+                    "scenario": "Verify reset link",
+                    "steps": "1. Click 'Forgot Password'. 2. Submit a registered email.",
+                    "expected_result": "Reset request accepted and confirmation message shown."
+                }
+            ]
+        },
+        "admin_portal": {
+            "authentication": [
+                {
+                    "id": "ADM-AUTH-01",
+                    "feature": "Login",
+                    "scenario": "Verify admin login flow",
+                    "steps": "1. Navigate to /signin. 2. Enter valid credentials. 3. Submit.",
+                    "expected_result": "User is authenticated and redirected to Dashboard."
+                },
+                {
+                    "id": "ADM-AUTH-02",
+                    "feature": "Unauthorized",
+                    "scenario": "Verify protected routes require login",
+                    "steps": "1. Open /dashboard directly while logged out.",
+                    "expected_result": "Redirected to login or shown permission error page."
+                }
+            ],
+            "dashboard": [
+                {
+                    "id": "ADM-DB-01",
+                    "feature": "Widgets",
+                    "scenario": "Verify dashboard charts and widgets",
+                    "steps": "1. Login. 2. Navigate to /dashboard.",
+                    "expected_result": "Attendance, earnings, visitors charts render; profile and notices widgets display data."
+                }
+            ],
+            "students": [
+                {
+                    "id": "ADM-STD-01",
+                    "feature": "List",
+                    "scenario": "Verify student listing filters",
+                    "steps": "1. Go to Students. 2. Filter by class/section. 3. Search by name.",
+                    "expected_result": "Table filters correctly and shows matching records."
+                },
+                {
+                    "id": "ADM-STD-02",
+                    "feature": "Create",
+                    "scenario": "Add a new student",
+                    "steps": "1. Click Add. 2. Fill mandatory fields. 3. Submit.",
+                    "expected_result": "Student is created; success message appears and record visible in list."
+                },
+                {
+                    "id": "ADM-STD-03",
+                    "feature": "Edit/Delete",
+                    "scenario": "Edit and delete a student",
+                    "steps": "1. Open a student. 2. Update contact. 3. Save. 4. Delete and confirm.",
+                    "expected_result": "Changes persist; deletion removes record from list."
+                }
+            ],
+            "teachers": [
+                {
+                    "id": "ADM-TCH-01",
+                    "feature": "CRUD",
+                    "scenario": "Verify add/edit teacher",
+                    "steps": "1. Add new teacher. 2. Edit subject assignment. 3. Save.",
+                    "expected_result": "Teacher record saved; subject mapping reflects updates."
+                }
+            ],
+            "parents": [
+                {
+                    "id": "ADM-PAR-01",
+                    "feature": "CRUD",
+                    "scenario": "Verify parent creation and linking",
+                    "steps": "1. Add parent. 2. Link to student. 3. Verify in student profile.",
+                    "expected_result": "Parent saved and linked; student profile shows guardian details."
+                }
+            ],
+            "classes_sections": [
+                {
+                    "id": "ADM-CLS-01",
+                    "feature": "Classes",
+                    "scenario": "Add/edit classes",
+                    "steps": "1. Add a new class. 2. Edit class name. 3. Save.",
+                    "expected_result": "Class appears in lists and can be selected elsewhere."
+                },
+                {
+                    "id": "ADM-SCT-01",
+                    "feature": "Sections",
+                    "scenario": "Add a section to a class",
+                    "steps": "1. Choose class. 2. Add section. 3. Save.",
+                    "expected_result": "Section is created and available in filters."
+                }
+            ],
+            "subjects": [
+                {
+                    "id": "ADM-SUB-01",
+                    "feature": "CRUD",
+                    "scenario": "Add/edit subjects",
+                    "steps": "1. Add subject. 2. Assign teacher. 3. Save.",
+                    "expected_result": "Subject visible in class subject lists; teacher assignment saved."
+                }
+            ],
+            "attendance": [
+                {
+                    "id": "ADM-ATT-01",
+                    "feature": "Student Attendance",
+                    "scenario": "Mark daily attendance",
+                    "steps": "1. Go to Student Attendance. 2. Select date, class, section. 3. Mark statuses. 4. Save.",
+                    "expected_result": "Attendance saved; success notification shown; reloading preserves marks."
+                },
+                {
+                    "id": "ADM-ATT-02",
+                    "feature": "Teacher Attendance",
+                    "scenario": "Mark teacher attendance",
+                    "steps": "1. Go to Teacher Attendance. 2. Select date. 3. Mark and save.",
+                    "expected_result": "Teacher attendance stored correctly."
+                }
+            ],
+            "exams_marks": [
+                {
+                    "id": "ADM-EXM-01",
+                    "feature": "Exam Setup",
+                    "scenario": "Create exam and schedule",
+                    "steps": "1. Add exam. 2. Add exam schedule for class/subject with date/time/room. 3. Save.",
+                    "expected_result": "Exam and schedules are listed and editable."
+                },
+                {
+                    "id": "ADM-EXM-02",
+                    "feature": "Marks Entry",
+                    "scenario": "Enter and publish marks",
+                    "steps": "1. Open Marks. 2. Select class/section/subject/exam. 3. Enter marks. 4. Save and publish.",
+                    "expected_result": "Marks saved and visible in reports/transcripts."
+                }
+            ],
+            "routine_timetable": [
+                {
+                    "id": "ADM-RTN-01",
+                    "feature": "Class Routine",
+                    "scenario": "Create a class routine",
+                    "steps": "1. Add periods for a class/section with subjects and teachers. 2. Save.",
+                    "expected_result": "Routine grid reflects saved periods; conflicts are validated."
+                }
+            ],
+            "library": [
+                {
+                    "id": "ADM-LIB-01",
+                    "feature": "Books",
+                    "scenario": "Add book and assign to category",
+                    "steps": "1. Add Book. 2. Select category. 3. Save.",
+                    "expected_result": "Book shows in list and can be issued."
+                },
+                {
+                    "id": "ADM-LIB-02",
+                    "feature": "Issue/Return",
+                    "scenario": "Issue and return a book",
+                    "steps": "1. Issue book to student. 2. Verify due date. 3. Return book.",
+                    "expected_result": "Issue recorded; return updates status and fine (if overdue)."
+                }
+            ],
+            "hostel_transport": [
+                {
+                    "id": "ADM-HOS-01",
+                    "feature": "Hostel",
+                    "scenario": "Add hostel and assign student",
+                    "steps": "1. Create hostel/room. 2. Assign student. 3. Save.",
+                    "expected_result": "Assignment visible in student profile; capacity respected."
+                },
+                {
+                    "id": "ADM-TRN-01",
+                    "feature": "Transport",
+                    "scenario": "Create route and assign student",
+                    "steps": "1. Add route/vehicle. 2. Assign student. 3. Save.",
+                    "expected_result": "Student appears in route manifest."
+                }
+            ],
+            "fees_finance": [
+                {
+                    "id": "ADM-FEE-01",
+                    "feature": "Fee Types",
+                    "scenario": "Create fee type",
+                    "steps": "1. Add fee type (e.g., Tuition). 2. Save.",
+                    "expected_result": "Fee type available during invoice creation."
+                },
+                {
+                    "id": "ADM-INV-01",
+                    "feature": "Invoices",
+                    "scenario": "Create invoice and record payment",
+                    "steps": "1. Create invoice for student. 2. Record partial payment. 3. Record full payment.",
+                    "expected_result": "Balances update correctly; receipts/print preview render."
+                },
+                {
+                    "id": "ADM-ACC-01",
+                    "feature": "Income/Expense",
+                    "scenario": "Record income and expense entries",
+                    "steps": "1. Add income. 2. Add expense. 3. Verify reports reflect totals.",
+                    "expected_result": "Entries saved; summary widgets and reports updated."
+                }
+            ],
+            "communication": [
+                {
+                    "id": "ADM-COM-01",
+                    "feature": "Mail & SMS",
+                    "scenario": "Send announcement to a class",
+                    "steps": "1. Open Mail/SMS. 2. Select audience. 3. Compose message. 4. Send.",
+                    "expected_result": "Job queued/sent; status logs show success."
+                }
+            ],
+            "content_management": [
+                {
+                    "id": "ADM-CMS-01",
+                    "feature": "Pages",
+                    "scenario": "Create static page",
+                    "steps": "1. Add page under Pages. 2. Publish. 3. Verify on public site.",
+                    "expected_result": "New page accessible on frontend with correct content."
+                },
+                {
+                    "id": "ADM-CMS-02",
+                    "feature": "Posts",
+                    "scenario": "Add blog post and category",
+                    "steps": "1. Create category. 2. Create post and assign category. 3. Publish.",
+                    "expected_result": "Post appears on /blog and detail page renders."
+                },
+                {
+                    "id": "ADM-CMS-03",
+                    "feature": "Media",
+                    "scenario": "Upload image and insert into post",
+                    "steps": "1. Upload image in Media. 2. Edit post to include image. 3. Save.",
+                    "expected_result": "Image displays on frontend; file present in uploads."
+                }
+            ],
+            "reports": [
+                {
+                    "id": "ADM-RPT-01",
+                    "feature": "Reports Index",
+                    "scenario": "Open key reports",
+                    "steps": "1. Open Attendance Report. 2. Open Result/Transcript Report. 3. Open Fees Collection Report.",
+                    "expected_result": "Each report loads with filters (class, section, date range) and renders tables/graphs; export (CSV/Excel/PDF) works."
+                }
+            ],
+            "settings_permissions": [
+                {
+                    "id": "ADM-SET-01",
+                    "feature": "General Settings",
+                    "scenario": "Update site title and logo",
+                    "steps": "1. Open Settings. 2. Change site title and upload logo. 3. Save.",
+                    "expected_result": "Changes persist; public site shows updated title/logo."
+                },
+                {
+                    "id": "ADM-PRM-01",
+                    "feature": "Roles & Permissions",
+                    "scenario": "Modify a role's access",
+                    "steps": "1. Open Permissions. 2. Toggle access for a module. 3. Save. 4. Re-login as that role.",
+                    "expected_result": "Module visibility/actions reflect updated permissions."
+                }
+            ],
+            "user_profile": [
+                {
+                    "id": "ADM-PROF-01",
+                    "feature": "Profile",
+                    "scenario": "Update profile and password",
+                    "steps": "1. Open Profile. 2. Update contact info. 3. Change password. 4. Save.",
+                    "expected_result": "Profile updates persist; password change requires re-login with new password."
+                }
+            ],
+            "errors_states": [
+                {
+                    "id": "ADM-ERR-01",
+                    "feature": "Permission Error",
+                    "scenario": "Access forbidden page",
+                    "steps": "1. As restricted role, navigate to a disallowed module.",
+                    "expected_result": "Error/permission page displays without leaking data."
+                },
+                {
+                    "id": "ADM-ERR-02",
+                    "feature": "404",
+                    "scenario": "Visit unknown route",
+                    "steps": "1. Navigate to a non-existing URL.",
+                    "expected_result": "Custom 404 page renders with link back to home."
+                }
+            ]
+        }
+    }
+}
