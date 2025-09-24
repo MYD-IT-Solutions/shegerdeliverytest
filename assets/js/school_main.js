@@ -1,0 +1,463 @@
+// School Management Test Form Logic (reuses delivery form behaviors, customized to manual_testcase.json)
+
+let IS_DEVELOPMENT_MODE = false;
+window.IS_DEVELOPMENT_MODE = IS_DEVELOPMENT_MODE;
+window.setDevModeFlag = function (val) {
+    IS_DEVELOPMENT_MODE = !!val;
+    window.IS_DEVELOPMENT_MODE = IS_DEVELOPMENT_MODE;
+    window.isAllRequired = !IS_DEVELOPMENT_MODE;
+};
+
+window.testCaseRead = window.testCaseRead || {};
+const allTestCases = {};
+
+function createTestCase(tc) {
+    allTestCases[tc.id] = tc;
+    return `
+        <div class="test-case-row grid grid-cols-1 md:grid-cols-12 gap-4 items-start">
+            <div class="md:col-span-5">
+                <div class="flex items-start">
+                    <button type="button" class="test-case-toggle flex-shrink-0 mt-1 mr-3 group" data-toggle-detail="${tc.id}" aria-expanded="false" tabindex="0" style="outline:none;">
+                        <svg class="w-5 h-5 text-gray-500 group-hover:text-indigo-600 transition-transform transform rotate-0" data-toggle-icon="${tc.id}" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /></svg>
+                    </button>
+                    <div class="flex flex-col cursor-pointer" data-toggle-detail-click="${tc.id}">
+                        <span class="font-semibold text-gray-800">${tc.id}</span>
+                        <span class="text-sm text-gray-600 mt-1">${tc.scenario}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="md:col-span-3">
+                <select name="${tc.id}_status" class="w-full p-2 border border-gray-300 rounded-md shadow-sm" required data-status-select="${tc.id}">
+                    <option value="" selected disabled>Select status</option>
+                    <option value="Pass">Pass</option>
+                    <option value="Fail">Fail</option>
+                    <option value="Blocked">Blocked</option>
+                </select>
+                <div class="text-xs text-red-600 mt-1 hidden" data-detail-error="${tc.id}">Please read the test case detail before selecting a status.</div>
+            </div>
+            <div class="md:col-span-4">
+                <input type="text" name="${tc.id}_comment" placeholder="Comments (Required for Fail/Blocked)" class="w-full p-2 border border-gray-300 rounded-md shadow-sm" data-comment-input="${tc.id}">
+            </div>
+        </div>
+        <div class="test-case-detail collapse-detail bg-gray-50 border border-gray-200 rounded-lg mt-2 p-4 hidden" id="detail-${tc.id}" style="grid-column: 1 / -1;">
+            <h3 class="font-semibold text-lg mb-2 text-gray-800">Feature: ${tc.feature}</h3>
+            <h4 class="font-semibold text-md mb-1 text-gray-700">Test Scenario</h4>
+            <p class="mb-3 text-gray-600">${tc.scenario}</p>
+            <h4 class="font-semibold text-md mb-1 text-gray-700">Test Steps</h4>
+            <ol class="list-decimal list-inside space-y-2 mb-3 text-gray-600">
+                ${tc.steps.split('\n').map(step => {
+        const cleanStep = step.replace(/^(\d+\.\s*)/, '');
+        return `<li>${cleanStep.replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank" class="text-indigo-600 hover:underline">$1<\/a>')}</li>`;
+    }).join('')}
+            </ol>
+            <h4 class="font-semibold text-md mb-1 text-gray-700">Expected Result</h4>
+            <div class="expected-result text-gray-700">${tc.expected_result}</div>
+        </div>
+    `;
+}
+
+function setupCollapsibleDetails() {
+    function toggleDetailById(id) {
+        const btn = document.querySelector(`.test-case-toggle[data-toggle-detail="${id}"]`);
+        const detail = document.getElementById('detail-' + id);
+        const icon = btn ? btn.querySelector('svg[data-toggle-icon]') : null;
+        const expanded = btn && btn.getAttribute('aria-expanded') === 'true';
+        if (expanded) {
+            detail.classList.add('hidden');
+            if (btn) btn.setAttribute('aria-expanded', 'false');
+            if (icon) icon.classList.remove('rotate-180');
+        } else {
+            detail.classList.remove('hidden');
+            if (btn) btn.setAttribute('aria-expanded', 'true');
+            if (icon) icon.classList.add('rotate-180');
+            if (!IS_DEVELOPMENT_MODE) {
+                window.testCaseRead[id] = true;
+            }
+        }
+    }
+
+    document.querySelectorAll('.test-case-toggle').forEach(btn => {
+        btn.addEventListener('click', function () {
+            const id = btn.getAttribute('data-toggle-detail');
+            toggleDetailById(id);
+        });
+        btn.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                btn.click();
+            }
+        });
+    });
+    document.querySelectorAll('[data-toggle-detail-click]').forEach(el => {
+        el.addEventListener('click', function () {
+            const id = el.getAttribute('data-toggle-detail-click');
+            toggleDetailById(id);
+        });
+        el.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                el.click();
+            }
+        });
+        el.setAttribute('tabindex', '0');
+        el.setAttribute('role', 'button');
+        el.setAttribute('aria-label', 'Show test case details');
+    });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const TOTAL_STEPS = 3;
+    let currentStep = 1;
+
+    const resetBtn = document.getElementById('reset-progress-btn');
+    if (resetBtn) {
+        resetBtn.addEventListener('click', () => {
+            localStorage.removeItem('schooltest_formData');
+            localStorage.removeItem('schooltest_currentStep');
+            localStorage.removeItem('schooltest_maxStepReached');
+            currentStep = 1;
+            showStep(currentStep);
+            const form = document.getElementById('test-form');
+            if (form) form.reset();
+            const today = new Date();
+            const year = today.getFullYear();
+            const month = String(today.getMonth() + 1).padStart(2, '0');
+            const day = String(today.getDate()).padStart(2, '0');
+            const formattedDate = `${year}-${month}-${day}`;
+            const testDateInput = document.getElementById('test_date');
+            if (testDateInput) testDateInput.value = formattedDate;
+        });
+    }
+
+    const savedStep = localStorage.getItem('schooltest_currentStep');
+    if (savedStep) {
+        currentStep = parseInt(savedStep, 10) || 1;
+    }
+
+    function saveStepToStorage() {
+        localStorage.setItem('schooltest_currentStep', currentStep);
+    }
+
+    function saveFormDataToStorage() {
+        const form = document.getElementById('test-form');
+        const formData = new FormData(form);
+        const obj = {};
+        for (let [k, v] of formData.entries()) {
+            obj[k] = v;
+        }
+        localStorage.setItem('schooltest_formData', JSON.stringify(obj));
+    }
+
+    function restoreFormDataFromStorage() {
+        const data = localStorage.getItem('schooltest_formData');
+        if (!data) return;
+        try {
+            const obj = JSON.parse(data);
+            for (let k in obj) {
+                const el = document.querySelector(`[name="${k}"]`);
+                if (el) {
+                    el.value = obj[k];
+                }
+            }
+        } catch { }
+    }
+
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+    const formattedDate = `${year}-${month}-${day}`;
+    const testDateEl = document.getElementById('test_date');
+    if (testDateEl) testDateEl.value = formattedDate;
+
+    let maxStepReached = currentStep;
+    const savedMaxStep = localStorage.getItem('schooltest_maxStepReached');
+    if (savedMaxStep) {
+        maxStepReached = parseInt(savedMaxStep, 10) || currentStep;
+    }
+    function saveMaxStepToStorage() {
+        localStorage.setItem('schooltest_maxStepReached', maxStepReached);
+    }
+
+    function renderProgressBar() {
+        const progressBar = document.getElementById('progress-bar');
+        progressBar.innerHTML = '';
+        for (let i = 1; i <= TOTAL_STEPS; i++) {
+            const stepDiv = document.createElement('div');
+            stepDiv.className = 'flex-1 flex flex-col items-center';
+            let status = '';
+            if (i < currentStep) status = 'completed';
+            else if (i === currentStep) status = 'active';
+            else status = 'upcoming';
+            let clickable = (i <= maxStepReached + 1);
+            let stepCircle = '';
+            if (status === 'completed') {
+                stepCircle = `<div class="w-8 h-8 flex items-center justify-center rounded-full mb-1 bg-green-500 text-white cursor-pointer stepper-step" data-step="${i}"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg></div>`;
+            } else if (status === 'active') {
+                stepCircle = `<div class="w-8 h-8 flex items-center justify-center rounded-full mb-1 bg-indigo-600 text-white cursor-pointer stepper-step" data-step="${i}">${i}</div>`;
+            } else {
+                stepCircle = `<div class="w-8 h-8 flex items-center justify-center rounded-full mb-1 bg-gray-200 text-gray-400 ${clickable ? 'cursor-pointer stepper-step' : ''}" data-step="${i}">${i}</div>`;
+            }
+            stepDiv.innerHTML = `
+                ${stepCircle}
+                <span class="text-xs ${status === 'active' ? 'font-bold text-indigo-700' : status === 'completed' ? 'text-green-700' : 'text-gray-400'} hidden md:inline">Step ${i}</span>
+                <span class="text-xs ${status === 'active' ? 'font-bold text-indigo-700' : status === 'completed' ? 'text-green-700' : 'text-gray-400'} md:hidden">${i}</span>
+            `;
+            progressBar.appendChild(stepDiv);
+            if (i < TOTAL_STEPS) {
+                const bar = document.createElement('div');
+                bar.className = `h-1 flex-1 mx-1 ${i < currentStep ? 'bg-green-500' : 'bg-gray-200'}`;
+                bar.style.marginTop = '16px';
+                progressBar.appendChild(bar);
+            }
+        }
+        setTimeout(() => {
+            document.querySelectorAll('.stepper-step').forEach(el => {
+                const stepNum = parseInt(el.getAttribute('data-step'), 10);
+                if (stepNum <= maxStepReached + 1) {
+                    el.addEventListener('click', () => {
+                        if (stepNum > currentStep) {
+                            for (let s = currentStep; s < stepNum; s++) {
+                                const stepEl = document.querySelector(`.step[data-step="${s}"]`);
+                                const requiredInputs = stepEl.querySelectorAll('input[required], select[required]');
+                                for (let input of requiredInputs) {
+                                    if (!input.value) {
+                                        input.focus();
+                                        input.classList.add('border-red-500');
+                                        input.reportValidity();
+                                        setTimeout(() => input.classList.remove('border-red-500'), 1200);
+                                        return;
+                                    }
+                                }
+                            }
+                        }
+                        if (stepNum <= maxStepReached + 1) {
+                            currentStep = stepNum;
+                            showStep(currentStep);
+                        }
+                    });
+                }
+            });
+        }, 0);
+    }
+
+    function showStep(step) {
+        document.querySelectorAll('.step').forEach(el => {
+            el.classList.add('hidden');
+            if (parseInt(el.getAttribute('data-step')) === step) {
+                el.classList.remove('hidden');
+            }
+        });
+        document.getElementById('prev-btn').style.display = step === 1 ? 'none' : '';
+        document.getElementById('next-btn').style.display = step === TOTAL_STEPS ? 'none' : '';
+        document.getElementById('submit-btn').classList.toggle('hidden', step !== TOTAL_STEPS);
+        renderProgressBar();
+        saveStepToStorage();
+        saveMaxStepToStorage();
+    }
+
+    document.getElementById('next-btn').addEventListener('click', () => {
+        if (currentStep < TOTAL_STEPS) {
+            const currentStepEl = document.querySelector(`.step[data-step="${currentStep}"]`);
+            const requiredInputs = currentStepEl.querySelectorAll('input[required], select[required]');
+            for (let input of requiredInputs) {
+                if (!input.value) {
+                    input.focus();
+                    input.classList.add('border-red-500');
+                    input.reportValidity();
+                    setTimeout(() => input.classList.remove('border-red-500'), 1200);
+                    return;
+                }
+            }
+            currentStep++;
+            if (currentStep > maxStepReached) {
+                maxStepReached = currentStep;
+            }
+            showStep(currentStep);
+            saveFormDataToStorage();
+        }
+    });
+    document.getElementById('prev-btn').addEventListener('click', () => {
+        if (currentStep > 1) {
+            currentStep--;
+            showStep(currentStep);
+            saveFormDataToStorage();
+        }
+    });
+
+    function setupRestoreOnInputs() {
+        document.getElementById('test-form').addEventListener('input', saveFormDataToStorage);
+        document.getElementById('test-form').addEventListener('change', saveFormDataToStorage);
+    }
+
+    showStep(currentStep);
+
+    window.isAllRequired = !IS_DEVELOPMENT_MODE;
+    fetch('assets/data/manual_testcase.json')
+        .then(response => {
+            if (!response.ok) throw new Error('Network response was not ok');
+            return response.json();
+        })
+        .then(data => {
+            const containers = {
+                'public-site': [
+                    ...(data.web_application?.public_site?.home || []),
+                    ...(data.web_application?.public_site?.about || []),
+                    ...(data.web_application?.public_site?.teachers || []),
+                    ...(data.web_application?.public_site?.admission || []),
+                    ...(data.web_application?.public_site?.gallery || []),
+                    ...(data.web_application?.public_site?.notice_list || []),
+                    ...(data.web_application?.public_site?.event_list || []),
+                    ...(data.web_application?.public_site?.blog || []),
+                    ...(data.web_application?.public_site?.contact || []),
+                    ...(data.web_application?.public_site?.login_registration || []),
+                ],
+                'admin-portal': [
+                    ...(data.web_application?.admin_portal?.authentication || []),
+                    ...(data.web_application?.admin_portal?.dashboard || []),
+                    ...(data.web_application?.admin_portal?.students || []),
+                    ...(data.web_application?.admin_portal?.teachers || []),
+                    ...(data.web_application?.admin_portal?.parents || []),
+                    ...(data.web_application?.admin_portal?.classes_sections || []),
+                    ...(data.web_application?.admin_portal?.subjects || []),
+                    ...(data.web_application?.admin_portal?.attendance || []),
+                    ...(data.web_application?.admin_portal?.exams_marks || []),
+                    ...(data.web_application?.admin_portal?.routine_timetable || []),
+                    ...(data.web_application?.admin_portal?.library || []),
+                    ...(data.web_application?.admin_portal?.hostel_transport || []),
+                    ...(data.web_application?.admin_portal?.fees_finance || []),
+                    ...(data.web_application?.admin_portal?.communication || []),
+                    ...(data.web_application?.admin_portal?.content_management || []),
+                    ...(data.web_application?.admin_portal?.reports || []),
+                    ...(data.web_application?.admin_portal?.settings_permissions || []),
+                    ...(data.web_application?.admin_portal?.user_profile || []),
+                    ...(data.web_application?.admin_portal?.errors_states || []),
+                ]
+            };
+            for (const containerId in containers) {
+                const container = document.getElementById(containerId);
+                if (container) {
+                    containers[containerId].forEach(tc => {
+                        container.innerHTML += createTestCase(tc);
+                    });
+                }
+            }
+
+            Object.keys(allTestCases).forEach(id => {
+                const statusSelect = document.querySelector(`[data-status-select="${id}"]`);
+                const commentInput = document.querySelector(`[data-comment-input="${id}"]`);
+                const detailError = document.querySelector(`[data-detail-error="${id}"]`);
+                if (statusSelect && commentInput) {
+                    statusSelect.addEventListener('change', function () {
+                        if (!IS_DEVELOPMENT_MODE) {
+                            if (!window.testCaseRead[id]) {
+                                statusSelect.selectedIndex = 0;
+                                if (detailError) {
+                                    detailError.classList.remove('hidden');
+                                }
+                                setTimeout(() => {
+                                    if (detailError) detailError.classList.add('hidden');
+                                }, 2500);
+                                return;
+                            }
+                        }
+                        if (window.isAllRequired && (statusSelect.value === 'Fail' || statusSelect.value === 'Blocked')) {
+                            commentInput.required = true;
+                        } else {
+                            commentInput.required = false;
+                        }
+                        saveFormDataToStorage();
+                    });
+                    if (window.isAllRequired && (statusSelect.value === 'Fail' || statusSelect.value === 'Blocked')) {
+                        commentInput.required = true;
+                    } else {
+                        commentInput.required = false;
+                    }
+                    if (!window.isAllRequired) {
+                        statusSelect.required = false;
+                        commentInput.required = false;
+                    }
+                }
+            });
+            setupCollapsibleDetails();
+            restoreFormDataFromStorage();
+            setupRestoreOnInputs();
+            if (currentStep > maxStepReached) {
+                maxStepReached = currentStep;
+                saveMaxStepToStorage();
+            }
+        })
+        .catch(error => console.error('Error loading manual_testcase.json:', error));
+
+    const form = document.getElementById('test-form');
+    const resultsModal = document.getElementById('results-modal');
+    const exportJsonBtn = document.getElementById('export-json-btn');
+    const closeModalBtn = document.getElementById('close-modal-btn');
+
+    form.addEventListener('submit', function (e) {
+        if (!form.checkValidity()) {
+            return;
+        }
+        e.preventDefault();
+        const formData = new FormData(form);
+        const results = {
+            testerName: formData.get('tester_name'),
+            testDate: formData.get('test_date'),
+            results: []
+        };
+        for (const id in allTestCases) {
+            const status = formData.get(`${id}_status`);
+            const comment = formData.get(`${id}_comment`) || '';
+            if (status) {
+                results.results.push({
+                    id: id,
+                    scenario: allTestCases[id].scenario,
+                    status: status,
+                    comment: comment
+                });
+            }
+        }
+        document.getElementById('modal-tester-info').textContent = `Tester: ${results.testerName} | Date: ${results.testDate}`;
+        document.getElementById('modal-results-json').value = JSON.stringify(results, null, 2);
+        resultsModal.classList.remove('hidden');
+        setTimeout(() => resultsModal.classList.remove('opacity-0'), 10);
+        setTimeout(() => resultsModal.querySelector('.modal-container').classList.remove('scale-95'), 10);
+        exportResults();
+        localStorage.removeItem('schooltest_formData');
+        localStorage.removeItem('schooltest_currentStep');
+        localStorage.removeItem('schooltest_maxStepReached');
+    });
+
+    const exportResults = () => {
+        const jsonString = document.getElementById('modal-results-json').value;
+        const blob = new Blob([jsonString], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        const testerName = (document.getElementById('tester_name').value || '').replace(/ /g, '_') || 'tester';
+        const testDate = document.getElementById('test_date').value || 'date';
+        a.href = url;
+        a.download = `school-test-results_${testerName}_${testDate}.json`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    };
+
+    exportJsonBtn.addEventListener('click', exportResults);
+    if (closeModalBtn) {
+        closeModalBtn.addEventListener('click', () => {
+            resultsModal.classList.add('opacity-0');
+            resultsModal.querySelector('.modal-container').classList.add('scale-95');
+            setTimeout(() => resultsModal.classList.add('hidden'), 300);
+        });
+    }
+    resultsModal.addEventListener('click', (e) => {
+        if (e.target === resultsModal) {
+            resultsModal.classList.add('opacity-0');
+            resultsModal.querySelector('.modal-container').classList.add('scale-95');
+            setTimeout(() => resultsModal.classList.add('hidden'), 300);
+        }
+    });
+});
+
+

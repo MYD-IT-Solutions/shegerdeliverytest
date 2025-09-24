@@ -1,0 +1,95 @@
+<style>
+    @media print {
+        #response-list .hidden {
+            display: block !important;
+        }
+    }
+</style>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analyze School Test Responses</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+</head>
+
+<body class="bg-gray-100 text-gray-800">
+    <header class="bg-white shadow">
+        <div class="container mx-auto px-4 py-6">
+            <h1 class="text-3xl font-bold">Analyze School Responses</h1>
+            <div id="tester-info" class="hidden mt-2 text-sm text-gray-600">
+                <strong>Tester:</strong> <span id="tester-name"></span> | <strong>Test Date:</strong> <span
+                    id="test-date"></span>
+                <ul id="tester-info-list" class="list-disc ml-6 mt-2"></ul>
+            </div>
+        </div>
+    </header>
+    <main class="container mx-auto px-4 py-6">
+        <section id="upload-section" class="bg-white p-6 rounded-lg shadow mb-6">
+            <h2 class="text-2xl font-bold mb-4">Upload JSON File</h2>
+            <div class="flex items-center">
+                <input type="file" id="response-file" accept="application/json" multiple
+                    class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100">
+                <button id="upload-btn"
+                    class="ml-4 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">Upload</button>
+            </div>
+        </section>
+        <section id="analysis-section" class="hidden">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h3 class="text-lg font-semibold text-gray-600">Total Responses</h3>
+                    <p id="total-count" class="text-3xl font-bold">0</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h3 class="text-lg font-semibold text-green-600">Passed</h3>
+                    <p id="passed-count" class="text-3xl font-bold">0</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h3 class="text-lg font-semibold text-red-600">Failed</h3>
+                    <p id="failed-count" class="text-3xl font-bold">0</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h3 class="text-lg font-semibold text-yellow-600">Blocked</h3>
+                    <p id="blocked-count" class="text-3xl font-bold">0</p>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h2 class="text-2xl font-bold mb-4">Response Status Summary</h2>
+                    <canvas id="status-chart"></canvas>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h2 class="text-2xl font-bold mb-4">Test Results by Category</h2>
+                    <canvas id="category-chart"></canvas>
+                </div>
+            </div>
+            <section id="response-details" class="bg-white p-6 rounded-lg shadow">
+                <h2 class="text-2xl font-bold mb-4">Response Details</h2>
+                <div class="border-b border-gray-200">
+                    <nav class="-mb-px flex space-x-8" aria-label="Tabs" id="response-tabs">
+                        <button
+                            class="tab-btn whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm border-indigo-500 text-indigo-600"
+                            data-status="all">All</button>
+                        <button
+                            class="tab-btn whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm text-gray-500 hover:text-gray-700 hover:border-gray-300"
+                            data-status="pass">Passed</button>
+                        <button
+                            class="tab-btn whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm text-gray-500 hover:text-gray-700 hover:border-gray-300"
+                            data-status="fail">Failed</button>
+                        <button
+                            class="tab-btn whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm text-gray-500 hover:text-gray-700 hover:border-gray-300"
+                            data-status="blocked">Blocked</button>
+                    </nav>
+                </div>
+                <div id="response-list" class="divide-y divide-gray-200 mt-4"></div>
+            </section>
+        </section>
+    </main>
+    <script src="assets/js/analyze_school.js"></script>
+</body>
+
+</html>
