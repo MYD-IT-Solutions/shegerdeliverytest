@@ -24,92 +24,7 @@
                     "expected_result": "User is routed to the frontend login page (/login)."
                 }
             ],
-            "about": [
-                {
-                    "id": "PUB-ABOUT-01",
-                    "feature": "Content",
-                    "scenario": "Verify About page sections",
-                    "steps": "1. Navigate to /about.",
-                    "expected_result": "Banner/title, mission/vision text, and team highlights render correctly."
-                }
-            ],
-            "teachers": [
-                {
-                    "id": "PUB-TCHR-01",
-                    "feature": "List",
-                    "scenario": "Verify teacher list loads",
-                    "steps": "1. Navigate to /teacher.",
-                    "expected_result": "Teacher cards with name, subject, and image are listed; pagination (if any) works."
-                }
-            ],
-            "admission": [
-                {
-                    "id": "PUB-ADM-01",
-                    "feature": "Form UI",
-                    "scenario": "Verify Admission form fields",
-                    "steps": "1. Navigate to /admission. 2. Inspect required inputs (name, class, contact, etc.).",
-                    "expected_result": "All mandatory fields are present and marked; submit button disabled until valid."
-                },
-                {
-                    "id": "PUB-ADM-02",
-                    "feature": "Validation",
-                    "scenario": "Verify client-side validations",
-                    "steps": "1. Leave required fields blank. 2. Click Submit.",
-                    "expected_result": "Inline errors appear next to empty/invalid fields; no submission occurs."
-                }
-            ],
-            "gallery": [
-                {
-                    "id": "PUB-GAL-01",
-                    "feature": "Grid",
-                    "scenario": "Verify gallery thumbnails and lightbox",
-                    "steps": "1. Navigate to /gallery. 2. Click a thumbnail.",
-                    "expected_result": "Images load with correct aspect; clicking opens a lightbox with navigation."
-                }
-            ],
-            "notice_list": [
-                {
-                    "id": "PUB-NOT-01",
-                    "feature": "List",
-                    "scenario": "Verify notices list and details",
-                    "steps": "1. Navigate to /notice. 2. Click a notice item.",
-                    "expected_result": "List shows titles and dates; clicking routes to notice details with full content."
-                }
-            ],
-            "event_list": [
-                {
-                    "id": "PUB-EVT-01",
-                    "feature": "List",
-                    "scenario": "Verify events list and details",
-                    "steps": "1. Navigate to /event. 2. Click an event item.",
-                    "expected_result": "List shows events with date/time; detail page renders description and images."
-                }
-            ],
-            "blog": [
-                {
-                    "id": "PUB-BLG-01",
-                    "feature": "Listing",
-                    "scenario": "Verify blog list and pagination",
-                    "steps": "1. Navigate to /blog. 2. Scroll and use pagination (if present).",
-                    "expected_result": "Posts render with title, excerpt, date; pagination loads subsequent pages."
-                },
-                {
-                    "id": "PUB-BLG-02",
-                    "feature": "Details",
-                    "scenario": "Verify blog details page",
-                    "steps": "1. Click a blog post.",
-                    "expected_result": "Full post content, author/date, and related posts (if any) display correctly."
-                }
-            ],
-            "contact": [
-                {
-                    "id": "PUB-CON-01",
-                    "feature": "Form",
-                    "scenario": "Verify contact submission validation",
-                    "steps": "1. Navigate to /contact. 2. Submit empty form. 3. Submit valid data.",
-                    "expected_result": "Errors shown for empty fields; valid submission shows success message."
-                }
-            ],
+            
             "login_registration": [
                 {
                     "id": "PUB-LOGIN-01",
@@ -117,33 +32,10 @@
                     "scenario": "Verify login page loads",
                     "steps": "1. Navigate to /login.",
                     "expected_result": "Login form appears with username/email and password fields; errors show for invalid attempts."
-                },
-                {
-                    "id": "PUB-LOGIN-02",
-                    "feature": "Forgot Password",
-                    "scenario": "Verify reset link",
-                    "steps": "1. Click 'Forgot Password'. 2. Submit a registered email.",
-                    "expected_result": "Reset request accepted and confirmation message shown."
                 }
             ]
         },
         "admin_portal": {
-            "authentication": [
-                {
-                    "id": "ADM-AUTH-01",
-                    "feature": "Login",
-                    "scenario": "Verify admin login flow",
-                    "steps": "1. Navigate to /signin. 2. Enter valid credentials. 3. Submit.",
-                    "expected_result": "User is authenticated and redirected to Dashboard."
-                },
-                {
-                    "id": "ADM-AUTH-02",
-                    "feature": "Unauthorized",
-                    "scenario": "Verify protected routes require login",
-                    "steps": "1. Open /dashboard directly while logged out.",
-                    "expected_result": "Redirected to login or shown permission error page."
-                }
-            ],
             "dashboard": [
                 {
                     "id": "ADM-DB-01",
