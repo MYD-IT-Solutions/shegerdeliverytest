@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Store App - Test Analysis</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../assets/css/style.css" />
+  </head>
+
+  <body class="bg-gray-50 text-gray-800 font-sans">
+    <header
+      class="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50"
+    >
+      <div
+        class="container mx-auto px-4 py-4 flex justify-between items-center"
+      >
+        <div>
+          <h1 class="text-2xl font-bold text-gray-900 flex items-center">
+            <span
+              class="bg-orange-100 text-orange-700 font-mono text-sm px-2 py-1 rounded mr-3"
+              >STORE</span
+            >
+            Shega Delivery Analysis
+          </h1>
+          <p class="text-xs text-gray-500 mt-1">
+            Manual Test Results Dashboard
+          </p>
+        </div>
+        <div
+          id="tester-info"
+          class="hidden text-sm text-gray-600 text-right bg-gray-50 p-2 rounded-lg border border-gray-100"
+        >
+          <ul
+            id="tester-info-list"
+            class="list-none mt-1 space-y-1 text-xs"
+          ></ul>
+        </div>
+      </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+      <!-- Upload Section -->
+      <section
+        id="upload-section"
+        class="bg-white p-12 rounded-2xl shadow-lg border border-gray-100 max-w-2xl mx-auto mt-10 transition-all text-center"
+      >
+        <h2 class="text-3xl font-bold text-gray-900 mb-2">
+          Upload Test Report
+        </h2>
+        <p class="text-gray-500 mb-8">
+          Select the JSON file exported from the Store App Test Page.
+        </p>
+
+        <label
+          for="response-file"
+          class="group flex flex-col items-center justify-center w-full h-48 border-2 border-dashed border-gray-300 rounded-xl cursor-pointer bg-gray-50 hover:bg-gray-100 hover:border-orange-400 transition-all relative overflow-hidden"
+        >
+          <div
+            class="flex flex-col items-center justify-center pt-5 pb-6 relative z-10 transition-transform group-hover:-translate-y-1"
+          >
+            <p class="mb-1 text-sm text-gray-500">
+              <span class="font-semibold text-orange-600">Click to upload</span>
+              or drag and drop
+            </p>
+            <p class="text-xs text-gray-400">JSON files only</p>
+          </div>
+          <input
+            id="response-file"
+            type="file"
+            class="hidden"
+            accept="application/json"
+          />
+        </label>
+
+        <button
+          id="upload-btn"
+          class="mt-8 px-10 py-3 bg-orange-600 text-white font-bold rounded-lg hover:bg-orange-700 shadow-lg shadow-orange-200 transform active:scale-95 transition-all w-full md:w-auto"
+        >
+          Analyze Results
+        </button>
+      </section>
+
+      <!-- Analysis Section -->
+      <section
+        id="analysis-section"
+        class="hidden animate-fade-in-up space-y-8"
+      >
+        <!-- Stats Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <!-- Status Cards (Same as others but maybe styled orange if desired? default style is fine) -->
+          <div
+            class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex items-center justify-between"
+          >
+            <div>
+              <p
+                class="text-xs font-bold text-gray-400 uppercase tracking-wider"
+              >
+                Total Tests
+              </p>
+              <p
+                id="total-count"
+                class="text-4xl font-black text-gray-900 mt-1"
+              >
+                0
+              </p>
+            </div>
+          </div>
+          <div
+            class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-green-500 flex items-center justify-between"
+          >
+            <div>
+              <p
+                class="text-xs font-bold text-green-600 uppercase tracking-wider"
+              >
+                Passed
+              </p>
+              <p
+                id="passed-count"
+                class="text-4xl font-black text-green-700 mt-1"
+              >
+                0
+              </p>
+            </div>
+          </div>
+          <div
+            class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-red-500 flex items-center justify-between"
+          >
+            <div>
+              <p
+                class="text-xs font-bold text-red-600 uppercase tracking-wider"
+              >
+                Failed
+              </p>
+              <p
+                id="failed-count"
+                class="text-4xl font-black text-red-700 mt-1"
+              >
+                0
+              </p>
+            </div>
+          </div>
+          <div
+            class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-yellow-500 flex items-center justify-between"
+          >
+            <div>
+              <p
+                class="text-xs font-bold text-yellow-600 uppercase tracking-wider"
+              >
+                Blocked
+              </p>
+              <p
+                id="blocked-count"
+                class="text-4xl font-black text-yellow-700 mt-1"
+              >
+                0
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Charts Row -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div
+            class="lg:col-span-1 bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex flex-col"
+          >
+            <h2
+              class="text-lg font-bold text-gray-800 mb-6 pb-2 border-b border-gray-100"
+            >
+              Status Distribution
+            </h2>
+            <div class="relative flex-grow flex items-center justify-center">
+              <canvas id="status-chart"></canvas>
+            </div>
+          </div>
+          <div
+            class="lg:col-span-2 bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex flex-col"
+          >
+            <h2
+              class="text-lg font-bold text-gray-800 mb-6 pb-2 border-b border-gray-100"
+            >
+              Results by Feature
+            </h2>
+            <div class="relative flex-grow w-full h-80">
+              <canvas id="category-chart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Detailed Response List -->
+        <section
+          class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden"
+        >
+          <div
+            class="p-4 border-b border-gray-200 bg-gray-50 flex flex-col md:flex-row md:items-center justify-between gap-4 sticky top-0 z-10"
+          >
+            <h2 class="text-lg font-bold text-gray-800 pl-2">
+              Test Case Details
+            </h2>
+            <nav
+              class="flex p-1 space-x-1 bg-gray-200/50 rounded-lg p-1.5"
+              id="response-tabs"
+            >
+              <button
+                class="tab-btn py-1.5 px-4 rounded-md text-xs font-bold uppercase tracking-wider bg-white shadow-sm text-indigo-600 transition-all focus:outline-none"
+                data-status="all"
+              >
+                All
+              </button>
+              <button
+                class="tab-btn py-1.5 px-4 rounded-md text-xs font-bold uppercase tracking-wider text-gray-500 hover:text-gray-700 hover:bg-white/50 transition-all focus:outline-none"
+                data-status="pass"
+              >
+                Passed
+              </button>
+              <button
+                class="tab-btn py-1.5 px-4 rounded-md text-xs font-bold uppercase tracking-wider text-gray-500 hover:text-gray-700 hover:bg-white/50 transition-all focus:outline-none"
+                data-status="fail"
+              >
+                Failed
+              </button>
+              <button
+                class="tab-btn py-1.5 px-4 rounded-md text-xs font-bold uppercase tracking-wider text-gray-500 hover:text-gray-700 hover:bg-white/50 transition-all focus:outline-none"
+                data-status="blocked"
+              >
+                Blocked
+              </button>
+            </nav>
+          </div>
+          <div
+            id="response-list"
+            class="divide-y divide-gray-100 h-[600px] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-200"
+          >
+            <div
+              class="flex flex-col items-center justify-center h-full text-gray-400"
+            >
+              <p>Upload a file to view detailed results</p>
+            </div>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <script src="../../assets/js/shegadelivery_analyze.js"></script>
+    <style>
+      .animate-fade-in-up {
+        animation: fadeInUp 0.5s ease-out forwards;
+      }
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translate3d(0, 20px, 0);
+        }
+        to {
+          opacity: 1;
+          transform: translate3d(0, 0, 0);
+        }
+      }
+    </style>
+  </body>
+</html>
