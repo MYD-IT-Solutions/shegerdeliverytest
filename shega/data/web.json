@@ -1,0 +1,156 @@
+{
+    "web_application": {
+        "header_functionality": [
+            {
+                "id": "WEB-HEAD-001",
+                "feature": "Page Load",
+                "scenario": "Verify Page Load and Assets",
+                "steps": "1. Navigate to https://shegadelivery.com/\n2. Verify the page loads completely.\n3. Check that all logos and images are loaded successfully without broken icons.",
+                "expected_result": "The website loads the entire page completely, and all logos and images loaded successfully."
+            },
+            {
+                "id": "WEB-HEAD-002",
+                "feature": "Location Selection",
+                "scenario": "Verify Automatic and Manual Location",
+                "steps": "1. Automatic: Allow browser location permissions when prompted to verify the 'Delivering to' address updates automatically.\n2. Manual: Click on the address, enter a specific location (e.g., 'Bole'), select from suggestions, and verify the address updates.",
+                "expected_result": "The location has automatic detection and manual submission working correctly."
+            },
+            {
+                "id": "WEB-HEAD-003",
+                "feature": "Search Functionality",
+                "scenario": "Verify Search Icon Usability",
+                "steps": "1. Click the search (magnifying glass) icon in the top right header.\n2. Type a keyword (e.g., 'Pizza').\n3. Press Enter.",
+                "expected_result": "Search input opens/focuses. Search results related to the keyword are displayed."
+            },
+            {
+                "id": "WEB-HEAD-004",
+                "feature": "User Authentication",
+                "scenario": "Verify Sign In Button",
+                "steps": "1. Click the 'Sign In' button in the top right header.",
+                "expected_result": "User is redirected to the Login/Registration page."
+            },
+            {
+                "id": "WEB-HEAD-005",
+                "feature": "Shopping Cart",
+                "scenario": "Verify Cart Button",
+                "steps": "1. Click the yellow 'Cart' button in the top right header.",
+                "expected_result": "Cart drawer opens or navigates to the Cart page."
+            }
+        ],
+        "service_cards": [
+            {
+                "id": "WEB-SERV-001",
+                "feature": "Service Type Navigation",
+                "scenario": "Verify 'Food' Service Card",
+                "steps": "1. Locate the 'Food' card with the burger/drink icon.\n2. Click on the card.",
+                "expected_result": "Navigates to the food delivery section or filters restaurants for food."
+            },
+            {
+                "id": "WEB-SERV-002",
+                "feature": "Service Type Navigation",
+                "scenario": "Verify 'Grocery' Service Card",
+                "steps": "1. Locate the 'Grocery' card with the bag icon.\n2. Click on the card.",
+                "expected_result": "Navigates to the grocery section or filters stores for groceries."
+            },
+            {
+                "id": "WEB-SERV-003",
+                "feature": "Service Type Navigation",
+                "scenario": "Verify 'Pickup and Drop' Service Card",
+                "steps": "1. Locate the 'Pickup and Drop' card with the delivery hands icon.\n2. Click on the card.",
+                "expected_result": "Navigates to the pickup & drop service page."
+            }
+        ],
+        "categories_and_filters": [
+            {
+                "id": "WEB-CAT-001",
+                "feature": "Category Filtering",
+                "scenario": "Verify Category Selection (e.g., Burger, Pizza)",
+                "steps": "1. Scroll to the 'Categories' section.\n2. Click on the 'Burger' icon.\n3. Click on the 'Pizza' icon.",
+                "expected_result": "The restaurant list updates to show only relevant results for the selected category."
+            },
+            {
+                "id": "WEB-FILT-001",
+                "feature": "Quick Filters",
+                "scenario": "Verify Tag Filters functionality",
+                "steps": "1. Locate the filter bar below categories.\n2. Click 'Free Delivery'.\n3. Click 'Top Rated'.\n4. Click 'Favourite'.\n5. Click 'Budget friendly'.\n6. Click 'Offers'.\n7. Click 'Veg'.",
+                "expected_result": "Clicking each filter correctly updates the displayed list of restaurants based on the criteria."
+            }
+        ],
+        "restaurant_listings": [
+            {
+                "id": "WEB-LIST-001",
+                "feature": "Nearby Restaurants",
+                "scenario": "Verify Restaurant Card Display",
+                "steps": "1. Scroll to the 'Nearby Restaurants' section.\n2. Verify that restaurant cards (e.g., 'MNC - Ethiopia', 'Shega cuisine') are visible with images.",
+                "expected_result": "Restaurant name, image, and meta-data (rating, time) are clearly visible."
+            },
+            {
+                "id": "WEB-LIST-002",
+                "feature": "Restaurant Navigation",
+                "scenario": "Verify Clicking a Restaurant Card",
+                "steps": "1. Click on any restaurant card (e.g., 'MNC - Ethiopia').",
+                "expected_result": "User is redirected to the detailed Menu page for that restaurant."
+            }
+        ],
+        "promotions_area": [
+            {
+                "id": "WEB-PROMO-001",
+                "feature": "App Download Promo",
+                "scenario": "Verify App Download Section Visibility",
+                "steps": "1. Scroll to the yellow promotion banner.\n2. Verify the illustration and text 'Simple way to Download the Shega Delivery'.\n3. Check if the QR Code is visible.",
+                "expected_result": "Banner elements are properly aligned and visible. QR Code is scan-able."
+            },
+            {
+                "id": "WEB-PROMO-002",
+                "feature": "Feature Highlights",
+                "scenario": "Verify Feature Checklist",
+                "steps": "1. Verify the checkmarks for 'Get Live Order Tracking' and 'Get Latest Feature Updates'.",
+                "expected_result": "Text and icons are visible and correct."
+            }
+        ],
+        "footer_navigation": [
+            {
+                "id": "WEB-FOOT-001",
+                "feature": "Footer Links",
+                "scenario": "Verify Quick Links Navigation",
+                "steps": "1. Scroll to the footer.\n2. Test clicks on: 'About Us', 'Privacy Policy', 'Terms and Conditions', 'FAQs', 'Contact'.",
+                "expected_result": "Each link opens the correct informational page."
+            },
+            {
+                "id": "WEB-FOOT-002",
+                "feature": "Partner Links",
+                "scenario": "Verify 'Join Us' Links",
+                "steps": "1. Click 'Add a Store' (for Merchants).\n2. Click 'Deliver with Us' (for Drivers).",
+                "expected_result": "Redirects to respective registration/info pages."
+            },
+            {
+                "id": "WEB-FOOT-003",
+                "feature": "App Store Links",
+                "scenario": "Verify App Store Badges",
+                "steps": "1. Click 'Download on the App Store'.\n2. Click 'Get it on Google Play'.",
+                "expected_result": "Opens the Apple App Store and Google Play Store pages for Shega Delivery."
+            },
+            {
+                "id": "WEB-FOOT-004",
+                "feature": "Social Media",
+                "scenario": "Verify Social Icons",
+                "steps": "1. Click the Facebook icon.\n2. Click the Instagram icon.",
+                "expected_result": "Opens the official social media pages in a new tab."
+            },
+            {
+                "id": "WEB-FOOT-005",
+                "feature": "Localization",
+                "scenario": "Verify Language Selector",
+                "steps": "1. Click the Language option (e.g., British Flag icon/English).\n2. Select a different language if available.",
+                "expected_result": "Language options appear or the site language updates."
+            },
+            {
+                "id": "WEB-FOOT-006",
+                "feature": "Back to Top",
+                "scenario": "Verify Scroll to Top Button",
+                "steps": "1. Click the yellow arrow button in the bottom-right corner of the footer.",
+                "expected_result": "The page smoothly scrolls back to the top."
+            }
+        ]
+    }
+}
