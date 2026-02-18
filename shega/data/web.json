@@ -104,6 +104,94 @@
                 "expected_result": "Redirects to the Store's page/menu."
             }
         ],
+        "restaurant_detail_page": [
+            {
+                "id": "WEB-REST-001",
+                "feature": "Store Banner",
+                "scenario": "Verify Store Banner Details",
+                "steps": "1. Navigate to a specific restaurant page.\n2. Verify the banner displays: Restaurant Name, Area/Location.\n3. Verify icons: Minimum Order Time, Rating (Star), Favorite (Heart), Info (i).",
+                "expected_result": "All banner details and icons are clearly visible and correct."
+            },
+            {
+                "id": "WEB-REST-002",
+                "feature": "Menu Navigation",
+                "scenario": "Verify Side Menu/Filters",
+                "steps": "1. Locate the side menu (e.g., All, Snacks, Beverages).\n2. Click on a specific category (e.g., 'Snacks').\n3. Verify the main content scrolls to that section.",
+                "expected_result": "Clicking a side menu item smoothly scrolls the page to the corresponding food category."
+            },
+            {
+                "id": "WEB-REST-003",
+                "feature": "Item Card",
+                "scenario": "Verify Food Item Card",
+                "steps": "1. Inspect a food item card.\n2. Verify: Food Image, Name, Price, and 'Add' button are visible.",
+                "expected_result": "Item card displays all details correctly. Image is loaded."
+            },
+            {
+                "id": "WEB-REST-004",
+                "feature": "Cart Interaction",
+                "scenario": "Verify Add to Cart Functionality",
+                "steps": "1. Click 'Add' on an item.\n2. Verify button changes to show Increment (+) and Decrement (-) controls.\n3. Verify the Cart icon in the header updates (count/price).",
+                "expected_result": "Item is added. controls appear. Header cart state reflects the new item."
+            }
+        ],
+        "cart_and_checkout": [
+            {
+                "id": "WEB-CART-001",
+                "feature": "Cart Drawer/Page",
+                "scenario": "Verify Cart Header and Store Name",
+                "steps": "1. Click the 'Cart' button in the header.\n2. Verify the drawer/page opens.\n3. Check that the correct Restaurant Name is displayed at the top.",
+                "expected_result": "Cart opens showing the correct restaurant name from which items were added."
+            },
+            {
+                "id": "WEB-CART-002",
+                "feature": "Service Mode",
+                "scenario": "Verify Delivery vs Takeaway",
+                "steps": "1. Locate the service toggle switches.\n2. Verify 'Delivery' and 'Takeaway' options.\n3. Select each to ensure they are clickable.",
+                "expected_result": "User can toggle between Delivery and Takeaway modes."
+            },
+            {
+                "id": "WEB-CART-003",
+                "feature": "Delivery Address",
+                "scenario": "Verify Address Selection",
+                "steps": "1. Verify the current delivery address is displayed.\n2. Check for an 'Add' or 'Change' address button.\n3. Verify clicking it opens the address management options.",
+                "expected_result": "Current address is visible. Option to add/change address is functional."
+            },
+            {
+                "id": "WEB-CART-004",
+                "feature": "Cart Items",
+                "scenario": "Verify Item Management in Cart",
+                "steps": "1. Review the list of added items.\n2. Verify Image, Name, and Price are correct.\n3. Use the (+) and (-) buttons to change quantity.\n4. Verify price updates accordingly.",
+                "expected_result": "Items match selection. Quantity adjustment works and updates total price immediately."
+            },
+            {
+                "id": "WEB-CART-005",
+                "feature": "Coupons",
+                "scenario": "Verify Coupon Application",
+                "steps": "1. Locate the 'Apply Coupon' section.\n2. Verify there is an input field or link to select available offers.",
+                "expected_result": "User can access the coupon selection area."
+            },
+            {
+                "id": "WEB-CART-006",
+                "feature": "Tips",
+                "scenario": "Verify Tip Selection",
+                "steps": "1. Locate the 'Tips' section.\n2. Verify options like 'ETB 3', 'ETB 6', 'ETB 9' are displayed.\n3. Select a tip amount and verify it is added to the bill.",
+                "expected_result": "Tip amount is selected and reflected in the final bill summary."
+            },
+            {
+                "id": "WEB-CART-007",
+                "feature": "Bill Details",
+                "scenario": "Verify Final Bill Calculation",
+                "steps": "1. Review the 'Bill Details' section.\n2. Verify rows for: Item Total, Packaging Charge, Delivery Charge, Tax, and Bill Total.\n3. Confirm Bill Total equals the sum of all charges.",
+                "expected_result": "All charges are clearly broken down. The final total is mathematically correct."
+            },
+            {
+                "id": "WEB-CART-008",
+                "feature": "Checkout",
+                "scenario": "Verify Proceed Button",
+                "steps": "1. Locate the yellow 'Proceed' button at the bottom.\n2. Verify it displays the total amount (if applicable).\n3. Click 'Proceed'.",
+                "expected_result": "User is navigated to the next step (Payment Gateway or Order Placement)."
+            }
+        ],
         "service_cards": [
             {
                 "id": "WEB-SERV-001",
