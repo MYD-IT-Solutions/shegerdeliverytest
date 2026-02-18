@@ -37,6 +37,73 @@
                 "expected_result": "Cart drawer opens or navigates to the Cart page."
             }
         ],
+        "authentication_and_profile": [
+            {
+                "id": "WEB-AUTH-001",
+                "feature": "Sign In",
+                "scenario": "Verify Sign In Methods",
+                "steps": "1. Navigate to Sign In page.\n2. Method 1: Enter valid phone number and OTP/password.\n3. Method 2: Click 'Sign in with Google' and complete the flow.\n4. Verify successful login for both methods.",
+                "expected_result": "Both Phone and Google sign-in methods authenticate the user successfully and redirect to the dashboard/home."
+            },
+            {
+                "id": "WEB-AUTH-002",
+                "feature": "User Menu",
+                "scenario": "Verify User Menu Links",
+                "steps": "1. After login, click on the User Profile icon/name in header.\n2. Verify the dropdown contains: 'Profile', 'My Orders', 'Logout'.\n3. Click each link to verify navigation.",
+                "expected_result": "Dropdown appears correctly. Links navigate to Profile, Orders, and Logout triggers logout action."
+            },
+            {
+                "id": "WEB-PROF-001",
+                "feature": "Profile Details",
+                "scenario": "Verify Profile Information",
+                "steps": "1. Navigate to 'Profile' section.\n2. Check for display of Name, Email ID, and Phone Number.",
+                "expected_result": "Name, Email, and Phone are displayed correctly matching the logged-in user's details."
+            },
+            {
+                "id": "WEB-PROF-002",
+                "feature": "Address Management",
+                "scenario": "Verify Add/Edit Address",
+                "steps": "1. Go to 'Address' tab/section.\n2. Click to Add or Edit an address.\n3. Verify Map interface loads.\n4. Enter text in 'Complete Address' and 'Landmark'.\n5. Select label: 'Home', 'Work', or 'Others'.\n6. Click 'Save Address'.",
+                "expected_result": "Map allows pin selection. Text inputs accept data. Address types are selectable. Address saves successfully."
+            },
+            {
+                "id": "WEB-PROF-003",
+                "feature": "Wallet & Membership",
+                "scenario": "Verify Wallet and Membership Pages",
+                "steps": "1. Click 'Wallet' link in sidebar/menu.\n2. Click 'Membership' link in sidebar/menu.\n3. Verify page content loads for each.",
+                "expected_result": "Wallet displays balance/history. Membership page displays tier info/benefits."
+            }
+        ],
+        "order_management": [
+            {
+                "id": "WEB-ORD-001",
+                "feature": "My Orders",
+                "scenario": "Verify Order Tabs",
+                "steps": "1. Navigate to 'My Orders'.\n2. Verify tabs for 'Active', 'Completed', and 'Cancelled' exist.\n3. Click each tab to view orders.",
+                "expected_result": "Tabs switch the view to show relevant orders. Order cards are displayed with Restaurant Name, Price, and Status."
+            },
+            {
+                "id": "WEB-ORD-002",
+                "feature": "Order Actions",
+                "scenario": "Verify Track, Call, and Help",
+                "steps": "1. Locate an Active order.\n2. Verify buttons: 'Track Order', 'Call Store', 'Help'.\n3. Click 'Call Store' (verify prompt).\n4. Click 'Help' (verify modal/chat).",
+                "expected_result": "Buttons are actionable. Call prompt appears. Help section opens."
+            },
+            {
+                "id": "WEB-ORD-003",
+                "feature": "Track Order",
+                "scenario": "Verify Order Tracking Page",
+                "steps": "1. Click 'Track Order' on an active order.\n2. Verify a new page opens showing the map with route (Source to Destination).\n3. Check for Order Details, Store Address, and Delivery Address.",
+                "expected_result": "Tracking page loads with Map, Driver/Order status, and correct addresses."
+            },
+            {
+                "id": "WEB-ORD-004",
+                "feature": "Store Navigation",
+                "scenario": "Verify Navigation to Store from Order",
+                "steps": "1. In 'My Orders', click the Store Name (e.g., 'MNC - Ethiopia').",
+                "expected_result": "Redirects to the Store's page/menu."
+            }
+        ],
         "service_cards": [
             {
                 "id": "WEB-SERV-001",
