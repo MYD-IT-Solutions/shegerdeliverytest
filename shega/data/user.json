@@ -1,0 +1,133 @@
+{
+    "user_application": {
+        "authentication": [
+            {
+                "id": "USER-AUTH-001",
+                "feature": "Login UI",
+                "scenario": "Verify Login Screen Options",
+                "steps": "1. Launch the User Application.\n2. Observe the initial login screen.",
+                "expected_result": "The screen displays clear options to 'Login with Phone Number' and 'Continue with Google'."
+            },
+            {
+                "id": "USER-AUTH-002",
+                "feature": "Phone Validation",
+                "scenario": "Verify Short Phone Number Input",
+                "steps": "1. Select 'Login with Phone Number'.\n2. Enter a phone number with fewer digits than required (e.g., 8 digits).\n3. Attempt to proceed.",
+                "expected_result": "The system prevents proceeding or shows an error. OTP is NOT sent. OTP field is not populated."
+            },
+            {
+                "id": "USER-AUTH-003",
+                "feature": "Phone Validation",
+                "scenario": "Verify Long Phone Number Input",
+                "steps": "1. Select 'Login with Phone Number'.\n2. Enter or attempt to enter a phone number with more digits than allowed (e.g., 11+ digits).\n3. Attempt to proceed.",
+                "expected_result": "The system prevents inputting extra digits or shows an error. OTP is NOT sent."
+            },
+            {
+                "id": "USER-AUTH-004",
+                "feature": "New User Flow",
+                "scenario": "Verify Registration Redirect for New Number",
+                "steps": "1. Enter a valid, unregistered (new) phone number.\n2. Click Continue.\n3. Verify OTP is not auto-filled (ensure manual entry is required/tested).\n4. Enter the received OTP.",
+                "expected_result": "System recognizes the number as new and redirects the user to the Registration Page (to enter Name/Email)."
+            },
+            {
+                "id": "USER-AUTH-005",
+                "feature": "Existing User Flow",
+                "scenario": "Verify Login Redirect for Existing Number",
+                "steps": "1. Enter a valid, already registered phone number.\n2. Click Continue.\n3. Verify OTP is not auto-filled.\n4. Enter the received OTP.",
+                "expected_result": "System recognizes the number as existing and redirects the user directly to the Account or Home Page."
+            },
+            {
+                "id": "USER-AUTH-006",
+                "feature": "Social Login",
+                "scenario": "Verify Google Sign-In",
+                "steps": "1. on the Login screen, click 'Continue with Google'.\n2. Select a Google account from the system dialog.",
+                "expected_result": "User is successfully authenticated and redirected to the Home/Account Page."
+            }
+        ],
+        "home_screen": [
+            {
+                "id": "USER-HOME-001",
+                "feature": "Address Selection",
+                "scenario": "Verify Address Changer - Search Area",
+                "steps": "1. On the Home Screen, tap the address dropdown/changer in the header.\n2. In the search bar, type a specific area name (e.g., 'Bole', 'Piazza').\n3. Select the area from the suggestions.",
+                "expected_result": "The application updates the current location to the selected area and refreshes the home screen accordingly."
+            },
+            {
+                "id": "USER-HOME-002",
+                "feature": "Address Selection",
+                "scenario": "Verify Address Changer - My Location",
+                "steps": "1. Tap the address dropdown/changer in the header.\n2. Select 'Use My Current Location' (or GPS icon).\n3. Grant location permissions if prompted.",
+                "expected_result": "The application detects the device's current GPS coordinates and updates the address automatically."
+            },
+            {
+                "id": "USER-HOME-003",
+                "feature": "Global Search",
+                "scenario": "Verify Global Search Functionality",
+                "steps": "1. Tap the Search (magnifying glass) icon in the header.\n2. Search for different entities: 'Grocery', 'Pizza' (food item), 'Pharmacy', or a specific 'Restaurant Name'.",
+                "expected_result": "Search results display relevant categories, items, or stores matching the query."
+            }
+        ],
+        "service_filters": [
+            {
+                "id": "USER-SERV-001",
+                "feature": "Service Type Navigation",
+                "scenario": "Verify Food Service Filter",
+                "steps": "1. Locate the service icons below the header.\n2. Tap on the 'Food' icon.",
+                "expected_result": "Navigates to the Food delivery section or filters list to show only restaurants."
+            },
+            {
+                "id": "USER-SERV-002",
+                "feature": "Service Type Navigation",
+                "scenario": "Verify Grocery Service Filter",
+                "steps": "1. Locate the service icons below the header.\n2. Tap on the 'Grocery' icon.",
+                "expected_result": "Navigates to the Grocery section, showing grocery stores or items."
+            },
+            {
+                "id": "USER-SERV-003",
+                "feature": "Service Type Navigation",
+                "scenario": "Verify Pickup and Drop Service",
+                "steps": "1. Locate the service icons below the header.\n2. Tap on 'Pickup and Drop' (Delivery) icon.",
+                "expected_result": "Opens the Pickup and Drop service interface (package delivery)."
+            },
+            {
+                "id": "USER-SERV-004",
+                "feature": "Service Type Navigation",
+                "scenario": "Verify All Services",
+                "steps": "1. Locate the 'All Services' icon or button.\n2. Tap on it.",
+                "expected_result": "Displays a comprehensive list or grid of all available service categories."
+            }
+        ],
+        "categories_and_sorting": [
+            {
+                "id": "USER-CAT-001",
+                "feature": "Category Filtering",
+                "scenario": "Verify Food Category Selection",
+                "steps": "1. Scroll to the Categories section (horizontal scroll).\n2. Select a category like 'Pizza', 'Burger', or 'Traditional'.",
+                "expected_result": "The restaurant list below updates to show only those serving the selected category."
+            },
+            {
+                "id": "USER-FILT-001",
+                "feature": "Quick Filters",
+                "scenario": "Verify Tag Filters functionality",
+                "steps": "1. Locate the filter tags (chips).\n2. Test each filter: 'Free Delivery', 'Top Rated', 'Favourites', 'Budget Friendly', 'Offers', 'Veg'.",
+                "expected_result": "The list of restaurants updates to match the selected filter criteria (e.g., only top-rated stores)."
+            }
+        ],
+        "listings_and_navigation": [
+            {
+                "id": "USER-LIST-001",
+                "feature": "Restaurant Listing",
+                "scenario": "Verify Nearest Restaurants",
+                "steps": "1. Scroll down to the main list of restaurants.\n2. Verify that restaurants are displayed with images, names, and ratings.",
+                "expected_result": "A list of nearest/relevant restaurants is displayed correctly."
+            },
+            {
+                "id": "USER-FOOT-001",
+                "feature": "Bottom Navigation",
+                "scenario": "Verify Footer Tabs",
+                "steps": "1. Tap 'Home' (should be active).\n2. Tap 'Grocery' tab.\n3. Tap 'All Services' (or middle tab).\n4. Tap 'Cart' tab.\n5. Tap 'Profile' tab.",
+                "expected_result": "Each tab navigates to the correct screen. 'Home' returns to the dashboard."
+            }
+        ]
+    }
+}
