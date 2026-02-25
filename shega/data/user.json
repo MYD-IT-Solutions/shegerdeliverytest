@@ -128,6 +128,175 @@
                 "steps": "1. Tap 'Home' (should be active).\n2. Tap 'Grocery' tab.\n3. Tap 'All Services' (or middle tab).\n4. Tap 'Cart' tab.\n5. Tap 'Profile' tab.",
                 "expected_result": "Each tab navigates to the correct screen. 'Home' returns to the dashboard."
             }
+        ],
+        "restaurant_detail": [
+            {
+                "id": "USER-REST-001",
+                "feature": "Restaurant Detail Page",
+                "scenario": "Select a Restaurant and Verify All Key Info",
+                "steps": "1. From the home screen restaurant list, tap on any restaurant.\n2. Observe the restaurant detail page that loads.",
+                "expected_result": "The restaurant detail page loads and clearly displays: the restaurant name, opening/closing time, location or address, average review/rating score, and the estimated order ready time (preparation time)."
+            },
+            {
+                "id": "USER-REST-002",
+                "feature": "Restaurant Detail Page",
+                "scenario": "Verify Restaurant Name is Displayed",
+                "steps": "1. Tap on a restaurant from the listing.\n2. Check the top of the detail page.",
+                "expected_result": "The restaurant's name is prominently displayed on the detail page header or banner."
+            },
+            {
+                "id": "USER-REST-003",
+                "feature": "Restaurant Detail Page",
+                "scenario": "Verify Opening Time is Displayed",
+                "steps": "1. Open a restaurant detail page.\n2. Look for the operational hours / opening time information.",
+                "expected_result": "The restaurant's opening and closing hours are visible (e.g., 'Open: 8:00 AM – 10:00 PM')."
+            },
+            {
+                "id": "USER-REST-004",
+                "feature": "Restaurant Detail Page",
+                "scenario": "Verify Location/Address is Displayed",
+                "steps": "1. Open a restaurant detail page.\n2. Look for the location or address information.",
+                "expected_result": "The restaurant's location or address is clearly visible on the detail page."
+            },
+            {
+                "id": "USER-REST-005",
+                "feature": "Restaurant Detail Page",
+                "scenario": "Verify Review/Rating is Displayed",
+                "steps": "1. Open a restaurant detail page.\n2. Check for a star rating or review score.",
+                "expected_result": "A rating (e.g., star rating out of 5) and/or review count is displayed on the detail page."
+            },
+            {
+                "id": "USER-REST-006",
+                "feature": "Restaurant Detail Page",
+                "scenario": "Verify Order Ready Time is Displayed",
+                "steps": "1. Open a restaurant detail page.\n2. Look for the estimated preparation or order ready time.",
+                "expected_result": "An estimated order ready/preparation time is displayed (e.g., '25–35 min' or 'Ready in 30 min')."
+            }
+        ],
+        "food_listing_and_filters": [
+            {
+                "id": "USER-FOOD-001",
+                "feature": "Food Listing",
+                "scenario": "Verify Food Items Are Listed on Restaurant Page",
+                "steps": "1. Open a restaurant detail page.\n2. Scroll down to the food/menu listing section.",
+                "expected_result": "A list of food items is displayed, each showing at minimum: food name, price, and an image or description."
+            },
+            {
+                "id": "USER-FOOD-002",
+                "feature": "Food Category Filters",
+                "scenario": "Verify Food Category Filter Chips Are Present",
+                "steps": "1. Open a restaurant detail page.\n2. Observe the filter chips/tabs above the food list (e.g., 'All', 'Burgers', 'Drinks', 'Sides').",
+                "expected_result": "Category filter chips or tabs are displayed above the food list."
+            },
+            {
+                "id": "USER-FOOD-003",
+                "feature": "Food Category Filters",
+                "scenario": "Verify Selecting a Category Filter Updates the Food Listing",
+                "steps": "1. Open a restaurant detail page.\n2. Tap on a specific food category chip (e.g., 'Burgers').\n3. Observe the food list below.",
+                "expected_result": "The food list updates to show only items belonging to the selected category. Items from other categories are hidden."
+            },
+            {
+                "id": "USER-FOOD-004",
+                "feature": "Food Category Filters",
+                "scenario": "Verify 'All' Filter Restores Full Food Listing",
+                "steps": "1. Select a specific category filter to narrow the list.\n2. Then tap the 'All' filter chip.",
+                "expected_result": "The food list reverts to showing all available food items from the restaurant."
+            },
+            {
+                "id": "USER-FOOD-005",
+                "feature": "Food Category Filters",
+                "scenario": "Verify Switching Between Multiple Category Filters Works Correctly",
+                "steps": "1. Open a restaurant detail page.\n2. Tap the first category filter (e.g., 'Drinks') and verify the list updates.\n3. Tap a second category filter (e.g., 'Sides') and verify the list updates again.",
+                "expected_result": "Each category filter correctly and independently filters the food list, showing only items from the selected category."
+            }
+        ],
+        "cart_management": [
+            {
+                "id": "USER-CART-001",
+                "feature": "Add to Cart",
+                "scenario": "Verify Adding a Food Item to Cart",
+                "steps": "1. Open a restaurant detail page.\n2. Locate a food item.\n3. Tap the '+' or 'Add to Cart' button on the item.",
+                "expected_result": "The item is added to the cart. A cart indicator/badge appears or updates with the item count. A mini cart bar appears above the bottom navigation."
+            },
+            {
+                "id": "USER-CART-002",
+                "feature": "Multi-Restaurant Cart Bar",
+                "scenario": "Verify Mini Cart Bar Appears Above Bottom Navigation",
+                "steps": "1. Add at least one food item to the cart from a restaurant.\n2. Observe the area just above the bottom navigation bar.",
+                "expected_result": "A floating mini cart bar/strip appears above the bottom navigation, showing a summary (e.g., item count, restaurant name, and a 'View Cart' or 'Checkout' button)."
+            },
+            {
+                "id": "USER-CART-003",
+                "feature": "Multi-Restaurant Cart Bar",
+                "scenario": "Verify Carts from Different Restaurants Are Shown Separately",
+                "steps": "1. Add a food item from Restaurant A.\n2. Navigate back and open Restaurant B.\n3. Add a food item from Restaurant B.\n4. Observe the mini cart bar above the bottom navigation.",
+                "expected_result": "The cart bar shows separate entries or sections for each restaurant, allowing the user to distinguish between items from different restaurants."
+            },
+            {
+                "id": "USER-CART-004",
+                "feature": "Cart Navigation",
+                "scenario": "Verify Tapping the Cart Bar Navigates to the Full Cart Screen",
+                "steps": "1. Add food items to the cart so the mini cart bar is visible.\n2. Tap the mini cart bar.",
+                "expected_result": "The app navigates to the full Cart screen."
+            },
+            {
+                "id": "USER-CART-005",
+                "feature": "Cart Screen - Item Verification",
+                "scenario": "Verify All Added Food Items Appear in the Cart Screen",
+                "steps": "1. Add multiple food items to the cart from a restaurant.\n2. Navigate to the Cart screen.\n3. Review the list of items displayed.",
+                "expected_result": "All food items that were added are listed correctly in the Cart screen. No items are missing or unexpectedly duplicated."
+            }
+        ],
+        "checkout_flow": [
+            {
+                "id": "USER-CHKOUT-001",
+                "feature": "Cart Screen - Restaurant Info",
+                "scenario": "Verify Restaurant Name is Shown on Cart Screen",
+                "steps": "1. Add food items from a specific restaurant.\n2. Navigate to the Cart screen.",
+                "expected_result": "The restaurant's name is clearly displayed on the Cart screen as a header or label for the order."
+            },
+            {
+                "id": "USER-CHKOUT-002",
+                "feature": "Cart Screen - Service Type",
+                "scenario": "Verify Service Type Selection (Delivery or Takeaway)",
+                "steps": "1. Navigate to the Cart screen.\n2. Locate the service type selector.\n3. Tap 'Delivery' and observe the fields shown.\n4. Tap 'Takeaway' and observe the fields shown.",
+                "expected_result": "The cart screen provides clearly labeled options to choose between 'Delivery' and 'Takeaway'. Selecting 'Delivery' shows the delivery address field; selecting 'Takeaway' may hide it."
+            },
+            {
+                "id": "USER-CHKOUT-003",
+                "feature": "Cart Screen - Order Scheduling",
+                "scenario": "Verify Option to Schedule the Order",
+                "steps": "1. Navigate to the Cart screen.\n2. Locate the 'Schedule Order' option.\n3. Tap it and attempt to set a future date and time.",
+                "expected_result": "A scheduling option is available that lets the user set a future date and/or time for delivery or pickup. The selected schedule is reflected in the order summary."
+            },
+            {
+                "id": "USER-CHKOUT-004",
+                "feature": "Cart Screen - Delivery Address",
+                "scenario": "Verify Delivery Address Selection Method is Available",
+                "steps": "1. Navigate to the Cart screen.\n2. Ensure 'Delivery' is selected as the service type.\n3. Locate the delivery address field or selector.",
+                "expected_result": "A method to choose or enter a delivery address is present (e.g., a field showing the current address or a button to change/add a delivery address)."
+            },
+            {
+                "id": "USER-CHKOUT-005",
+                "feature": "Cart Screen - Food List Controls",
+                "scenario": "Verify Food Item Increment and Decrement Controls",
+                "steps": "1. Navigate to the Cart screen.\n2. Locate the food item list.\n3. For any item, tap the '+' (increment) button multiple times and verify quantity and total update.\n4. Tap the '-' (decrement) button and verify quantity decreases.\n5. Decrement an item down to zero.",
+                "expected_result": "Each food item has '+' and '-' controls. Tapping '+' increases the item quantity and updates the subtotal. Tapping '-' decreases the quantity. When quantity reaches zero, the item is removed from the cart."
+            },
+            {
+                "id": "USER-CHKOUT-006",
+                "feature": "Cart Screen - Tip Selection",
+                "scenario": "Verify Tip Options Are Available and Selectable",
+                "steps": "1. Navigate to the Cart screen.\n2. Scroll to find the tip/gratuity section.\n3. Tap on a predefined tip option (e.g., 10%, 15%, 20%).\n4. If available, try entering a custom tip amount.",
+                "expected_result": "A tip selection section is present with predefined options. Selecting a tip option updates the order total to reflect the chosen tip amount."
+            },
+            {
+                "id": "USER-CHKOUT-007",
+                "feature": "Cart Screen - Order Placement",
+                "scenario": "Verify 'Order Now' Button is Visible and Functional",
+                "steps": "1. Navigate to the Cart screen with at least one item added.\n2. Scroll to the bottom of the cart.\n3. Locate the 'Order Now' button.\n4. Tap the 'Order Now' button.",
+                "expected_result": "An 'Order Now' button is clearly visible at the bottom of the Cart screen. Tapping it initiates the order placement process (e.g., navigates to payment confirmation or shows an order success screen)."
+            }
         ]
     }
 }
