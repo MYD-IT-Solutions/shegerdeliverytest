@@ -491,6 +491,113 @@
                 "steps": "1. Type a product name that does not exist (e.g., 'xyznonexistent') in the search box.\n2. Observe the product list area.",
                 "expected_result": "An empty state message is displayed (e.g., 'No products found') instead of a blank or broken list."
             }
+        ],
+        "side_navigation_drawer": [
+            {
+                "id": "STR-SIDE-001",
+                "feature": "Sidebar - Home Link",
+                "scenario": "Verify the 'Home' Link in the Sidebar Navigates to the Home Dashboard",
+                "steps": "1. Open the sidebar by tapping the burger menu (☰) icon.\n2. Tap the 'Home' link in the sidebar.",
+                "expected_result": "The sidebar closes and the app navigates to the Home dashboard. This is the same page as the 'Home' footer tab."
+            },
+            {
+                "id": "STR-SIDE-002",
+                "feature": "Sidebar - Orders Link",
+                "scenario": "Verify the 'Orders' Link in the Sidebar Navigates to the Orders Page",
+                "steps": "1. Open the sidebar.\n2. Tap the 'Orders' link.",
+                "expected_result": "The sidebar closes and the app navigates to the Orders page — the same page accessed via the 'Orders' tab in the bottom navigation footer."
+            },
+            {
+                "id": "STR-SIDE-003",
+                "feature": "Sidebar - Products Link",
+                "scenario": "Verify the 'Products' Link in the Sidebar Navigates to the Products Page",
+                "steps": "1. Open the sidebar.\n2. Tap the 'Products' link.",
+                "expected_result": "The sidebar closes and the app navigates to the Products page — the same page accessed via the 'Products' tab in the bottom navigation footer."
+            },
+            {
+                "id": "STR-SIDE-004",
+                "feature": "Sidebar - Order History Link",
+                "scenario": "Verify the 'Order History' Link in the Sidebar Navigates to the History Page",
+                "steps": "1. Open the sidebar.\n2. Tap the 'Order History' link.",
+                "expected_result": "The sidebar closes and the app navigates to the Order History page — the same page accessed via the 'History' tab in the bottom navigation footer, showing completed and cancelled orders."
+            },
+            {
+                "id": "STR-SIDE-005",
+                "feature": "Sidebar - Choose Language",
+                "scenario": "Verify 'Choose Language' Option Opens a Language Selection List",
+                "steps": "1. Open the sidebar.\n2. Tap the 'Choose Language' option.",
+                "expected_result": "A language selection UI appears (modal, bottom sheet, or new screen) listing the available languages to choose from (e.g., English, Amharic, etc.)."
+            },
+            {
+                "id": "STR-SIDE-006",
+                "feature": "Sidebar - Choose Language Selection",
+                "scenario": "Verify Selecting a Language From the List Changes the App Language",
+                "steps": "1. Open the sidebar and tap 'Choose Language'.\n2. From the language list, select a different language than the current one.\n3. Observe the app UI after selection.",
+                "expected_result": "The app language changes to the selected language. Labels, buttons, and text throughout the app update to reflect the new language. The selection is saved for future sessions."
+            },
+            {
+                "id": "STR-SIDE-007",
+                "feature": "Sidebar - Customer Care Call",
+                "scenario": "Verify 'Customer Care' Opens the Device Phone/Dialer App with the Support Number",
+                "steps": "1. Open the sidebar.\n2. Tap the 'Customer Care' option.",
+                "expected_result": "The device's native phone/dialer app opens, pre-filled with the developer/support phone number, ready to call. The store user does not need to manually type the number."
+            },
+            {
+                "id": "STR-SIDE-008",
+                "feature": "Sidebar - Chat",
+                "scenario": "Verify 'Chat' Option Opens the In-App Chat Screen",
+                "steps": "1. Open the sidebar.\n2. Tap the 'Chat' option.",
+                "expected_result": "The sidebar closes and the app navigates to the Chat screen, showing a list of conversations or chat threads with customers."
+            },
+            {
+                "id": "STR-SIDE-009",
+                "feature": "Sidebar - Chat: View Customer Messages",
+                "scenario": "Verify the Restaurant Can View Messages Sent by Customers",
+                "steps": "1. Navigate to the Chat screen via the sidebar.\n2. Tap on any existing customer conversation.",
+                "expected_result": "The conversation thread opens, displaying the full chat history with that customer. Customer messages and restaurant reply messages are clearly distinguishable."
+            },
+            {
+                "id": "STR-SIDE-010",
+                "feature": "Sidebar - Chat: Send Message to Customer",
+                "scenario": "Verify the Restaurant Can Send a Reply Message to a Customer in the Chat",
+                "steps": "1. Open a customer conversation in the Chat screen.\n2. Tap the message input field.\n3. Type a reply message (e.g., 'Your order is on the way!').\n4. Tap the send button.",
+                "expected_result": "The typed message is sent and appears in the chat thread as a restaurant message. The message timestamp is visible."
+            },
+            {
+                "id": "STR-SIDE-011",
+                "feature": "Sidebar - Dark Mode Toggle",
+                "scenario": "Verify the Dark Mode Toggle Switches the App to Dark Theme",
+                "steps": "1. Open the sidebar.\n2. Locate the Dark Mode toggle switch.\n3. If the app is in Light mode, tap the toggle to enable Dark mode.\n4. Observe the app's visual appearance.",
+                "expected_result": "The app switches to a dark color theme (dark backgrounds, light text) across all screens. The toggle reflects the 'on' / dark mode state."
+            },
+            {
+                "id": "STR-SIDE-012",
+                "feature": "Sidebar - Light Mode Toggle",
+                "scenario": "Verify the Dark Mode Toggle Switches the App Back to Light Theme",
+                "steps": "1. With Dark mode enabled, open the sidebar.\n2. Tap the Dark Mode toggle again to disable it.",
+                "expected_result": "The app switches back to the light color theme. The toggle reflects the 'off' / light mode state. The preference is saved for future sessions."
+            },
+            {
+                "id": "STR-SIDE-013",
+                "feature": "Sidebar - Dark Mode Persistence",
+                "scenario": "Verify the Dark/Light Mode Preference Persists After App Restart",
+                "steps": "1. Enable Dark mode via the sidebar toggle.\n2. Completely close and relaunch the Store App.\n3. Observe the app's theme on launch.",
+                "expected_result": "The app relaunches in Dark mode, reflecting the saved preference. The mode does not reset to the default on restart."
+            },
+            {
+                "id": "STR-SIDE-014",
+                "feature": "Sidebar - Logout",
+                "scenario": "Verify the 'Logout' Button in the Sidebar Logs the User Out",
+                "steps": "1. Open the sidebar.\n2. Tap the 'Logout' button.\n3. If a confirmation dialog appears, confirm the logout.",
+                "expected_result": "The user is logged out of the Store App. The app redirects to the Login screen. The saved session/token is cleared, and re-entering the app requires logging in again."
+            },
+            {
+                "id": "STR-SIDE-015",
+                "feature": "Sidebar - Active Link Highlight",
+                "scenario": "Verify the Currently Active Screen's Link is Highlighted in the Sidebar",
+                "steps": "1. Navigate to the Orders page via the footer.\n2. Open the sidebar.\n3. Observe which sidebar link is highlighted or marked as active.",
+                "expected_result": "The 'Orders' link in the sidebar is visually highlighted (e.g., different background, bold text, or accent color), reflecting the currently active screen."
+            }
         ]
     }
 }
