@@ -233,6 +233,150 @@
                 "steps": "1. Open the side navigation drawer.\n2. Locate and tap the 'Logout' option.\n3. Confirm any confirmation prompt if shown.",
                 "expected_result": "The user is logged out of the Store App and redirected to the Login screen. The session is cleared."
             }
+        ],
+        "orders_page": [
+            {
+                "id": "STR-ORDPG-001",
+                "feature": "Orders Page - Entry via 'New Orders' Card",
+                "scenario": "Verify Tapping the 'New Orders' Dashboard Card Opens the Orders Page with 'New Orders' Filter Selected",
+                "steps": "1. On the Home dashboard, tap the 'New Orders' summary card.\n2. Observe the screen that opens.",
+                "expected_result": "The Orders page opens and the 'New Orders' filter tab is pre-selected/highlighted. Only orders with 'New' status are shown in the list."
+            },
+            {
+                "id": "STR-ORDPG-002",
+                "feature": "Orders Page - Entry via 'Processing' Card",
+                "scenario": "Verify Tapping the 'Processing Orders' Dashboard Card Opens the Orders Page with 'Processing' Filter Selected",
+                "steps": "1. On the Home dashboard, tap the 'Processing Orders' summary card.\n2. Observe the screen that opens.",
+                "expected_result": "The Orders page opens and the 'Processing' filter tab is pre-selected/highlighted. Only orders currently being prepared are shown."
+            },
+            {
+                "id": "STR-ORDPG-003",
+                "feature": "Orders Page - Entry via Footer 'Orders' Tab",
+                "scenario": "Verify the Footer 'Orders' Tab Opens the Orders Page (No Pre-Selected Filter)",
+                "steps": "1. From any screen, tap the 'Orders' tab in the bottom navigation footer.\n2. Observe the screen that opens and the default filter state.",
+                "expected_result": "The Orders page opens. The default filter is either 'New Orders' or shows all active orders. The page displays Total Orders count and Total Earnings at the top."
+            },
+            {
+                "id": "STR-ORDPG-004",
+                "feature": "Orders Page - Total Orders",
+                "scenario": "Verify the Orders Page Displays a Total Orders Count",
+                "steps": "1. Open the Orders page (via any entry point).\n2. Observe the summary area at the top of the page.",
+                "expected_result": "A 'Total Orders' count is clearly displayed at the top of the page, reflecting the total number of orders in the current view or current period."
+            },
+            {
+                "id": "STR-ORDPG-005",
+                "feature": "Orders Page - Total Earnings",
+                "scenario": "Verify the Orders Page Displays the Total Earnings Amount",
+                "steps": "1. Open the Orders page.\n2. Observe the summary area at the top of the page.",
+                "expected_result": "A 'Total Earnings' or 'Revenue' value is clearly displayed at the top, showing the total monetary amount earned from orders in the current view."
+            },
+            {
+                "id": "STR-ORDPG-006",
+                "feature": "Orders Page - Filter: New Orders",
+                "scenario": "Verify the 'New Orders' Filter Shows Only Newly Received Orders",
+                "steps": "1. On the Orders page, tap the 'New Orders' filter tab.\n2. Observe the order list that is displayed.",
+                "expected_result": "The list updates to show only orders with a 'New' status, awaiting acceptance by the restaurant. All other order statuses are hidden."
+            },
+            {
+                "id": "STR-ORDPG-007",
+                "feature": "Orders Page - Filter: Processing",
+                "scenario": "Verify the 'Processing' Filter Shows Only Orders Being Prepared",
+                "steps": "1. On the Orders page, tap the 'Processing' filter tab.\n2. Observe the order list that is displayed.",
+                "expected_result": "The list updates to show only orders that have been accepted and are currently being prepared in the restaurant kitchen."
+            },
+            {
+                "id": "STR-ORDPG-008",
+                "feature": "Orders Page - Filter: Picked",
+                "scenario": "Verify the 'Picked' Filter Shows Only Orders That Have Been Picked Up by a Rider",
+                "steps": "1. On the Orders page, tap the 'Picked' filter tab.\n2. Observe the order list that is displayed.",
+                "expected_result": "The list updates to show only orders that are ready and have been picked up by a delivery driver, currently en route to the customer."
+            },
+            {
+                "id": "STR-ORDPG-009",
+                "feature": "Orders Page - Filter Switching",
+                "scenario": "Verify Switching Between Filters Updates the Order List Correctly",
+                "steps": "1. On the Orders page, tap 'New Orders' → verify only new orders show.\n2. Tap 'Processing' → verify only processing orders show.\n3. Tap 'Picked' → verify only picked orders show.\n4. Switch back to 'New Orders'.",
+                "expected_result": "Each filter switch correctly updates the displayed list without requiring a page reload. The active filter tab is visually highlighted."
+            },
+            {
+                "id": "STR-ORDPG-010",
+                "feature": "Orders Page - Order Card Detail",
+                "scenario": "Verify Each Order Card on the Orders Page Shows Relevant Information",
+                "steps": "1. Observe any order card in the Orders list.\n2. Check the details displayed on the card.",
+                "expected_result": "Each order card displays: order ID/number, customer name or order summary, order time, and the current status badge (New, Processing, or Picked)."
+            }
+        ],
+        "history_page": [
+            {
+                "id": "STR-HIST-001",
+                "feature": "History Page - Entry via 'Completed' Card",
+                "scenario": "Verify Tapping the 'Completed Orders' Dashboard Card Opens the History Page with 'Completed' Filter Selected",
+                "steps": "1. On the Home dashboard, tap the 'Completed Orders' summary card.\n2. Observe the screen that opens.",
+                "expected_result": "The History page opens and the 'Completed' filter tab is pre-selected/highlighted. Only successfully completed orders are shown."
+            },
+            {
+                "id": "STR-HIST-002",
+                "feature": "History Page - Entry via 'Cancelled' Card",
+                "scenario": "Verify Tapping the 'Cancelled Orders' Dashboard Card Opens the History Page with 'Cancelled' Filter Selected",
+                "steps": "1. On the Home dashboard, tap the 'Cancelled Orders' summary card.\n2. Observe the screen that opens.",
+                "expected_result": "The History page opens and the 'Cancelled' filter tab is pre-selected/highlighted. Only cancelled orders are shown in the list."
+            },
+            {
+                "id": "STR-HIST-003",
+                "feature": "History Page - Entry via Footer 'History' Tab",
+                "scenario": "Verify the Footer 'History' Tab Opens the History Page",
+                "steps": "1. From any screen, tap the 'History' tab in the bottom navigation footer.\n2. Observe the screen that opens and the default filter state.",
+                "expected_result": "The History page opens showing past orders. The default filter shows all historical orders or defaults to 'Completed'."
+            },
+            {
+                "id": "STR-HIST-004",
+                "feature": "History Page - Completed Orders List",
+                "scenario": "Verify the History Page Shows a List of Completed Orders",
+                "steps": "1. Open the History page.\n2. Confirm completed orders are visible in the list (either by default or by selecting the 'Completed' filter).",
+                "expected_result": "Completed orders are displayed in the list. Each order card shows relevant details such as order ID, items, customer name, total amount, and a 'Completed' status badge."
+            },
+            {
+                "id": "STR-HIST-005",
+                "feature": "History Page - Cancelled Orders List",
+                "scenario": "Verify the History Page Shows a List of Cancelled Orders",
+                "steps": "1. Open the History page.\n2. Confirm cancelled orders are visible (either by default or by selecting the 'Cancelled' filter).",
+                "expected_result": "Cancelled orders are displayed in the list with a visible 'Cancelled' status badge. The reason for cancellation may also be shown."
+            },
+            {
+                "id": "STR-HIST-006",
+                "feature": "History Page - Filter: Completed",
+                "scenario": "Verify the 'Completed' Filter Shows Only Successfully Completed Orders",
+                "steps": "1. On the History page, tap the 'Completed' filter tab.\n2. Observe the order list.",
+                "expected_result": "The list updates to show only orders with a 'Completed' status. No cancelled or other orders appear in this view."
+            },
+            {
+                "id": "STR-HIST-007",
+                "feature": "History Page - Filter: Cancelled",
+                "scenario": "Verify the 'Cancelled' Filter Shows Only Cancelled Orders",
+                "steps": "1. On the History page, tap the 'Cancelled' filter tab.\n2. Observe the order list.",
+                "expected_result": "The list updates to show only orders that were cancelled. No completed or other orders appear in this view."
+            },
+            {
+                "id": "STR-HIST-008",
+                "feature": "History Page - Filter Switching",
+                "scenario": "Verify Switching Between 'Completed' and 'Cancelled' Filters Works Correctly",
+                "steps": "1. On the History page, tap 'Completed' → verify only completed orders appear.\n2. Tap 'Cancelled' → verify only cancelled orders appear.\n3. Switch back to 'Completed'.",
+                "expected_result": "Each filter switch correctly updates the list in real time. The active filter tab is visually highlighted and the list refreshes accordingly."
+            },
+            {
+                "id": "STR-HIST-009",
+                "feature": "History Page - Order Card Detail",
+                "scenario": "Verify Each Order Card on the History Page Shows Relevant Information",
+                "steps": "1. Observe any order card in the History list.\n2. Check what details are shown on the card.",
+                "expected_result": "Each history order card displays: order ID/number, items or restaurant name, order date and time, total amount, and a status badge ('Completed' or 'Cancelled')."
+            },
+            {
+                "id": "STR-HIST-010",
+                "feature": "History Page - Empty State",
+                "scenario": "Verify an Appropriate Message is Shown When a Filter Has No Orders",
+                "steps": "1. On the History page, tap the 'Cancelled' filter (or any filter expected to have no results).\n2. If the list is empty, observe what is displayed.",
+                "expected_result": "An empty state message or illustration is shown (e.g., 'No cancelled orders yet') instead of a blank or broken list."
+            }
         ]
     }
 }
