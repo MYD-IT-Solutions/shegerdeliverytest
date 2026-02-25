@@ -429,6 +429,218 @@
                 "steps": "1. Open the order detail screen for a completed or active order.\n2. Verify all key sections are present: Order Number, Date & Time, Ordered Items list, Restaurant Details, and Billing Details.",
                 "expected_result": "All required sections — Order Number, Date & Time, Ordered Items, Restaurant Details, and Billing Details — are present and populated with correct data on the order detail screen."
             }
+        ],
+        "profile": [
+            {
+                "id": "USER-PROF-001",
+                "feature": "Profile Header",
+                "scenario": "Verify Profile Screen Displays User Picture, Name, Email, and Phone",
+                "steps": "1. Tap the 'Profile' tab in the bottom navigation.\n2. Observe the profile header section at the top of the screen.",
+                "expected_result": "The profile header displays the user's profile picture, full name, email address, and phone number."
+            },
+            {
+                "id": "USER-PROF-002",
+                "feature": "Profile Header - Settings Icon",
+                "scenario": "Verify Settings Icon is Visible on the Profile Screen",
+                "steps": "1. Navigate to the Profile screen.\n2. Look for a Settings (gear/pencil) icon near the profile header.",
+                "expected_result": "A Settings icon is visible on the profile screen, typically in the top-right area or alongside the profile header."
+            },
+            {
+                "id": "USER-PROF-003",
+                "feature": "Profile Header - Edit Name",
+                "scenario": "Verify Clicking Settings Icon Offers Option to Edit Name",
+                "steps": "1. Navigate to the Profile screen.\n2. Tap the Settings icon.\n3. Observe the options presented.",
+                "expected_result": "Tapping the Settings icon opens an edit panel or screen that includes an option to edit the user's name."
+            },
+            {
+                "id": "USER-PROF-004",
+                "feature": "Profile Header - Edit Picture",
+                "scenario": "Verify Clicking Settings Icon Offers Option to Edit Profile Picture",
+                "steps": "1. Navigate to the Profile screen.\n2. Tap the Settings icon.\n3. Look for an option to change or upload a profile picture.",
+                "expected_result": "The edit panel/screen includes an option to change the profile picture (e.g., via camera or gallery)."
+            },
+            {
+                "id": "USER-PROF-005",
+                "feature": "Shega Cash Balance",
+                "scenario": "Verify Shega Cash Balance is Displayed in ETB",
+                "steps": "1. Navigate to the Profile screen.\n2. Look for the wallet or balance section below the profile header.",
+                "expected_result": "The user's Shega Cash balance is displayed in Ethiopian Birr (ETB), clearly labeled as 'Shega Cash'."
+            },
+            {
+                "id": "USER-PROF-006",
+                "feature": "Account Management - Orders List",
+                "scenario": "Verify Orders Option is Available in Account Management",
+                "steps": "1. Navigate to the Profile screen.\n2. Locate the 'Account Management' section.\n3. Tap on 'Orders'.",
+                "expected_result": "The Orders screen opens, displaying a list of the user's orders."
+            },
+            {
+                "id": "USER-PROF-007",
+                "feature": "Account Management - Orders Tabs",
+                "scenario": "Verify Orders Screen Has Tabs to Filter Active, Completed, and Cancelled Orders",
+                "steps": "1. Open the Orders screen from the Profile.\n2. Observe the tabs at the top of the orders list.",
+                "expected_result": "Three filter tabs are visible: 'Active', 'Completed', and 'Cancelled'. Tapping each tab filters the list to show only orders in that state."
+            },
+            {
+                "id": "USER-PROF-008",
+                "feature": "Account Management - Orders List Item",
+                "scenario": "Verify Each Order in the List Shows Restaurant Image, Name, Order Detail, and Payment Amount",
+                "steps": "1. Open the Orders screen.\n2. Observe the details shown on each order card in the list.",
+                "expected_result": "Each order card displays: the restaurant's image, restaurant name, a brief order detail (items summary), and the total payment amount."
+            },
+            {
+                "id": "USER-PROF-009",
+                "feature": "Account Management - Orders - Track Order Button",
+                "scenario": "Verify 'Track Order' Button is Available on Each Order Card",
+                "steps": "1. Open the Orders screen.\n2. Find an active order.\n3. Tap the 'Track Order' button on the order card.",
+                "expected_result": "A map screen opens, showing the real-time location of the delivery and the order's tracking progress."
+            },
+            {
+                "id": "USER-PROF-010",
+                "feature": "Account Management - Orders - Cancel Order Button",
+                "scenario": "Verify 'Cancel Order' Button Opens a Cancellation Dialogue with a Reason List",
+                "steps": "1. Open the Orders screen.\n2. Find an active order.\n3. Tap the 'Cancel Order' button on the order card.",
+                "expected_result": "A cancellation dialog opens with a list of selectable cancellation reasons (e.g., 'Changed my mind', 'Ordered by mistake', 'Delivery too long'). The order is only cancelled after selecting a reason and confirming."
+            },
+            {
+                "id": "USER-PROF-011",
+                "feature": "Account Management - Orders - Help Button",
+                "scenario": "Verify 'Help' Button on Order Card Opens Chat with the Restaurant",
+                "steps": "1. Open the Orders screen.\n2. Find any order.\n3. Tap the 'Help' button on the order card.",
+                "expected_result": "The in-app chat window opens, connecting the user directly with the restaurant for that specific order."
+            },
+            {
+                "id": "USER-PROF-012",
+                "feature": "Account Management - Favourites",
+                "scenario": "Verify Favourites Screen Shows a List of Saved Restaurants",
+                "steps": "1. Navigate to the Profile screen.\n2. Tap 'Favourites' in the Account Management section.",
+                "expected_result": "A list of restaurants the user has previously marked as favourites is displayed."
+            },
+            {
+                "id": "USER-PROF-013",
+                "feature": "Account Management - Address",
+                "scenario": "Verify Address Screen Shows the List of Saved Addresses with Edit and Delete Options",
+                "steps": "1. Navigate to the Profile screen.\n2. Tap 'Address' in the Account Management section.\n3. Observe the list of saved addresses.",
+                "expected_result": "A list of currently saved delivery addresses is displayed. Each address has an 'Edit' and a 'Delete' option."
+            },
+            {
+                "id": "USER-PROF-014",
+                "feature": "Account Management - Address - Add New",
+                "scenario": "Verify 'Add New Address' Opens a Map with a Current Location Selector",
+                "steps": "1. Open the Address screen.\n2. Tap the 'Add New Address' button.\n3. Observe the screen that opens.",
+                "expected_result": "A map view opens with a pin/marker positioned at the user's current location, allowing the user to drag/select the precise delivery point."
+            },
+            {
+                "id": "USER-PROF-015",
+                "feature": "Account Management - Address - Add New Form",
+                "scenario": "Verify Add New Address Form Includes House/Flat No, Landmark, and Address Type",
+                "steps": "1. Open the Add New Address screen (map view).\n2. Confirm or select a location on the map.\n3. Observe the form fields below the map.",
+                "expected_result": "The form includes: a 'House / Flat No.' input field, a 'Landmark' input field, and an address type selector with options: 'Home', 'Office', and 'Other'."
+            },
+            {
+                "id": "USER-PROF-016",
+                "feature": "Account Management - Offers",
+                "scenario": "Verify Offers Screen Shows a List of Available Coupons",
+                "steps": "1. Navigate to the Profile screen.\n2. Tap 'Offers' in the Account Management section.",
+                "expected_result": "A list of currently available discount coupons or promotional offers is displayed to the user."
+            },
+            {
+                "id": "USER-PROF-017",
+                "feature": "Account Management - Language",
+                "scenario": "Verify Language Screen Shows a Selectable List of Languages",
+                "steps": "1. Navigate to the Profile screen.\n2. Tap 'Language' in the Account Management section.\n3. Observe the list of available languages.",
+                "expected_result": "A list of languages is displayed including: English, Turkish, French, Español, Nederlands, Arabic (UAE), Italian, Deutsch, Português, and Svenska. Selecting a language changes the app's interface language."
+            },
+            {
+                "id": "USER-PROF-018",
+                "feature": "Account Management - More Info",
+                "scenario": "Verify More Info Opens a List of Information Links",
+                "steps": "1. Navigate to the Profile screen.\n2. Tap 'More Info' in the Account Management section.",
+                "expected_result": "A list of links is displayed including: 'About Us', 'Help', 'FAQ', 'Privacy Policy', and 'Terms and Conditions'. Each link opens the corresponding content."
+            },
+            {
+                "id": "USER-PROF-019",
+                "feature": "Account Management - Dark Mode",
+                "scenario": "Verify Dark Mode Toggle Switches the App Theme",
+                "steps": "1. Navigate to the Profile screen.\n2. Locate the 'Dark Mode' toggle in the Account Management section.\n3. Tap the toggle to enable Dark Mode.\n4. Observe the app theme.\n5. Tap the toggle again to disable Dark Mode.",
+                "expected_result": "Enabling the toggle switches the app to a dark theme. Disabling it reverts to the light theme. The toggle state is saved across app sessions."
+            },
+            {
+                "id": "USER-PROF-020",
+                "feature": "Account Management - Logout",
+                "scenario": "Verify Logout Option Logs the User Out and Returns to the Login Screen",
+                "steps": "1. Navigate to the Profile screen.\n2. Tap 'Logout' in the Account Management section.\n3. Confirm the action if a confirmation prompt appears.",
+                "expected_result": "The user is logged out and redirected to the Login / Welcome screen. The session is cleared."
+            },
+            {
+                "id": "USER-PROF-021",
+                "feature": "Support Links - About Us",
+                "scenario": "Verify 'About Us' Link Opens the About Page",
+                "steps": "1. Navigate to the Profile screen.\n2. Locate the Support section.\n3. Tap 'About Us'.",
+                "expected_result": "The About Us page opens, displaying information about Shega Delivery."
+            },
+            {
+                "id": "USER-PROF-022",
+                "feature": "Support Links - Privacy Policy",
+                "scenario": "Verify 'Privacy Policy' Link Opens the Privacy Policy",
+                "steps": "1. Navigate to the Profile screen.\n2. Tap 'Privacy Policy' in the Support section.",
+                "expected_result": "The Privacy Policy page opens and is fully readable."
+            },
+            {
+                "id": "USER-PROF-023",
+                "feature": "Support Links - Rate the App",
+                "scenario": "Verify 'Rate the App' Redirects to the App Store Listing",
+                "steps": "1. Navigate to the Profile screen.\n2. Tap 'Rate the App' in the Support section.",
+                "expected_result": "The user is redirected to the app's listing on the App Store (iOS) or Google Play Store (Android) to leave a rating."
+            },
+            {
+                "id": "USER-PROF-024",
+                "feature": "Support Links - Help",
+                "scenario": "Verify 'Help' Link Opens the Help / Support Page",
+                "steps": "1. Navigate to the Profile screen.\n2. Tap 'Help' in the Support section.",
+                "expected_result": "The Help page or support chat opens, allowing the user to get assistance."
+            },
+            {
+                "id": "USER-PROF-025",
+                "feature": "Support Links - Deactivate Account",
+                "scenario": "Verify 'Deactivate Account' Option is Available and Prompts Confirmation",
+                "steps": "1. Navigate to the Profile screen.\n2. Tap 'Deactivate Account' in the Support section.\n3. Observe the confirmation prompt.",
+                "expected_result": "A confirmation dialog appears explaining the consequences of deactivation and asking the user to confirm. The account is only deactivated if the user confirms."
+            },
+            {
+                "id": "USER-PROF-026",
+                "feature": "Support Links - Delete Account",
+                "scenario": "Verify 'Delete Account' Option is Available and Prompts a Strong Confirmation",
+                "steps": "1. Navigate to the Profile screen.\n2. Tap 'Delete Account' in the Support section.\n3. Observe the confirmation prompt.",
+                "expected_result": "A strong confirmation dialog appears warning the user that account deletion is permanent and irreversible. The account is only deleted if the user explicitly confirms."
+            },
+            {
+                "id": "USER-PROF-027",
+                "feature": "Support Links - Become a Captain",
+                "scenario": "Verify 'Become a Captain' Redirects to the Rider/Driver App",
+                "steps": "1. Navigate to the Profile screen.\n2. Tap 'Become a Captain' in the Support section.",
+                "expected_result": "The user is redirected to the Shega Delivery Rider/Driver app (either via App Store, Play Store listing, or a deep link to the riders app)."
+            },
+            {
+                "id": "USER-PROF-028",
+                "feature": "Quick Actions - Invite",
+                "scenario": "Verify Invite Link Opens a Share/Referral Screen",
+                "steps": "1. Navigate to the Profile screen.\n2. Locate the quick-action links section.\n3. Tap 'Invite'.",
+                "expected_result": "A share screen or referral page opens, allowing the user to invite friends via a referral link or share to other apps."
+            },
+            {
+                "id": "USER-PROF-029",
+                "feature": "Quick Actions - Call",
+                "scenario": "Verify Call Link Initiates a Phone Call to Shega Support",
+                "steps": "1. Navigate to the Profile screen.\n2. Tap the 'Call' quick-action link.",
+                "expected_result": "The device's native dialer opens, pre-filled with Shega Delivery's support phone number, ready to initiate a call."
+            },
+            {
+                "id": "USER-PROF-030",
+                "feature": "Quick Actions - Mail",
+                "scenario": "Verify Mail Link Opens an Email Compose Window to Shega Support",
+                "steps": "1. Navigate to the Profile screen.\n2. Tap the 'Mail' quick-action link.",
+                "expected_result": "The device's default email client opens with a new compose window pre-filled with Shega Delivery's support email address in the 'To' field."
+            }
         ]
     }
 }
