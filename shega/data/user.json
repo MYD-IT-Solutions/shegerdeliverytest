@@ -297,6 +297,138 @@
                 "steps": "1. Navigate to the Cart screen with at least one item added.\n2. Scroll to the bottom of the cart.\n3. Locate the 'Order Now' button.\n4. Tap the 'Order Now' button.",
                 "expected_result": "An 'Order Now' button is clearly visible at the bottom of the Cart screen. Tapping it initiates the order placement process (e.g., navigates to payment confirmation or shows an order success screen)."
             }
+        ],
+        "order_contact": [
+            {
+                "id": "USER-CONTACT-001",
+                "feature": "Order Contact - Restaurant",
+                "scenario": "Verify Contact Options Appear When Tapping the Restaurant on an Active Order",
+                "steps": "1. Place an order and wait for it to be accepted.\n2. Navigate to the active order screen.\n3. Tap on the restaurant name or restaurant contact icon.",
+                "expected_result": "A contact panel or bottom sheet appears showing two clearly labeled options: a Phone icon (for calling) and a Chat icon (for in-app messaging)."
+            },
+            {
+                "id": "USER-CONTACT-002",
+                "feature": "Order Contact - Phone Call",
+                "scenario": "Verify Phone Icon Directly Initiates a Call to the Restaurant",
+                "steps": "1. From the active order screen, tap the restaurant contact section.\n2. Tap the Phone icon.",
+                "expected_result": "The device's native dialer opens immediately, pre-filled with the restaurant's phone number, ready to call — with no additional prompts or intermediate screens."
+            },
+            {
+                "id": "USER-CONTACT-003",
+                "feature": "Order Contact - In-App Chat",
+                "scenario": "Verify Chat Icon Opens the In-App Chat with the Restaurant",
+                "steps": "1. From the active order screen, tap the restaurant contact section.\n2. Tap the Chat icon.",
+                "expected_result": "An in-app chat window opens within the application, allowing the user to send and receive text messages directly with the restaurant."
+            },
+            {
+                "id": "USER-CONTACT-004",
+                "feature": "Order Contact - In-App Chat",
+                "scenario": "Verify Chat Messages Can Be Sent and Received",
+                "steps": "1. Open the in-app chat with the restaurant.\n2. Type a message in the input field.\n3. Tap the Send button.\n4. Observe the message thread.",
+                "expected_result": "The sent message appears in the chat thread. The chat interface supports real-time or near-real-time messaging with the restaurant."
+            }
+        ],
+        "order_status_tracking": [
+            {
+                "id": "USER-TRACK-001",
+                "feature": "Order Status - Ordered",
+                "scenario": "Verify 'Ordered' Status is Shown After Placing an Order",
+                "steps": "1. Place an order by tapping 'Order Now'.\n2. Navigate to the active order or order tracking screen.",
+                "expected_result": "The order status tracker displays the first step as 'Ordered' (or 'Placed') and it is marked as active/completed."
+            },
+            {
+                "id": "USER-TRACK-002",
+                "feature": "Order Status - Accepted",
+                "scenario": "Verify 'Accepted' Status Updates When Restaurant Accepts the Order",
+                "steps": "1. After placing an order, wait for the restaurant to accept it.\n2. Observe the order status tracker on the active order screen.",
+                "expected_result": "The status tracker updates to show 'Accepted' as the current step, with 'Ordered' marked as completed."
+            },
+            {
+                "id": "USER-TRACK-003",
+                "feature": "Order Status - Assigned",
+                "scenario": "Verify 'Assigned' Status Updates When a Delivery Driver is Assigned",
+                "steps": "1. After the order is accepted by the restaurant, wait for a delivery driver to be assigned.\n2. Observe the order status tracker.",
+                "expected_result": "The status tracker updates to show 'Assigned' (driver assigned) as the current step, with previous steps marked as completed."
+            },
+            {
+                "id": "USER-TRACK-004",
+                "feature": "Order Status - Delivered",
+                "scenario": "Verify 'Delivered' Status Updates When the Order is Delivered",
+                "steps": "1. After the driver is assigned and the order is delivered, observe the order status tracker.",
+                "expected_result": "The status tracker updates to show 'Delivered' as the final completed step. All previous steps (Ordered, Accepted, Assigned) are also marked as completed."
+            },
+            {
+                "id": "USER-TRACK-005",
+                "feature": "Order Status - Full Tracker",
+                "scenario": "Verify All Four Status Steps Are Visible on the Tracker",
+                "steps": "1. Navigate to any active or past order's tracking screen.\n2. Observe the status stepper/tracker UI.",
+                "expected_result": "All four status steps are visible in sequence: Ordered → Accepted → Assigned → Delivered. Each step is clearly labeled."
+            },
+            {
+                "id": "USER-TRACK-006",
+                "feature": "Order Status - Cancel Order",
+                "scenario": "Verify Cancel Order Option is Available on the Active Order Screen",
+                "steps": "1. Place an order and navigate to the active order/tracking screen.\n2. Look for a 'Cancel Order' button or link.",
+                "expected_result": "A 'Cancel Order' option is visible on the active order screen (e.g., a button or a text link)."
+            },
+            {
+                "id": "USER-TRACK-007",
+                "feature": "Order Status - Cancel Order",
+                "scenario": "Verify Cancel Order Asks for Confirmation Before Cancelling",
+                "steps": "1. On the active order screen, tap 'Cancel Order'.\n2. Observe any confirmation dialog or prompt that appears.",
+                "expected_result": "A confirmation dialog appears asking the user to confirm the cancellation (e.g., 'Are you sure you want to cancel this order?'). The order is only cancelled if the user confirms."
+            }
+        ],
+        "order_detail": [
+            {
+                "id": "USER-ORD-001",
+                "feature": "Order Detail - Access",
+                "scenario": "Verify 'Order Detail' Button is Present on the Active Order Screen",
+                "steps": "1. Place an order.\n2. Navigate to the active order or order history screen.\n3. Look for an 'Order Detail' button or link.",
+                "expected_result": "An 'Order Detail' button or link is clearly visible on the active order or order history screen."
+            },
+            {
+                "id": "USER-ORD-002",
+                "feature": "Order Detail - Order Number",
+                "scenario": "Verify Order Number is Displayed on the Order Detail Screen",
+                "steps": "1. Tap the 'Order Detail' button on any order.\n2. Observe the order detail screen.",
+                "expected_result": "A unique order number (ID) is clearly displayed on the order detail screen."
+            },
+            {
+                "id": "USER-ORD-003",
+                "feature": "Order Detail - Date and Time",
+                "scenario": "Verify Order Date and Time are Displayed on the Order Detail Screen",
+                "steps": "1. Open the order detail screen for any order.\n2. Look for the date and time of the order.",
+                "expected_result": "The date and time the order was placed are clearly displayed on the order detail screen."
+            },
+            {
+                "id": "USER-ORD-004",
+                "feature": "Order Detail - Ordered Items",
+                "scenario": "Verify All Ordered Items are Listed in the Order Detail",
+                "steps": "1. Open the order detail screen.\n2. Scroll through the items section.",
+                "expected_result": "All items included in the order are listed, each showing the item name, quantity, and individual price."
+            },
+            {
+                "id": "USER-ORD-005",
+                "feature": "Order Detail - Restaurant Details",
+                "scenario": "Verify Restaurant Details are Shown in the Order Detail",
+                "steps": "1. Open the order detail screen.\n2. Look for a restaurant information section.",
+                "expected_result": "The restaurant's name and relevant details (e.g., address or contact) are displayed within the order detail screen."
+            },
+            {
+                "id": "USER-ORD-006",
+                "feature": "Order Detail - Billing Details",
+                "scenario": "Verify Billing Details are Shown in the Order Detail",
+                "steps": "1. Open the order detail screen.\n2. Scroll to the billing or payment summary section.",
+                "expected_result": "A billing breakdown is displayed, including: subtotal (items cost), delivery fee (if applicable), tip amount (if any), and the final total amount charged."
+            },
+            {
+                "id": "USER-ORD-007",
+                "feature": "Order Detail - Full Completeness",
+                "scenario": "Verify Order Detail Screen Shows All Required Sections",
+                "steps": "1. Open the order detail screen for a completed or active order.\n2. Verify all key sections are present: Order Number, Date & Time, Ordered Items list, Restaurant Details, and Billing Details.",
+                "expected_result": "All required sections — Order Number, Date & Time, Ordered Items, Restaurant Details, and Billing Details — are present and populated with correct data on the order detail screen."
+            }
         ]
     }
 }
