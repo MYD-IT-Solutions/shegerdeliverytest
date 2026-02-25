@@ -377,6 +377,120 @@
                 "steps": "1. On the History page, tap the 'Cancelled' filter (or any filter expected to have no results).\n2. If the list is empty, observe what is displayed.",
                 "expected_result": "An empty state message or illustration is shown (e.g., 'No cancelled orders yet') instead of a blank or broken list."
             }
+        ],
+        "products_page": [
+            {
+                "id": "STR-PROD-001",
+                "feature": "Products Page - Entry via Footer",
+                "scenario": "Verify the 'Products' Footer Tab Opens the Products Page",
+                "steps": "1. From any screen, tap the 'Products' tab in the bottom navigation footer.\n2. Observe the screen that loads.",
+                "expected_result": "The Products page opens, displaying the restaurant's full product/menu item list."
+            },
+            {
+                "id": "STR-PROD-002",
+                "feature": "Products Page - Search Bar",
+                "scenario": "Verify the Search Box at the Top Filters Products by Name",
+                "steps": "1. On the Products page, tap the search box at the top of the page.\n2. Type the name of an existing product (e.g., 'Burger').\n3. Observe the list as you type.",
+                "expected_result": "The product list filters in real time to show only products whose names match the typed search query. Non-matching products are hidden."
+            },
+            {
+                "id": "STR-PROD-003",
+                "feature": "Products Page - Search Clear",
+                "scenario": "Verify Clearing the Search Box Restores the Full Product List",
+                "steps": "1. Enter a search query in the search box.\n2. Clear the search box (tap the clear/X button or delete the text).",
+                "expected_result": "The product list resets to show all products again with no active search filter."
+            },
+            {
+                "id": "STR-PROD-004",
+                "feature": "Products Page - Batch Action Bar Visibility",
+                "scenario": "Verify the Batch Action Toolbar is Visible on the Products Page",
+                "steps": "1. Open the Products page.\n2. Observe the area below the search box.",
+                "expected_result": "A batch action toolbar is visible containing at minimum: a 'Select All' checkbox/button, a 'Mark as Sold' action, and a 'Mark as Available' action."
+            },
+            {
+                "id": "STR-PROD-005",
+                "feature": "Products Page - Select All",
+                "scenario": "Verify 'Select All' Selects Every Product in the List",
+                "steps": "1. On the Products page, tap the 'Select All' checkbox or button in the batch action bar.\n2. Observe the product list.",
+                "expected_result": "All product checkboxes in the list become checked/selected simultaneously. The batch action buttons (Mark as Sold, Mark as Available) become active/tappable."
+            },
+            {
+                "id": "STR-PROD-006",
+                "feature": "Products Page - Deselect All",
+                "scenario": "Verify Tapping 'Select All' Again Deselects All Products",
+                "steps": "1. Tap 'Select All' to select all products.\n2. Tap 'Select All' again.",
+                "expected_result": "All product checkboxes are unchecked/deselected. The batch action buttons return to their inactive state."
+            },
+            {
+                "id": "STR-PROD-007",
+                "feature": "Products Page - Filter by Price",
+                "scenario": "Verify the Product List Can Be Filtered or Sorted by Price",
+                "steps": "1. On the Products page, locate the filter controls.\n2. Select the 'Price' filter option (e.g., low to high or high to low).\n3. Observe the list order.",
+                "expected_result": "The product list reorders based on price (ascending or descending) as selected. The filter remains active until changed."
+            },
+            {
+                "id": "STR-PROD-008",
+                "feature": "Products Page - Filter by Status",
+                "scenario": "Verify the Product List Can Be Filtered by Status (Active / Sold Out)",
+                "steps": "1. On the Products page, locate the filter controls.\n2. Select the 'Status' filter (e.g., 'Active' or 'Sold Out').\n3. Observe the list.",
+                "expected_result": "The list updates to show only products matching the selected status. Products with other statuses are hidden."
+            },
+            {
+                "id": "STR-PROD-009",
+                "feature": "Products Page - Product Card Layout",
+                "scenario": "Verify Each Product Card Shows the Correct Information",
+                "steps": "1. Observe any product item in the list.\n2. Check all elements displayed on the card.",
+                "expected_result": "Each product card shows:\n• A select checkbox on the left\n• Product image thumbnail\n• Product name\n• Product price\n• Current status badge (e.g., 'Active' or 'Sold Out')"
+            },
+            {
+                "id": "STR-PROD-010",
+                "feature": "Products Page - Select Individual Product",
+                "scenario": "Verify a Single Product Can Be Selected via Its Checkbox",
+                "steps": "1. On the Products page, tap the checkbox on a single product card.\n2. Observe the selection state of that product and the batch toolbar.",
+                "expected_result": "Only that product's checkbox becomes checked. The batch action buttons (Mark as Sold, Mark as Available) become active, ready to apply to the selected product."
+            },
+            {
+                "id": "STR-PROD-011",
+                "feature": "Products Page - Multi-Select",
+                "scenario": "Verify Multiple Products Can Be Selected Simultaneously",
+                "steps": "1. Tap the checkbox on 2 or more different product cards.\n2. Observe the selection state.",
+                "expected_result": "All tapped product checkboxes are checked simultaneously. The batch toolbar reflects the number of selected items and both batch action buttons are active."
+            },
+            {
+                "id": "STR-PROD-012",
+                "feature": "Products Page - Batch Mark as Sold",
+                "scenario": "Verify 'Mark as Sold' Batch Action Changes Selected Products' Status to Sold Out",
+                "steps": "1. Select one or more products using their checkboxes.\n2. Tap the 'Mark as Sold' button in the batch action toolbar.\n3. Observe the status of the selected products.",
+                "expected_result": "All selected products' status changes to 'Sold Out' (or equivalent). Their status badges update immediately in the list. The selection is cleared after the action."
+            },
+            {
+                "id": "STR-PROD-013",
+                "feature": "Products Page - Batch Mark as Available",
+                "scenario": "Verify 'Mark as Available' Batch Action Changes Selected Products' Status to Active",
+                "steps": "1. Select one or more products that are currently 'Sold Out'.\n2. Tap the 'Mark as Available' button in the batch action toolbar.\n3. Observe the status of the selected products.",
+                "expected_result": "All selected products' status changes to 'Active' (or equivalent). Their status badges update immediately in the list. The selection is cleared after the action."
+            },
+            {
+                "id": "STR-PROD-014",
+                "feature": "Products Page - Status Toggle (Single Tap)",
+                "scenario": "Verify Tapping the Status Badge of a Single Product Toggles Its Status",
+                "steps": "1. Find an 'Active' product in the list.\n2. Tap directly on its status badge or status toggle.\n3. Observe the status change.\n4. Tap the status badge again.\n5. Observe the status change again.",
+                "expected_result": "First tap: status changes from 'Active' → 'Inactive' (or 'Sold Out'). Second tap: status changes back from 'Inactive' → 'Active'. The toggle cycles between both states with each tap."
+            },
+            {
+                "id": "STR-PROD-015",
+                "feature": "Products Page - Status Toggle Persistence",
+                "scenario": "Verify Status Changes Made via Toggle Are Saved and Persist After Navigation",
+                "steps": "1. Toggle a product's status from 'Active' to 'Inactive'.\n2. Navigate away (e.g., go to Home, then back to Products).\n3. Find the same product in the list.",
+                "expected_result": "The product still shows the updated status ('Inactive') after returning to the Products page. The change was saved successfully."
+            },
+            {
+                "id": "STR-PROD-016",
+                "feature": "Products Page - Empty Search Result",
+                "scenario": "Verify an Empty State is Shown When Search Returns No Products",
+                "steps": "1. Type a product name that does not exist (e.g., 'xyznonexistent') in the search box.\n2. Observe the product list area.",
+                "expected_result": "An empty state message is displayed (e.g., 'No products found') instead of a blank or broken list."
+            }
         ]
     }
 }
