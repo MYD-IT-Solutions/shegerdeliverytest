@@ -1,0 +1,238 @@
+{
+    "store_application": {
+        "login": [
+            {
+                "id": "STR-LOGIN-001",
+                "feature": "Login - Test Credentials",
+                "scenario": "Verify Login Screen is Displayed with Email and Password Fields",
+                "steps": "1. Launch the Store Application.\n2. Observe the initial login screen.\n\n📋 TEST CREDENTIALS:\n   Email:    mnc@gmail.com\n   Password: 123456\n\n3. Confirm the login form has an Email field and a Password field.",
+                "expected_result": "The login screen is displayed with a clearly labeled 'Email' input field and a 'Password' input field, plus a 'Login' or 'Sign In' button."
+            },
+            {
+                "id": "STR-LOGIN-002",
+                "feature": "Login - Valid Credentials",
+                "scenario": "Verify Successful Login with Valid Email and Password",
+                "steps": "1. On the login screen, enter the email: mnc@gmail.com\n2. Enter the password: 123456\n3. Tap the 'Login' / 'Sign In' button.",
+                "expected_result": "The app authenticates successfully and navigates to the Store Home / Dashboard page."
+            },
+            {
+                "id": "STR-LOGIN-003",
+                "feature": "Login - Invalid Credentials",
+                "scenario": "Verify Login Fails with Incorrect Password",
+                "steps": "1. Enter the email: mnc@gmail.com\n2. Enter an incorrect password (e.g., 'wrongpass').\n3. Tap the 'Login' button.",
+                "expected_result": "An error message is displayed (e.g., 'Invalid credentials' or 'Incorrect password'). The app does not navigate away from the login screen."
+            },
+            {
+                "id": "STR-LOGIN-004",
+                "feature": "Login - Empty Fields",
+                "scenario": "Verify Login Fails When Fields Are Empty",
+                "steps": "1. Leave the Email and Password fields empty.\n2. Tap the 'Login' button.",
+                "expected_result": "Validation errors are shown for the empty required fields. Login is not attempted."
+            }
+        ],
+        "home_dashboard": [
+            {
+                "id": "STR-HOME-001",
+                "feature": "Home - Restaurant Status",
+                "scenario": "Verify Restaurant Status Selector is Displayed on the Home Page",
+                "steps": "1. Log in with valid credentials.\n2. Observe the Home page after login.\n3. Look for a status toggle or dropdown near the top of the page.",
+                "expected_result": "A status selector is visible on the Home page, allowing the restaurant to change its current operational status."
+            },
+            {
+                "id": "STR-HOME-002",
+                "feature": "Home - Status: Accepting Orders",
+                "scenario": "Verify Restaurant Can Set Status to 'Accepting Orders'",
+                "steps": "1. On the Home page, tap the status selector.\n2. Select 'Accepting Orders' from the options.",
+                "expected_result": "The status updates to 'Accepting Orders'. The UI reflects the active/open state. The restaurant is now visible and accepting new orders from customers."
+            },
+            {
+                "id": "STR-HOME-003",
+                "feature": "Home - Status: Not Accepting Orders",
+                "scenario": "Verify Restaurant Can Set Status to 'Not Accepting Orders'",
+                "steps": "1. On the Home page, tap the status selector.\n2. Select 'Not Accepting Orders' from the options.",
+                "expected_result": "The status updates to 'Not Accepting Orders'. The UI reflects the paused/busy state. The restaurant temporarily stops receiving new orders."
+            },
+            {
+                "id": "STR-HOME-004",
+                "feature": "Home - Status: Closed for Today",
+                "scenario": "Verify Restaurant Can Set Status to 'Closed for Today'",
+                "steps": "1. On the Home page, tap the status selector.\n2. Select 'Closed for Today' from the options.",
+                "expected_result": "The status updates to 'Closed for Today'. The UI reflects the closed state. The restaurant will not accept orders for the rest of the current day."
+            },
+            {
+                "id": "STR-HOME-005",
+                "feature": "Home - Status: Closed for Noon",
+                "scenario": "Verify Restaurant Can Set Status to 'Closed for Noon'",
+                "steps": "1. On the Home page, tap the status selector.\n2. Select 'Closed for Noon' from the options.",
+                "expected_result": "The status updates to 'Closed for Noon'. The UI reflects this state, indicating the restaurant is temporarily closed during the noon period."
+            },
+            {
+                "id": "STR-HOME-006",
+                "feature": "Home - Greeting",
+                "scenario": "Verify the Home Page Shows a Greeting with the Restaurant Name",
+                "steps": "1. Log in and navigate to the Home page.\n2. Observe the greeting text at the top of the dashboard.",
+                "expected_result": "A greeting message is displayed, such as 'Hello, [Restaurant Name]!' or 'Welcome back, [Restaurant Name]', correctly showing the authenticated restaurant's name."
+            },
+            {
+                "id": "STR-HOME-007",
+                "feature": "Home - Stats Cards",
+                "scenario": "Verify Four Summary Cards Are Displayed on the Home Dashboard",
+                "steps": "1. Log in and observe the Home dashboard.\n2. Count and identify the summary cards displayed.",
+                "expected_result": "Four summary cards are visible on the dashboard: 'New Orders', 'Processing Orders', 'Completed Orders', and 'Cancelled Orders', each displaying a count."
+            },
+            {
+                "id": "STR-HOME-008",
+                "feature": "Home - New Orders Card",
+                "scenario": "Verify 'New Orders' Card Displays the Current Count",
+                "steps": "1. On the Home dashboard, locate the 'New Orders' card.\n2. Observe the number displayed.",
+                "expected_result": "The 'New Orders' card displays the correct count of orders that are newly received and awaiting action."
+            },
+            {
+                "id": "STR-HOME-009",
+                "feature": "Home - Processing Orders Card",
+                "scenario": "Verify 'Processing Orders' Card Displays the Current Count",
+                "steps": "1. On the Home dashboard, locate the 'Processing Orders' card.\n2. Observe the number displayed.",
+                "expected_result": "The 'Processing Orders' card displays the correct count of orders currently being prepared."
+            },
+            {
+                "id": "STR-HOME-010",
+                "feature": "Home - Completed Orders Card",
+                "scenario": "Verify 'Completed Orders' Card Displays the Current Count",
+                "steps": "1. On the Home dashboard, locate the 'Completed Orders' card.\n2. Observe the number displayed.",
+                "expected_result": "The 'Completed Orders' card displays the correct count of orders that have been successfully delivered or picked up."
+            },
+            {
+                "id": "STR-HOME-011",
+                "feature": "Home - Cancelled Orders Card",
+                "scenario": "Verify 'Cancelled Orders' Card Displays the Current Count",
+                "steps": "1. On the Home dashboard, locate the 'Cancelled Orders' card.\n2. Observe the number displayed.",
+                "expected_result": "The 'Cancelled Orders' card displays the correct count of orders that have been cancelled."
+            }
+        ],
+        "orders_list": [
+            {
+                "id": "STR-ORD-001",
+                "feature": "Orders List - Display",
+                "scenario": "Verify the Orders List is Shown on the Home Page",
+                "steps": "1. Log in and navigate to the Home page.\n2. Scroll down below the summary cards to find the orders list.",
+                "expected_result": "A list of orders is displayed below the summary cards on the Home page."
+            },
+            {
+                "id": "STR-ORD-002",
+                "feature": "Orders List - Filter: New Orders",
+                "scenario": "Verify 'New Orders' Filter Shows Only New Orders",
+                "steps": "1. On the Home page orders list, locate the filter options.\n2. Tap the 'New Orders' filter.",
+                "expected_result": "The list updates to show only orders with 'New' status. Orders in other states (Processing, Completed, Cancelled) are hidden."
+            },
+            {
+                "id": "STR-ORD-003",
+                "feature": "Orders List - Filter: Processing",
+                "scenario": "Verify 'Processing Orders' Filter Shows Only Processing Orders",
+                "steps": "1. On the Home page orders list, tap the 'Processing Orders' filter.",
+                "expected_result": "The list updates to show only orders that are currently being processed/prepared."
+            },
+            {
+                "id": "STR-ORD-004",
+                "feature": "Orders List - Order Card Content",
+                "scenario": "Verify Each Order in the List Shows Relevant Order Information",
+                "steps": "1. Observe any order item in the list.\n2. Check what details are displayed on the order card.",
+                "expected_result": "Each order card displays key information such as: order ID/number, customer name or order items summary, and the order time or status."
+            },
+            {
+                "id": "STR-ORD-005",
+                "feature": "Orders List - Accept New Order",
+                "scenario": "Verify a New Order Can Be Accepted from the List",
+                "steps": "1. Filter the list to 'New Orders'.\n2. Find a new order in the list.\n3. Tap the 'Accept' button on the order card.",
+                "expected_result": "The order status changes to 'Processing'. The order may move out of the 'New Orders' filtered list and disappear from view when filtered by 'New'."
+            }
+        ],
+        "bottom_navigation": [
+            {
+                "id": "STR-NAV-001",
+                "feature": "Bottom Navigation - Home Tab",
+                "scenario": "Verify the 'Home' Tab is Active by Default After Login",
+                "steps": "1. Log in to the Store App.\n2. Observe the bottom navigation bar.",
+                "expected_result": "The bottom navigation is visible with 4 tabs. The 'Home' tab is active/highlighted by default, showing the dashboard."
+            },
+            {
+                "id": "STR-NAV-002",
+                "feature": "Bottom Navigation - Orders Tab",
+                "scenario": "Verify the 'Orders' Tab Navigates to the Orders Screen",
+                "steps": "1. On the bottom navigation, tap the 'Orders' tab.",
+                "expected_result": "The app navigates to the Orders screen, showing the full list of all orders."
+            },
+            {
+                "id": "STR-NAV-003",
+                "feature": "Bottom Navigation - Products Tab",
+                "scenario": "Verify the 'Products' Tab Navigates to the Products/Menu Screen",
+                "steps": "1. On the bottom navigation, tap the 'Products' tab.",
+                "expected_result": "The app navigates to the Products or Menu management screen."
+            },
+            {
+                "id": "STR-NAV-004",
+                "feature": "Bottom Navigation - History Tab",
+                "scenario": "Verify the 'History' Tab Navigates to the Order History Screen",
+                "steps": "1. On the bottom navigation, tap the 'History' tab.",
+                "expected_result": "The app navigates to the Order History screen, showing past completed and cancelled orders."
+            },
+            {
+                "id": "STR-NAV-005",
+                "feature": "Bottom Navigation - Tab Switching",
+                "scenario": "Verify All Bottom Navigation Tabs Switch Correctly",
+                "steps": "1. Start on the Home tab.\n2. Tap 'Orders' → verify Orders screen loads.\n3. Tap 'Products' → verify Products screen loads.\n4. Tap 'History' → verify History screen loads.\n5. Tap 'Home' → verify Home dashboard reloads.",
+                "expected_result": "Each tab navigates correctly to its corresponding screen. The active tab is visually highlighted at all times."
+            }
+        ],
+        "burger_menu_and_side_nav": [
+            {
+                "id": "STR-MENU-001",
+                "feature": "Burger Menu Icon",
+                "scenario": "Verify the Burger Menu Icon is Visible Beside the Order Status",
+                "steps": "1. Log in and navigate to the Home page.\n2. Observe the area next to the restaurant order status selector (e.g., 'Accepting Orders' toggle).\n3. Confirm the hamburger menu (☰) icon is present.",
+                "expected_result": "A hamburger/burger menu icon (three horizontal lines) is clearly visible beside or near the order status control on the Home page header."
+            },
+            {
+                "id": "STR-MENU-002",
+                "feature": "Burger Menu - Open",
+                "scenario": "Verify Tapping the Burger Menu Icon Opens the Side Navigation Drawer",
+                "steps": "1. On the Home page, tap the burger menu (☰) icon beside the order status.\n2. Observe the animation and resulting UI.",
+                "expected_result": "A side navigation drawer slides in (typically from the left). The main content may dim or be overlaid. The drawer is fully visible and interactive."
+            },
+            {
+                "id": "STR-MENU-003",
+                "feature": "Burger Menu - Close",
+                "scenario": "Verify the Side Navigation Drawer Can Be Closed",
+                "steps": "1. Open the side navigation drawer by tapping the burger menu icon.\n2. Tap the close button (✕) inside the drawer, OR tap outside the drawer on the dimmed background.",
+                "expected_result": "The side navigation drawer slides closed. The main Home page content returns to its normal, fully interactive state."
+            },
+            {
+                "id": "STR-MENU-004",
+                "feature": "Side Navigation - Content",
+                "scenario": "Verify the Side Navigation Shows Restaurant Name and Logo/Image",
+                "steps": "1. Open the side navigation drawer.\n2. Observe the top section of the drawer.",
+                "expected_result": "The top of the side navigation displays the restaurant's logo or profile image and the restaurant name."
+            },
+            {
+                "id": "STR-MENU-005",
+                "feature": "Side Navigation - Menu Items",
+                "scenario": "Verify All Expected Navigation Items Are Present in the Side Drawer",
+                "steps": "1. Open the side navigation drawer.\n2. Scroll through all items listed in the drawer and note each one.",
+                "expected_result": "The side navigation contains all expected items, such as: Home, Orders, Products / Menu, Order History, and any additional items like Profile, Settings, or Logout."
+            },
+            {
+                "id": "STR-MENU-006",
+                "feature": "Side Navigation - Item Tap",
+                "scenario": "Verify Tapping a Side Nav Item Navigates to the Correct Screen",
+                "steps": "1. Open the side navigation drawer.\n2. Tap any navigation item (e.g., 'Orders').\n3. Observe the screen that loads.",
+                "expected_result": "The drawer closes and the app navigates to the correct screen corresponding to the tapped item (e.g., 'Orders' opens the Orders screen)."
+            },
+            {
+                "id": "STR-MENU-007",
+                "feature": "Side Navigation - Logout",
+                "scenario": "Verify the Logout Option in the Side Navigation Logs the User Out",
+                "steps": "1. Open the side navigation drawer.\n2. Locate and tap the 'Logout' option.\n3. Confirm any confirmation prompt if shown.",
+                "expected_result": "The user is logged out of the Store App and redirected to the Login screen. The session is cleared."
+            }
+        ]
+    }
+}

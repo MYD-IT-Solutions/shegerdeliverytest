@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Shega Delivery - Store App Test</title>
+    <title>Shega Delivery - Store App Test (Restaurant)</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
@@ -32,7 +32,8 @@
 
   <body
     class="bg-gray-50 text-gray-800 font-sans"
-    data-json-key="mobile_application.store_application" data-json-file="../../assets/data/testcase.json"
+    data-json-key="store_application"
+    data-json-file="../data/stores.json"
   >
     <form id="test-execution-form">
       <div class="container mx-auto p-4 md:p-8 max-w-5xl">
@@ -55,8 +56,12 @@
               ></path>
             </svg>
           </div>
-          <h1 class="text-3xl font-bold text-gray-900">Store App Test</h1>
-          <p class="text-gray-500 mt-2">Shega Delivery Manual Test Execution</p>
+          <h1 class="text-3xl font-bold text-gray-900">
+            Store App Test <span class="text-orange-600">(Restaurant)</span>
+          </h1>
+          <p class="text-gray-500 mt-2">
+            Shega Delivery — Manual Test Execution
+          </p>
         </div>
 
         <!-- Progress Bar -->
@@ -84,10 +89,41 @@
               class="text-center p-6 bg-orange-50 rounded-lg border border-orange-100"
             >
               <h2 class="text-2xl font-bold text-orange-900 mb-2">
-                New Test Session
+                New Test Session — Store App
               </h2>
               <p class="text-orange-700">
                 Please provide your details to begin the test execution.
+              </p>
+            </div>
+
+            <!-- Test Credentials Banner -->
+            <div class="mt-4 p-5 bg-gray-900 rounded-xl border border-gray-700">
+              <p
+                class="text-xs font-bold text-orange-400 uppercase tracking-widest mb-3"
+              >
+                📱 Store App — Test Login Credentials
+              </p>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div class="bg-gray-800 rounded-lg p-3">
+                  <p class="text-xs text-gray-400 mb-1">Email</p>
+                  <p
+                    class="font-mono text-sm font-bold text-green-400 select-all"
+                  >
+                    mnc@gmail.com
+                  </p>
+                </div>
+                <div class="bg-gray-800 rounded-lg p-3">
+                  <p class="text-xs text-gray-400 mb-1">Password</p>
+                  <p
+                    class="font-mono text-sm font-bold text-green-400 select-all"
+                  >
+                    123456
+                  </p>
+                </div>
+              </div>
+              <p class="text-xs text-gray-500 mt-3">
+                Use these credentials when executing the Login test cases in the
+                next steps.
               </p>
             </div>
           </div>
